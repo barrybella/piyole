@@ -1,0 +1,104 @@
+<!--Breadcrumb-->
+<div>
+  <div class="bannerimg cover-image bg-background3" data-image-src="../assets/images/banners/banner2.jpg">
+    <div class="header-text mb-0">
+      <div class="container">
+        <div class="text-center text-white ">
+          <h1 class="">Nous contacter</h1>
+          <ol class="breadcrumb text-center">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Accueil</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">Contact</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/Breadcrumb-->
+
+<section class="sptb bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row text-white">
+          <div class="col-lg-6 col-md-12">
+            <div class="card">
+              <div class="support-service bg-primary">
+                <i class="fa fa-phone"></i>
+                <h6><a href="tel:+224 622-372-345" style="color: white">+224 612-39-67-39</a></h6>
+                <P>Assistance gratuite!</P>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card">
+              <div class="support-service bg-secondary">
+                <i class="fa fa-clock-o"></i>
+                <h6>Lun-Dim(8:00-19:00)</h6>
+                <p>Heures d'ouverture!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card mb-lg-0">
+              <div class="support-service bg-warning">
+                <i class="fa fa-map-marker"></i>
+                <h6>Conakry, Ratoma Kaporo</h6>
+                <p> Guinée, Afrique de l'Ouest</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card mb-0">
+              <div class="support-service bg-info">
+                <i class="fa fa-envelope-o"></i>
+                <h6>contact@piyole.com</h6>
+                <p>Notre email!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Contact-->
+<div class="sptb">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-xl-6  col-md-12">
+          <div class="map1">
+            <!-- <div class="map-header-layer" id="map2"></div> -->
+            <img src="../assets/images/pi.jpeg" alt="img">
+
+          </div>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-md-12">
+        <div class="card mb-0">
+          <form [formGroup]="control_form" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="form-group">
+                <input type="text" formControlName="name" class="form-control {{ getNameError() ? 'is-invalid state-invalid' : getNameSuccess() ? 'is-valid state-valid' : '' }}" id="name1" placeholder="Nom && Prénom (Entreprise)">
+                <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
+              </div>
+              <div class="form-group">
+                <input type="number" formControlName="tel" class="form-control {{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }}" id="email" placeholder="Telephone">
+                <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control {{ getDescError() ? 'is-invalid state-invalid' : getDescSuccess() ? 'is-valid state-valid' : '' }}" formControlName="detail" name="example-textarea-input" rows="8" placeholder="Message"></textarea>
+                <span *ngIf="getDescError()" class="text text-danger"><small>{{ getDescError() }}</small></span>
+
+              </div>
+              <div class="text-left">
+                <button type="submit" [disabled]="control_form.invalid || etatPadding" class="btn btn-primary {{ etatPadding ? 'btn-loading' : '' }} ">Envoyer le message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Contact-->

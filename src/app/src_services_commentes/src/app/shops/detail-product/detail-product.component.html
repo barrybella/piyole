@@ -1,0 +1,428 @@
+<app-nav-bar [subTitle]="'Detail Produit'"></app-nav-bar>
+<section class="sptb " *ngIf="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">    
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <div class="card-body" style="margin-bottom: -30px;">
+
+                        <div class="item-det mb-4">
+                            <a  class="text-dark">
+                                <h3 class="capitalString">{{ shop?.title }}</h3>
+                            </a>
+                            <!-- <ul  class="d-flex">
+                              
+                                <li class="mr-5 mobile-only">
+                                    <a class="icons">
+                                        <i class="fa fa-money  text-muted mr-1"></i> 
+                                        <span class="font-weight-bold">
+                                            34 000
+                                             <small class="ml-1 font-weight-bold"> GNF <span class="font-weight-bold">/MOIS</span> </small>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                        <div class="product-slider">
+                            <div id="carousel" class="carousel slide" data-ride="carousel">
+                                <div class="arrow-ribbon2 desktop-only bg-primary">
+                                    <small>
+                                        <span >{{ shop?.categorie }}</span>
+                                         
+                                    </small>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div *ngFor="let img of shop?.images; let i=index;" style="max-height: 500px;" class="carousel-item {{ i == 0 ? 'active' : '' }}">
+                                         <img  src="{{ print.printImage(img) }}" style="width:500px; height:300px;" class="radius_border mobile-only" alt="img">
+                                         <!-- <img  src="{{ print.printImage(img) }}" style="width:500px; height:400px;" class="radius_border mobile-only" alt="img"> -->
+                                         <img  src="{{ print.printImage(img) }}" class="radius_border d-none d-md-block" alt="img">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                </a>
+                                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix">
+                                <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div data-target="#carousel" data-slide-to="0" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[0]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="1" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[1]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="2" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[2]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="3" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[3]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="4" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[4]) }}" class="radius_border" alt="img"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="5" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[5]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="6" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[6]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="7" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[7]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="8" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[8]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="9" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[9]) }}" class="radius_border" alt="img"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="10" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[10]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="11" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[11]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="12" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[12]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="13" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[13]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="14" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[14]) }}" class="radius_border" alt="img"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="15" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[15]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="16" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[16]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="17" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[17]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="18" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[18]) }}" class="radius_border" alt="img"></div>
+                                            <div data-target="#carousel" data-slide-to="19" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[19]) }}" class="radius_border" alt="img"></div>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#thumbcarousel" role="button" data-slide="prev">
+                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="border-0 mb-4">
+                    <div class="wideget-user-tab wideget-user-tab3">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu1">
+                                <ul class="nav">
+                                    <li class=""><a href="#tab-1" class="active" data-toggle="tab">Aperçu</a></li>
+                                    <li ><a href="#tab-3" data-toggle="tab" class="">Utilisations</a></li>
+                                    <li><a href="#tab-5" data-toggle="tab" class="">Vidéo</a></li>
+                                    <!-- <li ><a href="#tab-4" data-toggle="tab" class="">Devis Construction</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content border-0 p-5 bg-white details-tab-content">
+                        <div class="tab-pane active" id="tab-1">
+                            <h3 class="card-title mb-3 font-weight-semibold">Description <span class="mb-0 font-weight-bold">(REF_{{ shop?.productId}})</span></h3>
+                            <div class="mb-4">
+							<!-- <p [innerHTML]="formatText(shop?.use)"></p> -->
+							<p [innerHTML]="formatText(shop?.desc)"></p>
+                                <!-- <p style="font-weight: 900;"><b [innerText]="post?.detail_construction"></b></p> -->
+
+                            </div>
+                            <h3 class="card-title mb-3 font-weight-semibold">Specifications</h3>
+                                <div  class="row">
+                                    <div class="col-xl-12 col-md-12" >
+                                        <table class="table table-bordered border-top mb-0 table-striped">
+                                            <tbody>
+                                                
+                                                <tr>
+                                                    <td>Categorie </td>
+                                                    <td><span class="font-weight-bold">{{ shop?.categorie }}</span></td>
+                                                </tr>
+                                              
+                                                <!-- <tr >
+                                                    <td>Marque </td>
+                                                    <td><span class="font-weight-bold">{{ shop?.marque }}</span></td>
+                                                </tr> -->
+                                                <tr>
+                                                    <td>Prix </td>
+                                                    <td><span class="font-weight-bold">{{ print.printPrice(shop?.prix_global) }} GNF/<span>{{ shop?.unite }}</span> </span></td>
+                                                </tr>
+                                                <!-- <tr >
+                                                    <td>Couleur </td>
+                                                    <td><span class="font-weight-bold">{{ shop?.color }}</span></td>
+                                                </tr>
+                                                <tr >
+                                                    <td>Taille </td>
+                                                    <td><span class="font-weight-bold">{{ shop?.size }}</span></td>
+                                                </tr> -->
+                                                <tr *ngFor="let item of tabs" >
+                                                    <td>{{ item.title}} </td>
+                                                    <td><span class="font-weight-bold">{{ item.desc }}</span></td>
+                                                </tr> 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                        <div class="tab-pane" id="tab-3">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12">
+                                    <h3 class="card-title mb-3 font-weight-semibold">Utilisation du produit</h3>
+                                    <div class="mb-4">
+                                        <p [innerHTML]="formatText(shop?.use)"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                            <ul class="list-unstyled video-list-thumbs row ">
+                                <li class="mb-0">
+                                    <!-- <a data-toggle="modal" data-target="#homeVideo">
+                                        <img src="../assets/images/products/products/h1.jpg" alt="Barca" class="img-responsive">
+                                        <span class="mdi mdi-arrow-right-drop-circle-outline text-white"></span>
+                                    </a> -->
+                                    <!-- <video  controls>
+                                        <source src="{{ print.printVideo(post?.video) }}" type="video/mp4">
+                                        
+                                    </video> -->
+
+                                    <!-- <video *ngIf="post?.video"  controls>
+                                        <source src="{{ print.printVideo(post?.video) }}" type="video/mp4">
+                                        Videos detail du bien!!
+                                    </video> -->
+                                    <img  src="../assets/images/products/products/h1.jpg" alt="Barca" class="img-responsive">
+
+                                    <!-- <span *ngIf="!post?.video" class="mdi mdi-arrow-right-drop-circle-outline text-white"></span> -->
+                                </li>
+                            </ul>
+                        </div>
+                       
+                    </div>
+                    <div class="pt-4 pb-4 pl-5 pr-5 border-top bg-white">
+                        <div class="list-id">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="mb-0 font-weight-bold">REF_{{ shop?.productId }}</a>
+                                </div>
+                                <div class="col col-auto" >
+                                    Poster Par <a class="mb-0 font-weight-bold">{{  'PIYOLE GROUP SARLU' }}</a> / <span class="nb-0 font-weight-bold callnumber"> <a  href="tel:{{ shop?.user_id?.tel}}">{{ shop?.user_id?.tel}}</a>  </span>
+                                </div>
+
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white details-tab">
+                        <div class="icons">
+                            <span class="btn btn-primary mr-1" *ngIf="shop" (click)="addBasket(shop)"><i class="fa fa-envelope"></i>  Ajouter au Panier</span>
+                            <!-- <a href="#" class="btn btn-info icons"><i class="icon icon-share mr-1"></i> Partager</a> -->
+                            <!-- <a href="#" class="btn btn-primary icons"><i class="icon icon-heart  mr-1"></i> 678</a> -->
+                            <!-- <a href="#" class="btn btn-secondary icons"><i class="icon icon-printer  mr-1"></i> Print</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-5 mt-4 desktop-only">Articles Similaires</h3>
+
+                <div class="row desktop-only" >
+                    <!-- Wrapper for carousel items -->
+                    <div class="col-lg-12 col-md-12"
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="100"
+                    (scrolled)="onScroll()"
+                    [scrollWindow]="true"
+                    >
+                        <div *ngFor="let shop_recent of shop_recents" class="card overflow-hidden">
+                            <div class="d-md-flex cursorPointer" (click)="onDetaille(shop_recent._id)">
+                                <div class="item-card9-img">
+                                    <!-- <div class="arrow-ribbon bg-primary" >{{ shop_recent.categorie }}</div> -->
+                                    <div class="item-card9-imgs">
+                                        <a [routerLink]="['../../detail-product', shop_recent._id]"></a>
+                                        <img src="{{ print.printImage(shop_recent?.images[0]) }}" style="max-height: 300px; max-width: 400px;" alt="img" class="cover-image products-1">
+                                    </div>
+                                    <!-- <div class="item-card9-icons">
+                                        <a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
+                                    </div> -->
+                                    <div class="item-tags">
+                                        <div class="ng_post_id tag-option">REF_{{ shop_recent.productId }} </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="card border-0 mb-0">
+                                    <div class="card-body ">
+                                        <div class="item-card9">
+                                            <a [routerLink]="['../../detail-product', shop_recent._id]" class="text-muted"><i class="fa fa-tag mr-1" ></i> {{ shop_recent.categorie }}</a>
+                                            <a [routerLink]="['../../detail-product', shop_recent._id]" class="text-dark"><h4 class="font-weight-bold mt-1 line_clamp">{{ shop_recent.title }} </h4></a>
+                                            <p class="mb-0 leading-tight">{{ shop_recent.use  }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer pt-4 pb-4">
+                                        <div class="item-card9-footer d-flex" >
+                                            <div class="item-card9-cost" >
+                                                <!-- <a [routerLink]="['../../detail-product', post_rent._id]" class="mr-4"><span class=""><i class="fa fa-map-marker text-muted mr-1"></i> {{ post_rent.commune }}, {{ post_rent.quartier }}, {{ post_rent.secteur }}</span></a> -->
+                                                <a [routerLink]="['../../detail-product', shop_recent._id]" class=""><span class=""> <h6 class="font-weight-bold mt-1">{{ print.printPrice(shop_recent.prix_global) }} FG  </h6></span></a>
+                                            
+                                            </div>
+                                            <!-- <div class="ml-auto">
+                                                <a [routerLink]="['../../detail-product', shop_recent._id]" class=""><span class=""> <h6 class="font-weight-bold mt-1">{{ print.printPrice(shop_recent.prix_global) }} FG  </h6></span></a>
+                                            </div> -->
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+            
+            <!--Right Side Content-->
+
+
+            <div class="col-xl-4 col-lg-4 col-md-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Poster Par</h3>
+                    </div>
+                    <div  class="card-body  item-user">
+                        <div class="profile-pic mb-0">
+                            <img src="{{ print.printProfile(shop?.user_id?.image) }}" class="brround avatar-xxl" alt="user">
+                            <div class="">
+                                <a href="userprofile2.html" class="text-dark">
+                                    <h4 class="mt-3 mb-1 font-weight-semibold">{{ shop?.user_id?.name}}</h4>
+                                </a>
+                                <p class="mb-0">Piyole Boutique</p>
+                                <span class="text-muted">Membre Depuis {{ shop?.user_id?.createdAt | date}}</span>
+                                <h6 class="mt-2 mb-0">
+                                    <a [routerLink]="['/shops/shopping']" class="btn btn-primary btn-sm">Voir tous les postes</a>
+                                    <!-- <a *ngIf="post?.ing == true" [routerLink]="['/posts/all-post-ing']"class="btn btn-{{ post?.type == '0' ? 'primary' : 'secondary'}} btn-sm">Voir tous les postes</a> -->
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="card-body item-user">
+                        <h4 class="mb-4">Informations pour contact</h4>
+                        <div>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-map-marker mr-2 mb-2"></i></span><span class="text-body"> Conakry, Ratoma, Kaporo</span></h6>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-envelope mr-2 mb-2"></i></span><span class="text-body">contact@piyole.com</span></h6>
+                            <h6 ><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><span class="text-body"> <a href="tel:+224622372345">+224 622-37-23-45</a></span></h6>
+                        </div>
+
+                        
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-left">
+                            <!-- <a href="#" class="btn  btn-success mr-1"><i class="fa fa-envelope"></i> Chat</a> -->
+                            <span class="btn btn-primary mr-1" *ngIf="shop" (click)="addBasket(shop)"><i class="fa fa-envelope"></i>  Ajouter au Panier</span>
+                            <!-- <a href="#" class="btn  btn-info"><i class="fa fa-share"></i> Partager</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Produits Récent</h3>
+                    </div>
+                    <div class="card-body pb-3">
+                        <ul class="vertical-scroll"
+                        infiniteScroll
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="100"
+                        (scrolled)="onScrollCategorie()"
+                        [scrollWindow]="true"
+                        >
+                            <li *ngFor="let shop_cat of shopings" class="news-item">
+                                <table>
+                                    <tr>
+                                        <td><img src="{{ print.printImage(shop_cat?.images[0]) }}" style="max-height: 50px;" alt="img" class="w-8 border" /></td>
+                                        <td class="pl-4">
+                                            <h5 class="mb-1 line_clamp"> <b>{{ shop_cat.title }}</b>  <small> ({{ shop_cat.categorie }})</small></h5><a [routerLink]="['../../detail-product', shop_cat._id]" class="btn-link">Voir les détails</a><span class="float-right font-weight-bold ng_post_id">REF_{{ shop_cat.productId }}</span></td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class=" card-footer text-center">
+                        <a [routerLink]="['../../../shops/shopping']" ><i class="fa fa-share"></i> Voir Tous</a>
+                    </div>
+                </div>
+               
+            </div>
+            <!--/Right Side Content-->
+        </div>
+    </div>
+</section>
+
+<section class="sptb desktop-only" *ngIf="!shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="720px" class="" type="square"></shimmer>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="320px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body pb-3">
+                        <shimmer width="320px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sptb mobile-only " *ngIf="!shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <div class="card-header">
+                        <shimmer width="200px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-header">
+                        <shimmer width="100px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body pb-3">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,189 @@
+<app-nav-bar [subTitle]="'Chantier'"></app-nav-bar>
+
+<section class="sptb">
+    <div class="container">
+    <div class="page">
+        <div class="page-main h-100">
+            <div class="app-content  my-3 my-md-5">
+                <div class="side-app">
+                    <div *ngIf="userService.isLoggedIn()" class="section-title center-block text-center">
+                        <h2>Mes Chantiers en Cours de Construction</h2>
+                        <p>Liste de Mes Chantiers en Cours, Suivi et Avancement de mes Projets</p>
+                    </div>
+                    <div *ngIf="userService.isLoggedIn()" class="row">   
+                        <div *ngFor="let contrat of contrats" class="col-md-12 cols-ms-12 col-lg-4">
+                            <div class="card text-center">
+                                <img src="../../../assets/images/logo-color.png" alt="img" class="br-tl-2 br-tr-2" >
+                                <div class="card-body">
+                                    <h3 class="mb-3 line_clamp">{{ contrat.chantier }}</h3>
+                                    <p class="three_line_clamp">{{ contrat.description }}</p>
+                                    <a [routerLink]="['../raport-construction-for-chantier', contrat._id]" class="btn btn-primary">Voir le raport</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6 pr-0 d-none d-lg-block">
+                                    <img src="../../../assets/images/ch.jpeg" alt="CHANTIER" class="br-tl-2 br-bl-2 ">
+                                </div>
+                                <div class="col-md-12 col-lg-6  pl-0 ">
+                                    <div class="card-body p-7 about-con pabout">
+                                        <h2 class="mb-4 font-weight-semibold">Avez vous des CHANTIERS en cours de construction ?</h2>
+                                        <h3 class="leading-normal">Suivez vos chantiers en temps réel, prenez les meilleures décisions et achetez vos matériaux de construction en toute simplicité.</h3>
+                                        <p class="leading-normal" [innerHTML]="formatText('Créez votre chantier en cliquant sur le bouton ci-dessous **Créer un chantier** et suivez son évolution grâce à des rapports journaliers (texte, images, vidéos) envoyés par votre ingénieur ou chef de chantier.  Grâce à ces rapports, vous serez informé en temps réel de l’avancement des travaux. Si vous constatez une anomalie qui ne vous convient pas, vous pourrez réagir immédiatement.  Cette fonctionnalité est idéale pour la diaspora et les personnes trop occupées pour visiter leur chantier au quotidien.  De plus, vous pouvez approvisionner votre chantier en matériaux de construction à un prix abordable, sans avancer un centime jusqu\'à la livraison.')"></p>
+                                        <a (click)="onAddChantier()" class="btn btn-primary text-white  mt-2">Créer un chantier</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="mb-7">
+                                    <div class="section-title center-block text-center">
+                                        <h2>Exemple de Suivi de Chantier en Cours </h2>
+                                        <p>Cette page vous propose un exemple détaillé de suivi de chantier en cours, vous permettant de visualiser l’évolution des travaux à chaque étape. </p>
+                                    </div>
+									<div class="card-body p-0">
+                                        
+										<ul class="timelineleft mb-0">
+											<li class="timeleft-label"><span class="bg-danger">10 Oct 2024</span></li>
+											<li>
+												<i class="fa fa-envelope bg-primary"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+													<h3 class="timelineleft-header"><b style="font-weight: 500; color: black;">Viste du chantier</b></h3>
+													<div class="timelineleft-body">
+														Aujourd'hui, nous avons effectué une visite enrichissante du chantier et prévoyons de lancer les travaux dans les plus brefs délais. Tous les détails de l’avancement du chantier seront publiés ici, et chaque participant ayant un rôle pourra réagir en temps réel.
+													</div>
+													<div class="timelineleft-footer">
+														<a class="btn btn-info btn-sm text-white mt-1 mr-1">Modifier</a>
+														<a class="btn btn-primary btn-sm mt-1 text-white">Supprimer</a>
+													</div>
+												</div>
+											</li>
+                                            <li>
+												<i class="fa fa-picture-o bg-primary"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+													<h3 class="timelineleft-header"><b style="font-weight: 500; color: black;">Fondations et Soubassement</b></h3>
+													<div class="timelineleft-body">
+														<img src="../../../assets/images/pi.jpeg" alt="..." class="margin mb-2 mr-1">
+														<img src="../../../assets/images/chantier.jpeg" alt="..." class="margin mb-2">
+														<p class="mb-0">
+                                                            Aujourd’hui, nous avons officiellement lancé les travaux de fondation avec toute l’équipe au complet.  
+                                                            Les premières étapes se déroulent dans de bonnes conditions, avec une parfaite coordination des tâches.  
+                                                            Les fouilles et le coulage des semelles avancent conformément au planning établi.  
+                                                            Nous veillons à ce que chaque étape soit réalisée avec précision et dans le respect des normes de construction.  
+                                                            L’ensemble du personnel est mobilisé pour assurer un travail efficace et de qualité.  
+                                                            Nous continuerons à vous tenir informés de l’évolution du chantier au fur et à mesure.
+                                                        </p>
+													</div>
+
+												</div>
+											</li>
+											<li>
+												<i class="fa fa-user bg-pink"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+													<h3 class="timelineleft-header no-border"><b style="font-weight: 500; color: black;">Kana Bah</b> rejoint officiellement le chantier. Il a désormais la possibilité d’ajouter des rapports sur les travaux.</h3>
+												</div>
+											</li>
+											<li>
+												<i class="fa fa-comments bg-cyan"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+													<h3 class="timelineleft-header"><b >Zénab Barry</b> a laissé un commentaire.</h3>
+													<div class="timelineleft-body">
+														Je trouve l’avancement des travaux tout simplement exceptionnel. Chaque étape est réalisée avec sérieux et professionnalisme, ce qui garantit un chantier bien organisé.
+													</div>
+													<div class="timelineleft-footer">
+														<a class="btn btn-purple btn-sm text-white">Repondre</a>
+													</div>
+												</div>
+											</li>
+											
+											<li>
+												<i class="fa fa-video-camera bg-warning"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 5 days ago</span>
+													<h3 class="timelineleft-header"><b>Coulage de Beton </b></h3>
+													<div class="timelineleft-body">
+														<div class="embed-responsive embed-responsive-16by9 w-75">
+                                                            <iframe class="embed-responsive-item" src="../../../assets/videos/coulage.mp4" allowfullscreen=""></iframe>
+                                                            <video  controls>
+                                                              <source src="../../../assets/videos/coulage.mp4" type="video/mp4">
+                                                              <source src="movie.ogg" type="video/ogg">
+                                                              <iframe  src="result?.video_mobile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                              <!-- <iframe width="560" height="315" src="{{ result?.video_mobile }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                                      
+                                                              Videos detail du raport!!
+                                                            </video>
+                                                          </div>
+														<p class="mb-0">
+                                                            Aujourd’hui, nous entamons le coulage de la première dalle avec toute l’équipe mobilisée sur le chantier.  
+                                                            Chacun est à son poste et s’applique avec rigueur pour assurer la bonne réalisation de cette étape clé.  
+                                                            Le béton est préparé et coulé avec précision afin de garantir une structure solide et durable.  
+                                                            Nous veillons au respect strict des normes de construction et des délais fixés pour avancer efficacement.  
+                                                            L’ambiance est dynamique et l’engagement de l’équipe témoigne de notre volonté de livrer un travail de qualité.  
+                                                            Nous continuerons à suivre de près l’évolution du chantier et vous tiendrons informés des prochaines avancées.
+                                                        </p>
+													</div>
+												</div>
+											</li>
+											<li class="timeleft-label">
+												<span class="bg-primary"> 21 Sept 2024</span>
+											</li>
+											<li>
+												<i class="fa fa-camera bg-purple"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+													<h3 class="timelineleft-header"><a href="#">Ibrahim Barry</a> a ajouter 3 photos</h3>
+													<div class="timelineleft-body">
+														<img src="../../../assets/images/pi.jpeg" alt="..." class="margin">
+														<img src="../../../assets/images/pi.jpeg" alt="..." class="margin">
+														<img src="../assets/images/photos/3.jpg" alt="..." class="margin">
+														<img src="../assets/images/photos/4.jpg" alt="..." class="margin">
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="fa fa-video-camera bg-warning"></i>
+												<div class="timelineleft-item">
+													<span class="time"><i class="fa fa-clock-o"></i> 5 days ago</span>
+													<h3 class="timelineleft-header"><a href="#">Mr. Doe</a> shared a video</h3>
+													<div class="timelineleft-body">
+														<div class="embed-responsive embed-responsive-16by9 w-75">
+                                                            <iframe class="embed-responsive-item" src="../../../assets/videos/coulage.mp4" allowfullscreen=""></iframe>
+                                                            <video  controls>
+                                                              <source src="../../../assets/videos/coulage.mp4" type="video/mp4">
+                                                              <source src="movie.ogg" type="video/ogg">
+                                                              <iframe  src="result?.video_mobile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                              <!-- <iframe width="560" height="315" src="{{ result?.video_mobile }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                                                            </video>         
+														</div>
+													</div>
+													<div class="timelineleft-footer">
+														<a href="#" class="btn btn-sm btn-primary">See comments</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="fa fa-clock-o bg-gray"></i>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

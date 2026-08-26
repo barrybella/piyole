@@ -1,0 +1,108 @@
+<app-nav-bar [subTitle]="'Contrats journalière'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Liste des contrats journalière</h3>
+            <div class="card-options">
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon fa fa-search mr-1"></i> Recherche Post</span>
+              <span>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon icon-plus mr-1"></i> Publication
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post')" style="color: black;">Location</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post-sale')" style="color: black;">Vente</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-terrain')" style="color: black;">Terrain</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-plan')" style="color: black;">Plan</a>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab {{ contrats.length < 4 ? 'botom_card' : '' }}" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Information client</th>
+                        <th>ID POST</th>
+                        <th>JOUR NON PAYER</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                        <th >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats | paginate:{ itemsPerPage: 10, currentPage: p}" class=" bg-{{ print.printDayNotPay(contrat)?.response_status }}">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        
+                        <td>
+                          <div  class="d-flex">
+                             <span> <img class="avatar avatar-md  d-block brround cover-image mr-2" src="{{ print.printProfile(contrat.client_id?.image) }}"></span>
+                              <!-- <span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../assets/images/faces/male/25.jpg"></span> -->
+                              <div>
+                                  <span>{{ contrat.client_id?.name }}</span><br>
+                                  <a ><small>{{ contrat.client_id?.tel }}</small></a>
+                              </div>
+                          </div>
+                      </td>
+                        <td>{{ contrat.post_id?.postId }}</td>
+
+                        <td>
+                          <span >{{print.printDayNotPay(contrat).jnp }}</span>
+                          
+                        </td>
+                      
+                        <td>
+                          {{ print.printPrice(contrat.montant) }}
+                        </td>
+                       
+                        <td>
+                          {{ contrat.createdAt | date }}
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu">
+                            <a *ngIf="contrat.post_id?.type == 0 && contrat.type_contrat != 2" class="dropdown-item cursorPointer" [routerLink]="['../../contrats/payements-contrat', contrat._id]" >Payements</a>
+                            <!-- <span class="dropdown-item cursorPointer" >Annuler le contrat</span> -->
+                            <span class="dropdown-item cursorPointer" *ngIf="contrat.type_contrat == 0" (click)="addPresAvis(contrat)">Pres Avis</span>
+                            <span class="dropdown-item cursorPointer" (click)="addResiliation(contrat)">Resilier le contrat</span>
+                            <span class="dropdown-item cursorPointer" (click)="onDetail(contrat.post_id?._id)" >Detail du post</span>
+                            <span class="dropdown-item cursorPointer" *ngIf="contrat.type_contrat == 1" (click)="stopContrat(contrat)">Stop Contrat</span>
+                            <span class="dropdown-item cursorPointer" (click)="onRedirect('contrats/detail-contrat', contrat._id)">Plus d'information</span>
+                            <!-- <span class="dropdown-item cursorPointer" >Modification</span> -->
+                            <span class="dropdown-item cursorPointer" (click)="onUpdatePrix(contrat)" >Modification Prix</span>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Fermer</a> -->
+                            </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

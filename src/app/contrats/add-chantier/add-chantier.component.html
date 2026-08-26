@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">Ajout de chantier</div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+    <div class="card-body">
+        <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="form-label text-dark">Nom du chantier</label>
+                    <input type="text" formControlName="chantier" class="form-control {{ getChantierError() ? 'is-invalid state-invalid' : getChantierSuccess() ? 'is-valid state-valid' : '' }}" placeholder="EX: Chantier KAKIMBO">
+                    <span *ngIf="getChantierError()" class="text text-danger"><small>{{ getChantierError() }}</small></span>
+                  </div>
+                  
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="inputAddress" class="form-label text-dark">Adresse</label>
+                    <input type="text" class="form-control {{ getAdressError() ? 'is-invalid state-invalid' : getAdressSuccess() ? 'is-valid state-valid' : '' }}" formControlName="adress" id="inputAddress" placeholder="EX: Ratoma/KAKIMBO">
+                    <span *ngIf="getChantierError()" class="text text-danger"><small>{{ getAdressError() }}</small></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                  <label class="form-label text-dark" for="nb_month">Periode(Mois)</label>
+                    <select class="form-control {{ getNb_monthError() ? 'is-invalid state-invalid' : getNb_monthSuccess() ? 'is-valid state-valid' : '' }}" formControlName="nb_month" id="nb_month">
+                        <option disabled value="Selectioner">Selectioner</option>
+                        <option  *ngFor="let day of days" value="{{ day  }}">{{ day }}</option>
+                    </select>
+              </div>
+          </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                  <label class="form-label text-dark" for="nb_month">Description</label>
+                    <textarea formControlName="description" class="form-control" placeholder="Details..." id=""></textarea>
+              </div>
+          </div>
+            
+         
+            <!-- <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="" id="description" formControlName="description" cols="30" rows="2" class="form-control" placeholder="Description"></textarea>
+            </div> -->
+            <button type="submit" [disabled]="controlForm.invalid || etatPaading" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPaading"></span> <span *ngIf="!etatPaading">Ajouter</span></button>
+        </form>
+    </div>
+    </div>

@@ -1,0 +1,40 @@
+<app-nav-bar [subTitle]="'Agences'"></app-nav-bar>
+<section class="sptb ">
+<section class="sptb ">
+  <div class="container ">
+      <div class="section-title center-block text-center">
+          <h2>Toutes les agences</h2>
+          <p>L'ensemble des agences certifié chez nous</p>
+      </div>
+      <div class="row">
+        <shimmer width="360px" *ngFor="let item of chimers" class="mr-4 mb-4 {{ !chimer ? 'd-none' : ''}}" type="square"></shimmer>
+       
+
+				<div *ngFor="let user of users" class="col-xl-4 col-md-12">
+					<div class="card cursorPointer" (click)="onRedirect(user.slug)" >
+						<div class="card-body">
+							<div class="team-section text-center">
+								<div class="team-img">
+									<img src="{{ print.printProfile(user.image) }}" height="10" class="img-thumbnail rounded-circle    " alt="">
+								</div>
+								<h4 class="font-weight-bold dark-grey-text mt-4">{{ user.name }}</h4>
+								<h6 class=" blue-text mb-3">{{ user.type_agence }}</h6>
+								<p class="font-weight-normal dark-grey-text three_line_clamp">
+									<i class="fa fa-quote-left pr-2"></i>{{ user.description }}
+								</p>
+								<div class="text-warning">
+									<i class="fa fa-star"> </i>
+									<i class="fa fa-star"> </i>
+									<i class="fa fa-star"> </i>
+									<i class="fa fa-star"> </i>
+									<i class="fa fa-star"> </i>
+									<!-- <i class="fa fa-star-o"> </i> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+      </div>
+  </div>
+</section>
+</section>

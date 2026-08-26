@@ -1,0 +1,246 @@
+<!-- <app-nav-bar [subTitle]="'Agences'"></app-nav-bar> -->
+<section style="margin-top: -30px; margin-bottom: -80px;" >
+    <div class="bannerimg">
+        <div class="bg-white border-bottom">
+            <div class="container">
+                <div class="page-header">
+                    <h4 class="page-title">Piyole BOUTIQUE</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="['/']">Accueil</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="#">Categories</a></li> -->
+                        <li class="breadcrumb-item active" aria-current="page">BOUTIQUES</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sptb ">
+
+    <section class="sptb"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="100"
+    (scrolled)="onScroll()"
+    [scrollWindow]="true"
+    >
+        <div class="container">
+            <div class="row">
+                <!-- <h1>Vente des produits de construction, Guinee Conakry</h1> -->
+                <!--Left Side Content-->
+                <div class="col-xl-3 col-lg-4 col-md-12">
+                    <!-- <div class="card">
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control br-tl-3  br-bl-3" placeholder="Search">
+                                <div class="input-group-append ">
+                                    <button type="button" class="btn btn-primary br-tr-3  br-br-3">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Categories</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="" id="container">
+                                <div class="filter-product-checkboxs">
+                                    <label *ngFor="let categorie of categories" class="custom-control custom-checkbox mb-3">
+                                        <input [(ngModel)]="categorie.isChecked" (change)="onCheckboxChange($event, categorie._id)" type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+                                        <span class="custom-control-label">
+                                            <span class="text-dark"> {{ categorie._id }}<span class="label label-secondary float-right">{{ categorie.count }}</span></span>
+                                        </span>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="card-header border-top">
+                            <h3 class="card-title">Price Range</h3>
+                        </div>
+                        <div class="card-body">
+                            <h6>
+                               <label for="price">Price Range:</label>
+                               <input type="text" id="price">
+                            </h6>
+                            <div id="mySlider"></div>
+                        </div>
+                        <div class="card-header border-top">
+                            <h3 class="card-title">Condition</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="filter-product-checkboxs">
+                                <label class="custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+                                    <span class="custom-control-label">
+                                        For Rent
+                                    </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+                                    <span class="custom-control-label">
+                                        For Sale
+                                    </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mb-0">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox3" value="option3">
+                                    <span class="custom-control-label">
+                                        For Buy
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-header border-top">
+                            <h3 class="card-title">Posted By</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="filter-product-checkboxs">
+                                <label class="custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+                                    <span class="custom-control-label">
+                                        Owner
+                                    </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+                                    <span class="custom-control-label">
+                                        Agent
+                                    </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mb-0">
+                                    <input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+                                    <span class="custom-control-label">
+                                        Builder
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary btn-block">Apply Filter</a>
+                        </div> -->
+                    </div>
+                    <!-- <div class="card mb-0">
+                        <div class="card-header">
+                            <h3 class="card-title">Shares</h3>
+                        </div>
+                        <div class="card-body product-filter-desc">
+                            <div class="product-filter-icons text-center">
+                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
+                                <a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
+                                <a href="#" class="pinterest-bg"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!--/Left Side Content-->
+
+                <div class="col-xl-9 col-lg-8 col-md-12">
+                    <!--Add lists-->
+                    <div class=" mb-lg-0">
+                        <div class="">
+                            <div class="item2-gl ">
+                                <div class=" mb-0">
+                                    <div class="">
+                                        <div class="p-5 bg-white item2-gl-nav d-flex">
+                                            <h6 class="mb-0 mt-2">Affichage de 1 à {{ page == 0 ? 12 : (page * 12) > count_products ? count_products : (page * 12)  }} sur {{ count_products }} produits</h6>
+                                            <ul class="nav item2-gl-menu ml-auto">
+                                                <!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> -->
+                                                <!-- <li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li> -->
+                                            </ul>
+                                            <!-- <div class="d-flex">
+                                                <label class="mr-0 mt-1 mb-sm-1">Filtré Par:</label>
+                                                <select name="item" class="form-control select-sm w-75 select2">
+                                                    <option value="" >Filtré Par</option>
+                                                    <option value="2">Prix</option>
+                                                    <option value="3">Date Ajout</option>
+                                                </select>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content">
+                                 <!-- <app-show-products [shops]="!check_is ? shops : shopings"></app-show-products> -->
+                                 <app-show-products [shops]="shops" [chimer]="chimer_product"></app-show-products>
+
+                                    <!-- <div class="row">
+                                        <div *ngFor="let item of chimers" class=" col-xl-3 col-lg-4 col-md-6 col-sm-12 {{ !chimer ? 'd-none' : 'desktop-only'}}" style="" >
+                                                <div class="card overflow-hidden">
+                                                    <div class="item-card9-imgs ">
+                                                        <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="175px" height="100px" type="square"></shimmer>
+                                    
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div style="display: inline">
+                                                            
+                                                            <shimmer width="200px" type="line"></shimmer>
+                                                            
+                                                            <div>
+                                                            <shimmer width="240px" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="160px" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="110px" type="line"></shimmer>
+                                                            <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="90px" type="line"></shimmer>
+                                                            <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                        </div>
+
+                                        <div *ngFor="let item of chimers_mobile" class=" {{ !chimer ? 'd-none' : 'mobile-only'}} col-xl-3 col-lg-4 col-md-6 col-sm-12" >
+                                                <div class="card overflow-hidden">
+                                                    <div class="item-card9-imgs ">
+                                                        <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="385px" height="100px" type="square"></shimmer>
+                                    
+                                                    </div>
+                                                    <div class="card-body">
+                                                            <div >
+                                                            
+                                                            <shimmer width="200px" type="line"></shimmer>
+                                                            
+                                                            <div>
+                                                            <shimmer width="240px" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="160px" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="110px" type="line"></shimmer>
+                                                            <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                                                            </div>
+                                                            <div>
+                                                            <shimmer width="90px" type="line"></shimmer>
+                                                            <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div> -->
+
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--/Add lists-->
+                </div>
+            </div>
+        </div>
+    </section>
+  
+</section>

@@ -1,0 +1,34 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Nom & Prénom <small>(ou nom entreprise)</small></label>
+        <input type="text" class="{{ getNameError() ? 'is-invalid state-invalid form-control' : getNameSuccess() ? 'is-valid state-valid' : '' }} form-control" placeholder="Nom et Prénom" formControlName="name">
+        <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span> 
+    </div>
+    <div class="form-row">
+        <div class="form-group col-5">
+            <label for="country">Code Pays</label>
+            <input placeholder="EX: +224" class="{{ getCodeError() ? 'is-invalid state-invalid' : getCodeSuccess() ? 'is-valid state-valid' : '' }} form-control" type="text" formControlName="code">
+            <span *ngIf="getCodeError()" class="text text-danger"><small>{{ getCodeError() }}</small></span>  
+        </div>
+        <div class="form-group col-7">
+            <label>Téléphone</label>
+            <input placeholder="Votre numero de telephone." class="{{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }} form-control" type="text" formControlName="tel">
+            <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>    
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input placeholder="votre email." class="{{ getEmailError() ? 'is-invalid' : getEmailSuccess() ? 'is-valid' : '' }} form-control"  type="email" formControlName="email">
+        <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+
+    </div>
+    <div class="form-group">
+       <label for="password">Mot de passe</label>
+       <input placeholder="Mot de passe" type="password" class="form-control" formControlName="password">
+    </div>
+    <!-- <span *ngIf="passwordIncorect"><span class="text-danger">Identifiant incorrecte!!</span></span><br> -->
+
+    <div class="form-footer">
+        <button type="submit" [disabled]="registerForm.invalid || etatPadding" class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }} mr-1">Ajouter</button>
+    </div>
+</form>

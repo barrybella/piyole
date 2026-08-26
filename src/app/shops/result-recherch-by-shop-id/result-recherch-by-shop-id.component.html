@@ -1,0 +1,284 @@
+<app-nav-bar [subTitle]="'Detail du post'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">
+              <span class="mr-3">Detail de la publication <span *ngIf="shop"></span> </span> 
+              <!-- <button *ngIf="post?.status == 0 && post?.delete == 0  && post?.active == true && (post?.type == 0 || post?.type == 1)" (click)="onConfirm(post)" class="btn btn-info btn-sm icons mr-1"><i class="icon icon-printer  mr-1"></i> Contact</button> -->
+              <!-- <span *ngIf="post?.status == 0 && post?.active == false && post?.delete == 0" class="text-warning">(en cours de validation)</span> -->
+              <!-- <span *ngIf="post?.status == 1 && post?.active == true && post?.delete == 0" class="text-danger">(Dejat pris)</span> -->
+              <span *ngIf="shop?.delete == 1" class="text-danger">(Dejat Suprimé)</span>
+            </h3>
+            <div class="card-options">
+              <a (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="border-0">
+				<div class="wideget-user-tab wideget-user-tab3">
+					<div class="tab-menu-heading">
+						<div class="tabs-menu1">
+							<ul class="nav">
+								<li class=""><a href="#tab-1" class="active" data-toggle="tab">Aperçu</a></li>
+								<li ><a href="#tab-3" data-toggle="tab" class="">Utilisations</a></li>
+								<li><a href="#tab-2" data-toggle="tab" class="">Introduction</a></li>
+								<li><a href="#tab-4" data-toggle="tab" class="">Images</a></li>
+								<li><a href="#tab-5" data-toggle="tab" class="">Video</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="tab-content border-0 p-5 bg-white details-tab-content">
+					<div class="tab-pane active" id="tab-1">
+						<h2 class="card-title mb-3"><b style="font-weight: 900;">{{ shop?.title }}</b></h2>
+						<div class="mb-4">
+							<p [innerHTML]="formatText(shop?.desc)"></p>
+							<!-- <p>{{ shop?.desc }}</p> -->
+							<!-- <p >{{ shop?.use }}</p> -->
+							<!-- <p *ngIf="post?.type == 2"><b style="font-weight: 900;">{{ post?.detail_construction }}</b></p> -->
+						</div>
+						<h4  class="mb-4">Specifications</h4>
+						<div  class="row">
+							<div class="col-xl-12 col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered border-top mb-0">
+										<tbody>
+											
+											<tr>
+												<td>Categorie </td>
+												<td><span class="font-weight-bold">{{ shop?.categorie }}</span></td>
+											</tr>
+                                          
+											<tr >
+												<td>Marque </td>
+												<td><span class="font-weight-bold">{{ shop?.marque }}</span></td>
+											</tr>
+											<tr>
+												<td>Prix </td>
+												<td><span class="font-weight-bold">{{ print.printPrice(shop?.prix_global) }} GNF/<span>{{ shop?.unite }}</span> </span></td>
+											</tr>
+											<tr >
+												<td>Couleur </td>
+												<td><span class="font-weight-bold">{{ shop?.color }}</span></td>
+											</tr>
+											<tr >
+												<td>Taille </td>
+												<td><span class="font-weight-bold">{{ shop?.size }}</span></td>
+											</tr>
+											<tr >
+												<td>Entreprise </td>
+												<td><span class="font-weight-bold">{{ shop?.entreprise_id?.name }} - {{ shop?.entreprise_id?.tel }}</span></td>
+											</tr>
+											<tr *ngFor="let item of tabs" class="{{ item.delete == 1 ? 'sup_ng' : ''}}">
+												<td>{{ item.title }} </td>
+												<td>
+													<span class="font-weight-bold">{{ item.desc }}</span>
+													<span class="ml-5">
+														<i (click)="onUpdate(item, shop?._id)" class="fa fa-pencil mr-2 cursorPointer text-danger"></i>
+														<i (click)="onDelete(item, shop?._id)" class="fa fa-trash cursorPointer text-info"></i>
+													</span>
+												</td>
+											</tr>
+											
+							
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div *ngIf="" class="row"> 
+							<div class="col-xl-12 col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered border-top mb-0">
+										<!-- <tbody>
+										
+											<tr>
+												<td>Categorie </td>
+												<td><span class="font-weight-bold">{{ post?.categorie }}</span></td>
+											</tr>
+											<tr>
+												<td>Type</td>
+												<td><span class="font-weight-bold">{{ getTypePost(post?.type) }}</span></td>
+											</tr>
+										
+											<tr>
+												<td>Prix </td>
+												<td><span class="font-weight-bold">{{ print.printPrice(post?.prix) }} GNF</span></td>
+											</tr>
+											
+											<tr>
+												<td>Contact en cours</td>
+												<td><span class="font-weight-bold" *ngIf="post">{{ getContacts(post) }} contacts</span></td>
+											</tr>
+											<tr>
+												<td>Devis</td>
+												<td><span class="font-weight-bold"><a href="#">Telecharger</a> Ajouter</span></td>
+											</tr>
+											<tr>
+												<td>Partenaire</td>
+												<td><span class="font-weight-bold" [innerText]="post?.partner"></span></td>
+											</tr>
+										</tbody> -->
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  class="tab-pane" id="tab-3">
+						<div class="row">
+							<div class="col-xl-12 col-md-12">
+								<p [innerHTML]="formatText(shop?.use)"></p>
+							</div>
+						</div>
+					</div>
+					<div  class="tab-pane" id="tab-2">
+						<div class="row">
+							<div class="col-xl-12 col-md-12">
+								<p [innerHTML]="formatText(shop?.intro)"></p>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="tab-4">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="product-slider">
+									<div id="carousel" class="carousel slide" data-ride="carousel">
+											<!-- <div class="arrow-ribbon2 bg-{{ print.getTypePostColor(post?.type) }}">{{ print.printPrice(post?.prix) }} GNF <span *ngIf="post?.type == 0">/MOIS</span></div> -->
+											<div class="carousel-inner">
+													<div *ngFor="let img of shop?.images; let i=index;" style="max-height: 500px;" class="carousel-item {{ i == 0 ? 'active' : '' }}"> <img src="{{ print.printImage(img) }}" class="radius_border" alt="img"> </div>
+													<!-- <div class="carousel-item"> <img src="../assets/images/products/i1.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i2.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i3.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i4.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i5.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i1.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i2.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i3.jpg" alt="img"> </div>
+													<div class="carousel-item"> <img src="../assets/images/products/i4.jpg" alt="img"> </div> -->
+											</div>
+											<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+													<i class="fa fa-angle-left" aria-hidden="true"></i>
+											</a>
+											<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+													<i class="fa fa-angle-right" aria-hidden="true"></i>
+											</a>
+									</div>
+									<div class="clearfix">
+											<div id="thumbcarousel" class="carousel slide" data-interval="false">
+													<div class="carousel-inner">
+															<div class="carousel-item active">
+																	<div data-target="#carousel" data-slide-to="0" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[0]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="1" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[1]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="2" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[2]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="3" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[3]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="4" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[4]) }}" class="radius_border" alt="img"></div>
+															</div>
+															<div class="carousel-item">
+																	<div data-target="#carousel" data-slide-to="5" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[5]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="6" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[6]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="7" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[7]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="8" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[8]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="9" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[9]) }}" class="radius_border" alt="img"></div>
+															</div>
+															<div class="carousel-item">
+																	<div data-target="#carousel" data-slide-to="10" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[10]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="11" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[11]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="12" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[12]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="13" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[13]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="14" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[14]) }}" class="radius_border" alt="img"></div>
+															</div>
+															<div class="carousel-item">
+																	<div data-target="#carousel" data-slide-to="15" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[15]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="16" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[16]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="17" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[17]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="18" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[18]) }}" class="radius_border" alt="img"></div>
+																	<div data-target="#carousel" data-slide-to="19" class="thumb img_carousel"><img src="{{ print.printImage(shop?.images[19]) }}" class="radius_border" alt="img"></div>
+															</div>
+													</div>
+													<a class="carousel-control-prev" href="#thumbcarousel" role="button" data-slide="prev">
+															<i class="fa fa-angle-left" aria-hidden="true"></i>
+													</a>
+													<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+															<i class="fa fa-angle-right" aria-hidden="true"></i>
+													</a> 
+													<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+															<i class="fa fa-angle-right" aria-hidden="true"></i>
+													</a> 
+													<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+															<i class="fa fa-angle-right" aria-hidden="true"></i>
+													</a> 
+											</div>
+									</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="tab-pane" id="tab-5">
+						<ul class="list-unstyled video-list-thumbs row ">
+							<li class="mb-0">
+								<a data-toggle="modal" data-target="#homeVideo">
+									<video *ngIf="shop?.video"  controls>
+										<source src="{{ print.printVideo(shop?.video) }}" type="video/mp4">
+										<!-- <source src="movie.ogg" type="video/ogg"> -->
+										Videos detail du bien!!
+									</video>
+									<img *ngIf="!shop?.video" src="../assets/images/products/products/h1.jpg" alt="Barca" class="img-responsive">
+
+									<!-- <span *ngIf="!post?.video" class="mdi mdi-arrow-right-drop-circle-outline text-white"></span> -->
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="pt-4 pb-4 pl-5 pr-5 border-top bg-white">
+					<div class="list-id">
+						<div class="row">
+							<div class="col">
+								<a class="mb-0">REFERENCE DU PRODUIT : <span class="font-weight-bold"> REF_{{ shop?.productId }}</span></a>
+							</div>
+							<div class="col col-auto">
+									<a class="mb-0 font-weight-bold">Publié le</a> {{ shop?.createdAt | date }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer bg-white details-tab">
+					<div class="icons">
+						<!-- <a *ngIf="post?.delete == 0 && post?.status == 0 && post?.active == true" href="#" class="btn btn-info icons mr-1"><i class="icon icon-share mr-1"></i> Partager</a> -->
+						<button (click)="addDetails(shop)" class="btn btn-secondary icons mr-1"><i class="fa fa-plus  mr-1"></i> Ajout Details</button>
+						<button (click)="onDeleteShop(shop)" class="btn btn-primary icons mr-1"><i class="icon icon-trash  mr-1"></i> Supprimer</button>
+						<!-- <button *ngIf="post?.delete == 0 && post?.status == 0 && post?.active == true && (post?.type == 0 || post?.type == 1)" (click)="onConfirm(post)" class="btn btn-secondary icons mr-1"><i class="icon icon-call-in  mr-1"></i> Contact</button> -->
+						<!-- <a *ngIf="post?.delete == 0 && post?.status == 0 && post?.type == 0" (click)="onRedirect('shops/update-product', shop?._id)" class="btn btn-secondary icons mr-1"><i class="icon icon-note  mr-1"></i> Modifier</a>
+						<a *ngIf="post?.delete == 0 && post?.status == 0 && post?.type == 1 && post?.categorie != 'Terrain'" (click)="onRedirect('posts/update-post-sale', post?._id)" class="btn btn-secondary icons mr-1"><i class="icon icon-note  mr-1"></i> Modifier</a>
+						<a *ngIf="post?.delete == 0 && post?.status == 0 && post?.type == 1  && post?.categorie == 'Terrain'" (click)="onRedirect('posts/update-terrain', post?._id)" class="btn btn-secondary icons mr-1"><i class="icon icon-note  mr-1"></i> Modifier</a>
+						<a *ngIf="post?.delete == 0 && post?.status == 0 && post?.type == 2" (click)="onRedirect('posts/update-plan', post?._id)" class="btn btn-secondary icons mr-1"><i class="icon icon-note  mr-1"></i> Modifier</a>
+						<a *ngIf="post?.delete == 1 && post.delete_centre == false" class="btn btn-secondary icons mr-1" (click)="onRestore(post)"><i class="icon icon-printer  mr-1"></i> Restorer</a>
+							<button *ngIf="post?.delete == 0" type="button" class="btn btn-secondary dropdown-toggle mr-1" data-toggle="dropdown">
+								<i class="icon icon-camrecorder  mr-1"></i> Vidéo
+							</button>
+							<div class="dropdown-menu">
+								<span class="dropdown-item cursorPointer" (click)="AddVideo(post, 'Ajout Vidéo', 'Ajouter')" style="color: black;">Ajouter</span>
+								<span class="dropdown-item cursorPointer" (click)="AddVideoMobile(post, 'Ajout Vidéo pour Mobile', 'Ajouter')" style="color: black;">Vidéo Pour Mobile</span>
+								<a class="dropdown-item cursorPointer" href="{{ post?.video_mobile }}" target="_blank" style="color: black;">Voir la video pour mobile</a>
+								<span class="dropdown-item cursorPointer" (click)="AddVideo(post, 'Modification Vidéo', 'Modifier')"  style="color: black;">Modifier</span>
+								<span class="dropdown-item cursorPointer" (click)="onDeleteVideo(post)" style="color: black;">Supprimer</span>
+							</div> -->
+							
+					</div>
+				</div>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

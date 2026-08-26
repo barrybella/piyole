@@ -1,0 +1,331 @@
+<app-nav-bar></app-nav-bar>
+
+<!--Add posts-section-->
+<section class="sptb">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 col-md-12 col-md-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <h3 class="card-title">Modification Publication Vente</h3>
+                        <div class="card-options">
+                            <button (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</button>
+                          </div>
+                    </div>
+                    <form (ngSubmit)="onSubmit()" [formGroup]="controlForm">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label text-dark">Titre</label>
+                                <input type="text" formControlName="title" class="form-control" placeholder="EX: Location Appartement bon prix profité en!">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text-dark">Categorie</label>
+                                <select formControlName="categorie" class="form-control   custom-select">
+									                  <option disabled value="Selectioner">Selectioner</option>
+                                    <option *ngFor="let cate of print.categories" [disabled]="cate.categorie == 'Terrain'" value="{{ cate.categorie }}">{{ cate.categorie }}</option>
+								                </select>
+                                <span><small class="text-danger" *ngIf="categorieRequired">La categorie est requise!!</small></span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Chambre (Pièces)</label>
+                                    <input formControlName="chambre" min="0" type="number" class="form-control" placeholder="0">
+                                    <span><small class="text-danger" *ngIf="chambreRequired">Le nombre chambre est requis!!</small></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Salon</label>
+                                    <input formControlName="salon" type="number" min="0" class="form-control" placeholder="0">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Toilette</label>
+                                    <input formControlName="toilette" type="number" min="0" class="form-control" placeholder="0">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Cuisine</label>
+                                    <input formControlName="cuisine" type="number" min="0" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="form-row" >
+                                <div class="form-group col-md-6">
+                                    <label class="form-label text-dark">Eaux</label>
+                                    <!-- <input formControlName="couloir" type="number" min="0" class="form-control" placeholder="0"> -->
+                                    <select formControlName="eaux" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="Forage">Forage</option>
+                                      <option value="SEG">SEG</option>
+                                      <option value="Puit">Puit</option>
+                                      <option value="Pas d'eaux">Pas d'eaux</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label text-dark">Terrasse</label>
+                                    <input formControlName="terrasse" type="number" min="0" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Parking</label>
+                                    <select formControlName="parcking" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="1">Oui</option>
+                                      <option value="0">Non</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="parkingRequired">Veiller choisir si oui ou non!!</small></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Meublé</label>
+                                    <select formControlName="meuble" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="1">Oui</option>
+                                      <option value="0">Non</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="meubleRequired">Veiller choisir si oui ou non!!</small></span>
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Climatiseur</label>
+                                    <select formControlName="climatiseur" class="form-control custom-select">
+                                        <option disabled value="Selectioner">Selectioner</option>
+                                        <option  value="1">Oui</option>
+                                        <option value="0">Non</option>
+                                      </select>
+                                    <span><small class="text-danger" *ngIf="climatiseurRequired">Veiller choisir si oui ou non!!</small></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Garage</label>
+                                    <select formControlName="garage" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="1">Oui</option>
+                                      <option value="0">Non</option>
+                                    </select>
+                                    <!-- <span><small class="text-danger" *ngIf="parkingRequired">Veiller choisir si oui ou non!!</small></span> -->
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Salle à manger</label>
+                                    <input formControlName="sale_manger" type="number" min="0" class="form-control" placeholder="0">
+                                   
+                                    <!-- <span><small class="text-danger" *ngIf="meubleRequired">Veiller choisir si oui ou non!!</small></span> -->
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-label text-dark">Sale à bain</label>
+                                    <input formControlName="sale_bain" type="number" min="0" class="form-control" placeholder="0">
+                                    
+                                    <!-- <span><small class="text-danger" *ngIf="climatiseurRequired">Veiller choisir si oui ou non!!</small></span> -->
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Mettre Carree</label>
+                                    <input formControlName="mettreCaree" type="number" min="0" class="form-control" placeholder="0">
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Cour</label>
+                                    <select formControlName="cour" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="1">Oui</option>
+                                      <option value="0">Non</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="courRequired">Veiller choisir si oui ou non!!</small></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Etat du bien</label>
+                                    <select formControlName="etat_bien" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="En chantier">En chantier</option>
+                                      <option value="Bon État">Bon État</option>
+                                      <option value="Fini">Fini</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="courRequired">Veiller choisir si oui ou non!!</small></span>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Documents</label>
+                                    <input formControlName="doc" type="text"  class="form-control" placeholder="Les documents dispo.">
+
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-{{ colValEtage }}">
+                                    <label class="form-label text-dark">Etage</label>
+                                    <select (change)="changeEvent($event)" formControlName="etage" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="1">Oui</option>
+                                      <option value="0">Non</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="etageRequired">Veiller choisir si oui ou non!!</small></span>
+                                </div>
+                                <div *ngIf="champNiveauxEtage" class="form-group col-md-3">
+                                    <label class="form-label text-dark">Niveaux Etage</label>
+                                    <select formControlName="nivauxEtage" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="Rais de chausser">Rais de chausser</option>
+                                      <option value="1er">1er</option>
+                                      <option value="2 em">2 em</option>
+                                      <option value="3 em">3 em</option>
+                                      <option value="4 em">4 em</option>
+                                      <option value="5 em">5 em</option>
+                                      <option value="6 em">6 em</option>
+                                      <option value="7 em">7 em</option>
+                                      <option value="8 em">8 em</option>
+                                      <option value="9 em">9 em</option>
+                                      <option value="10 em">10 em</option>
+                                      <option value="11 em">11 em</option>
+                                      <option value="12 em">12 em</option>
+                                      <option value="13 em">13 em</option>
+                                      <option value="14 em">14 em</option>
+                                      <option value="15 em">15 em</option>
+                                      <option value="16 em">16 em</option>
+                                      <option value="17 em">17 em</option>
+                                      <option value="18 em">18 em</option>
+                                      <option value="19 em">19 em</option>
+                                      <option value="20 em">20 em</option>
+                                      <option value="21 em">21 em</option>
+                                      <option value="22 em">22 em</option>
+                                      <option value="23 em">23 em</option>
+                                      <option value="24 em">24 em</option>
+                                      <option value="25 em">25 em</option>
+                                      <option value="26 em">26 em</option>
+                                      <option value="27 em">27 em</option>
+                                      <option value="28 em">28 em</option>
+                                      <option value="29 em">29 em</option>
+                                      <option value="30 em">30 em</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="nivauxEtageRequired">Veiller choisir le niveaux!!</small></span>
+                                </div>
+                               
+                                <div class="form-group col-md-{{ colValEtage }}">
+                                    <label class="form-label text-dark">Prix</label>
+                                    <input formControlName="prix" type="number" min="0" class="form-control" placeholder="0">
+                                    <span><small class="text-danger" *ngIf="prixRequired">Veiller enter le prix par mois!!</small></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">À discuter</label>
+                                    <select formControlName="discut" class="form-control custom-select">
+                                        <option disabled value="Selectioner">Selectioner</option>
+                                        <option value="1">Oui</option>
+                                        <option value="0">Non</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Region</label>
+                                    <select formControlName="region" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="Conakry">Conakry</option>
+                                      <option value="Labé">Labé</option>
+                                      <option value="Boké">Boké</option>
+                                      <option value="Kindia">Kindia</option>
+                                      <option value="Mamou">Mamou</option>
+                                      <option value="Kankan">Kankan</option>
+                                      <option value="Nzérékoré">Nzérékoré</option>
+                                      <option value="Faranah">Faranah</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="regionRequired">La region est requise!!</small></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Commume</label>
+                                    <select (change)="eventChangeCommune($event)"  formControlName="commune" class="form-control custom-select">
+                                        <option  disabled value="Selectioner">Selectioner</option>
+                                        <option *ngFor="let item of communes"  value="{{ item.commune }}">{{ item.commune }}</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="communeRequired">La commune est requise!!</small></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Quartier</label>
+                                    <select formControlName="quartier" class="form-control custom-select">
+                                        <option  disabled value="Selectioner">Selectioner</option>
+                                        <option *ngFor="let item of quartierFileters" value="{{ item.quartier }}">{{ item.quartier }}</option>
+								                  	</select>
+                                    <span><small class="text-danger" *ngIf="quartierRequired">Le quartier est requise!!</small></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Secteur</label>
+                                    <input formControlName="secteur" type="text" class="form-control" placeholder="EX: Concasseur">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Images</label>
+                                <input type="file" accept="image/*" name="photos" multiple (change)="fileProgress($event)" class="form-control" >
+                              </div>
+                            <div class="form-group">
+                                <label class="form-label text-dark">Description</label>
+                                <textarea class="form-control" formControlName="description" rows="6" placeholder="ecrivez ici.."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text-dark">Patenaire</label>
+                                <textarea class="form-control" formControlName="partner" rows="3" placeholder="Les detail du partenaire."></textarea>
+                            </div>
+
+                        </div>
+                        <div class="card-footer ">
+                            <button type="submit" [disabled]="controlForm.invalid || etatPadding || ctrlImage" class="btn btn-success {{ etatPadding ? 'btn-loading' : '' }} ">Modifier</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Termes et conditions</h3>
+                    </div>
+                    <div class="card-body pb-2">
+                        <ul class="list-unstyled widget-spec vertical-scroll mb-0">
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Inclure des vrais information
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Mesurer tous les pièces par mètre carré
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Prendre des images claire
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Prendre les images en portrait
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne publier que des bien qui existent
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne pas mettre d'autres images qui ne concernent pas l'immobilier
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Avoir la certitude que le bien n'a pas de problème
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne pas mettre des images qui concernent pas le bien
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Bien rédiger la description avec plusieurs détails
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Au minimum 5 images et au maiximum 10 images
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Add posts-section-->

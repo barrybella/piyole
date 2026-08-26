@@ -1,0 +1,75 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h3 class="card-title">Raports de travail</h3>
+            <div class="card-options">
+              
+              <button *ngIf="contrat && contrat?.status_construct == 0" (click)="onAddRaport()" class="btn btn-sm btn-secondary mr-2  {{ contrat.status_construct == 0 ? '' : 'disabled' }}"><i class="icon icon-plus mr-1"></i> Ajouter</button>
+              <button *ngIf="contrat && contrat?.status_construct == 0" (click)="onAddRaportVideo()" class="btn btn-sm btn-secondary mr-2  {{ contrat.status_construct == 0 ? '' : 'disabled' }}"><i class="icon icon-plus mr-1"></i> Ajouter une video</button>
+              <button *ngIf="contrat && contrat?.status_construct == 0" (click)="onAddRaportVideoMobile()" class="btn btn-sm btn-secondary mr-2  {{ contrat.status_construct == 0 ? '' : 'disabled' }}"><i class="icon icon-plus mr-1"></i> Ajouter une vidéo Mobile</button>
+              <button (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</button>
+            </div>
+          </div>
+        </div>
+        <div class="mb-7">
+          <div class="card-body p-0">
+            <ul class="timelineleft mb-0" *ngFor="let item of raports">
+              <li class="timeleft-label"><span class="bg-danger">{{ item._id | date }}</span></li>
+              <li *ngFor="let result of item.books">
+                <i *ngIf="result.type_raport != 5" class="fa fa-info bg-success"></i>
+                <i *ngIf="result.type_raport == 5" class="fa fa-video-camera bg-primary"></i>
+                <div class="timelineleft-item">
+                  <span class="time font-weight-bold" style="font-weight: 900; color: black;"> <span *ngIf="contrat && (contrat?.user_id?._id == userService.getUserDetails()._id) && contrat?.status_construct == 0 && result?.type_raport != 5"> {{ print.printPrice(result.montant) }} GNF</span></span>
+                  <h3 class="timelineleft-header"><a >{{ result.title }} {{ result?.video_mobile }}</a></h3>
+                  <div class="timelineleft-body" *ngIf="result.images && result.type_raport != 5" >
+                    <img *ngFor="let img of result.images; let i=index;" src="{{ print.printImage(result?.images[i]) }}" alt="..." class="margin mr-1 mb-1">
+                    <!-- <img src="../assets/images/photos/2.jpg" alt="..." class="margin mr-1">
+                    <img src="../assets/images/photos/3.jpg" alt="..." class="margin mr-1">
+                    <img src="../assets/images/photos/4.jpg" alt="..." class="margin mr-1"> -->
+                  </div>
+                  <div  *ngIf="result.type_raport == 5 && result.video" class="timelineleft-body">
+                    <div class="embed-responsive embed-responsive-16by9 w-75">
+                      <iframe class="embed-responsive-item" src="{{ print.printVideo(result.video) }}" allowfullscreen=""></iframe>
+                      <video  controls>
+                        <source src="{{ print.printVideo(result?.video) }}" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                        <iframe  src="result?.video_mobile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="{{ result?.video_mobile }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        Videos detail du raport!!
+                      </video>
+                    </div>
+                    <!-- <div class="timelineleft-body">
+														<div class="embed-responsive embed-responsive-16by9 mb-3 w-75">
+															<iframe class="embed-responsive-item" src="{{ result?.video }}" allowfullscreen=""></iframe>
+
+														</div>
+														<p class="mb-0">
+														Take me to your leader!
+														Switzerland is small and neutral!
+														We are more like Germany, ambitious and misunderstood!mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system</p>
+													</div> -->
+                  </div>
+                  <div class="timelineleft-body">
+                    {{ result.desc }}
+                  </div>
+                  <div class="timelineleft-footer" *ngIf="contrat && (contrat?.user_id?._id == userService.getUserDetails()._id) && contrat?.status_construct == 0" > 
+                    <a *ngIf="result.type_raport != 5" class="btn btn-info btn-sm text-white mt-1 mr-1" (click)="onUpdate(result)">Modifier</a>
+                    <a class="btn btn-secondary btn-sm mt-1 " (click)="onDelete(result)">Supprimer</a>
+                  </div>
+                </div>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

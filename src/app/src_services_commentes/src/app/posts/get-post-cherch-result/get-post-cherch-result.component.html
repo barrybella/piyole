@@ -1,0 +1,78 @@
+<app-nav-bar [subTitle]="'Resultat Recherche'"></app-nav-bar>
+<section class="sptb">
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container">
+    <div class="section-title center-block text-center">
+        <h2 *ngIf="posts.length > 0">Resultat de votre recherche</h2>
+        <p *ngIf="posts.length > 0" style="color: black; font-weight: bold">Resultat pour {{ categorie }}, pour le prix de {{ print.printPrice(min) }} GNF à {{ print.printPrice(max) }} GNF à {{ commune }}, {{ quartier }}</p>
+
+        <h2 *ngIf="posts.length == 0 && chimer == false">Pas de resultat pour votre recherche</h2>
+        <p *ngIf="posts.length == 0 && chimer == false" style="color: red; font-weight: bold">Pas de résultat pour votre recherche!! Enregistrez votre besoin, nous vous aidons à trouver ce que vous cherchez dans les plus brefs délais!!</p>
+    </div>
+      <div class="row">
+        <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>  
+      </div>
+      
+      <!-- <div class="center-block text-center desktop-only"> -->
+        <div class="col-lg-5 col-md-6 item-all-cat center-block text-center">
+            <div class="item-all-card text-dark text-center card mb-5">
+                <!-- <a href="#"></a> -->
+                <div class="iteam-all-icon">
+                    <img src="../assets/images/svgs/jobs/medal.svg" class="imag-service" alt="Sales">
+                </div>
+                <div class="item-all-text mt-5">
+                    <h5 class="text-body font-weight-bold">Vous n'avez pas trouvé ce que vous cherchez ? </h5>
+                    <button (click)="onAddBesoin()" class="btn btn-danger btn-pill" >Cliquez ICI!!</button>
+                </div>
+            </div>
+        </div>
+     <!-- </div> -->
+      
+      <!-- <div class="center-block text-center desktop-only">
+        <button (click)="onAddBesoin()" class="btn btn-primary rounded-pill btn-lg ">-----Vous n'avez pas trouver ce que vous cherchez ? Clickquez ICI !!-----</button>
+     </div> -->
+    
+    <!-- <div class="center-block text-center mobile-only">
+        <button (click)="onAddBesoin()" class="btn btn-primary rounded-pill btn-lg ">-----Pas satisfait? Clickquez ICI !!-----</button>
+      </div> -->
+  </div>
+</section>
+
+<section class="sptb bg-white mt-2" *ngIf="posts_not_between_results.length > 0">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Nous avons d'autres bien dans la même zone avec d'autres prix</h2>
+            <p style="color: black; font-weight: bold">Autres publications possédant la même catégorie et zone dont le prix est different de ce que vous recherchez!!</p>
+        </div>
+        <div class="row">
+            <app-show-posts [posts]="posts_not_between_results" [chimer]="chimer_deux"></app-show-posts>  
+        </div>
+        <div class="center-block text-center desktop-only">
+            <a [routerLink]="['../../../../../../../get-posts-for-rent']" class="btn btn-primary rounded-pill btn-lg">-----Voir toute les plublications pour Location ({{ count_loc }})-----</a>
+        </div>
+
+        <div class="center-block text-center mobile-only">
+            <a [routerLink]="['../../../../../../../get-posts-for-rent']" class="btn btn-primary rounded-pill btn-lg">--Plublications pour Location ({{ count_loc }})--</a>
+        </div>
+    </div>
+</section>
+
+<section class="sptb bg-white mt-2"  *ngIf="posts_categories.length > 0 && posts_not_between_results.length == 0 && posts.length == 0">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Nous avons d'autres bien dans la même catégorie</h2>
+            <p>Scroller pour voir l'ensemble des publications des différentes agences! Vous trouverez votre goût 👌</p>
+        </div>
+        <div class="row">
+             <app-show-posts [posts]="posts_categories" [chimer]="chimer_tois"></app-show-posts>     
+        </div>
+        <div class="center-block text-center">
+            <a [routerLink]="['../../../../../../../get-posts-for-rent']" class="btn btn-primary rounded-pill btn-lg">--Les plublications pour Location ({{ count_loc }})--</a>
+        </div>
+    </div>
+</section>
+
+<!--Latest Ads-->
+
+</section>

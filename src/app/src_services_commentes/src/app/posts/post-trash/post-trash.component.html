@@ -1,0 +1,98 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Corbeil des posts</h3>
+            <div class="card-options">
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon fa fa-search mr-1"></i> Recherche Post</span>
+              <span>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon icon-plus mr-1"></i> Publication
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post')" style="color: black;">Location</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post-sale')" style="color: black;">Vente</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-terrain')" style="color: black;">Terrain</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-plan')" style="color: black;">Plan</a>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab {{ posts.length < 4 ? 'botom_card' : '' }}" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>INTITULÉ</th>
+                        <th>CATEGORIE</th>
+                        <th>PRIX(GNF)</th>
+                        <!-- <th>TYPE</th> -->
+                        <th>DATE SUP</th>
+                        <th >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let post of posts | paginate:{ itemsPerPage: 10, currentPage: p}">
+                        <td>
+                            {{ post.postId }}  
+                        </td>
+                        <td>
+                          <div class="media mt-0 mb-0">
+                            <div class="card-aside-img">
+                              <a (click)="onDetail(post._id)"></a>
+                              <img src="{{ print.printImage(post?.images[0]) }}" class="radius_border" alt="img">
+                            </div>
+                            <div class="media-body">
+                              <div class="card-item-desc ml-4 p-0 mt-2">
+                                <a (click)="onDetail(post._id)" class="text-dark"><h4 class="font-weight-semibold">{{ post.title }}</h4></a>
+                                <a (click)="onDetail(post._id)"><i class="fa fa-clock-o mr-1"></i> {{ post.createdAt | date}}</a><br>
+                                <a (click)="onDetail(post._id)"><i class="fa fa-tag mr-1"></i><span class="badge badge-{{ print.getTypePostColor(post.type) }}">{{ print.getTypePost(post.type) }}</span> <small *ngIf="post.type == 2 && post.status_devi == 1 && post.pdf" class="text-warning">(validation devi...)</small><small *ngIf="post.type == 2 && post.status_devi == 2" class="text-success">(Construction)</small></a>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{{ post.categorie }}</td>
+                        <td class="font-weight-semibold fs-16">{{ post.prix }}</td>
+                        <!-- <td>
+                          <span  class="badge badge-{{ post.active ? 'success' : 'warning'}}">{{ print.getActice(post.active) }}</span>
+                        </td> -->
+                        <td>
+                          <!-- <a (click)="onDetail(post._id)" >{{ countContact(post) }}</a> -->
+                          {{ post.updatedAt | date }}
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item cursorPointer" (click)="onDetail(post._id)">Detail</a>
+                              <span class="dropdown-item cursorPointer" *ngIf="post.delete_centre == false" (click)="onRestore(post)">Restorer</span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event" previousLabel="précédent" nextLabel="Suivant" [autoHide]=true></pagination-controls>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+    <div class="card-header">
+        <div class="card-title">Modification Details</div>
+        <div class="card-options">
+            <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+            
+            <div class="form-group select2-lg col-12">
+                <label for="country">Titre</label>
+                <input placeholder="Le titre" class="{{ getTitleError() ? 'is-invalid state-invalid' : getTitleSuccess() ? 'is-valid state-valid' : '' }} form-control" type="text" formControlName="title">
+                <span *ngIf="getTitleError()" class="text text-danger"><small>{{ getTitleError() }}</small></span>  
+            </div>
+               
+            <div class="form-group">
+                <label class="form-label">
+                    Description
+                </label>
+                <textarea class="{{ getDescError() ? 'is-invalid state-invalid' : getDescSuccess() ? 'is-valid state-valid' : '' }} form-control" formControlName="desc" rows="3" placeholder="La description"></textarea>
+                <span *ngIf="getDescError()" class="text text-danger"><small>{{ getDescError() }}</small></span> 
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }} mr-1">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>

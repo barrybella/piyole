@@ -1,0 +1,51 @@
+<app-nav-bar [subTitle]="'Contrats Plan'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Contrat de Plan</h3>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>ID POST</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        <td>{{ contrat.post_id?.postId }}</td>
+                        <td>
+                          <a href="#" >{{ print.printPrice(contrat.montant) }}</a>
+                        </td>
+                        <td>
+                          {{ contrat.createdAt | date }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

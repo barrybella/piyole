@@ -1,0 +1,79 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">My Ads</h3>
+            <div class="card-options">
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Quel Client?</span>
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Quel Contrat?</span>
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Quel Post?</span>
+              <a routerLink="../add-post" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Ajouter</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>ID POST</th>
+                        <th>MONTANT INVESTI</th>
+                        <th>POURCENTAGE INVESTI</th>
+                        <th>NB INVESTISSEURS</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        <td>{{ contrat.postId }}</td>
+                        <td>
+                          {{ print.printPrice(contrat.info.montant) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(contrat.info.pourcentage_investi) }}
+                        </td>
+                        <td>
+                          {{ contrat.nb_invest }}
+                        </td>
+                        <td>
+                          {{ contrat.info.date_confirm | date }}
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu">
+                            <!-- <span class="dropdown-item cursorPointer" (click)="onAddRaport(contrat)" >Ajouter un raport</span> -->
+                            <a [routerLink]="['../raport-construction', contrat._id]" class="dropdown-item cursorPointer" >Voir vos raports</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Fermer</a>
+                            </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

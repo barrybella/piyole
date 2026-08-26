@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">
+        Annulation du payement {{ print.returnMonth(data.month) }}/{{ data.year }}
+      </div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="controlForm" (ngSubmit)="onSubmit()"> 
+      <div class="form-group">
+        <label for="exampleInputEmail1">Mot de passe</label>
+        <input type="password" class="form-control" formControlName="password" (keyup)="onClear($event)" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="******">
+        <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+      </div>
+      
+      <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-danger {{ etatPadding ? 'btn-loading' : '' }}">Confirmer</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+    <div class="card-header">
+        <div class="card-title">Investissement </div>
+        <div class="card-options">
+            <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+  <div class="card-body">
+      <ul class="mb-5">
+        <li><span class="mr-5">Budget total à investir:</span><b> {{ print.printPrice(post?.mont_invest)  }} GNF</b> </li>
+        <li><span class="mr-5">Budget restant à investir:</span> <b class="montant"> {{ print.printPrice(34000000000)  }}</b> GNF</li>
+        <li><span class="mr-5">Mon budget:</span> <b class="montant">{{ print.printPrice(mont)  }}</b></li>
+        <li><span class="mr-5">Mon Bénéfice/Mois:</span> <b class="montant">{{ print.printPrice(montant_benefice_front)  }}</b> GNF soit <b>{{ pourcentage_investi_front }}</b> % d'investissement</li>
+        <li><span class="mr-5">Mon Bénéfice/Année:</span> <b class="montant">{{ print.printPrice(montant_benefice_front * 12)  }}</b> GNF</li>
+      </ul>
+      <form  [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="name">Nom & Prenom</label>
+            <input type="text" class="form-control" placeholder="Nom complet" formControlName="name" id="name">
+          </div>
+          <div class="form-group col-6">
+            <label for="tel">Telephone</label>
+            <input type="text" class="form-control" placeholder="Numero telephone" formControlName="tel" id="tel">
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="montant">Montant à investir</label>
+          <input type="number" (keyup)="onMontant($event)" formControlName="montant" id="montant" class="form-control" placeholder="Montant a investir">
+        </div>
+
+        <div class="form-group">
+          <label for="name">Quelque Details</label>
+          <textarea formControlName="desc" class="form-control" placeholder="Description"  id="" cols="3" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button [disabled]="controlForm.invalid || controlForm.pending || etatPadding || !button_active" class="btn btn-primary btn-sm"><i class="fa fa-spin fa-refresh" *ngIf="etatPadding "></i> Se connectez pour investir</button>
+        </div>
+    </form>
+  </div>
+</div>

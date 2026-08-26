@@ -1,0 +1,22 @@
+<app-nav-bar [subTitle]="'Piyole SAS'"></app-nav-bar>
+<section class="sptb" 
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container ">
+      <div class="section-title center-block text-center">
+          <h2>Tout les publications de PIYOLE</h2>
+          <p>Scroller pour voir l'ensemble des publications des different agence!! Vous trouverrez votre gout 👌</p>
+      </div>
+      <div class="row">
+        <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+      </div>
+  </div>
+</section>
+<!--Latest Ads-->
+</section>

@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">CONFIRMATION DE LA SUPPRESION</div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="control_form" (ngSubmit)="onSubmit()" >
+      <div class="form-group">
+        <label for="exampleInputPassword1">Mot de passe</label>
+        <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+        <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+      </div>
+      <!-- <button [disabled]="control_form.invalid" type="submit" class="btn btn-primary">Enregistrer</button> -->
+      <button type="submit" [disabled]="control_form.invalid || etatPadding" class="btn btn-danger mr-1"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPadding"></span> <span *ngIf="!etatPadding">Supprimer</span></button>
+    </form>
+  </div>
+</div>

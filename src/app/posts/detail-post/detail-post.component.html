@@ -1,0 +1,809 @@
+<app-nav-bar [subTitle]="'Detail Post'"></app-nav-bar>
+
+<section class="sptb " *ngIf="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <!-- <shimmer width="960px" class="" type="square"></shimmer> -->
+                    
+                    <div class="ribbon ribbon-top-right text-danger"><span class="bg-{{ print.getTypePostColor(post?.type) }}">{{ print.getTypePost(post?.type)}}</span></div>
+                    <div class="card-body" style="margin-bottom: -30px;">
+
+                        <div class="item-det mb-4">
+                            <a  class="text-dark">
+                                <h1 class="capitalString">{{ print.printTitle(post?.title, 150 )}} </h1>
+                            </a>
+                            <ul *ngIf="post?.type == 0 || post?.type == 1" class="d-flex">
+                                <!-- <li class="mr-5"><a href="#" class="icons"><i class="icon icon-briefcase text-muted mr-1"></i> RealEstate</a></li> -->
+                                <li class="mr-5"><a class="icons"><i class="icon icon-location-pin text-muted mr-1"></i> {{ print.printAdress(post?.commune, post?.quartier, post?.secteur, 90) }}</a></li>
+                                <li class="mr-5 mobile-only">
+                                    <a class="icons">
+                                        <i class="fa fa-money  text-muted mr-1"></i> 
+                                        <span class="font-weight-bold">
+                                            {{ print.printPrice(post?.prix) }} 
+                                             <small class="ml-1 font-weight-bold"> GNF <span class="font-weight-bold" *ngIf="post?.type == 0">/MOIS</span> </small>
+                                        </span>
+                                    </a>
+                                </li>
+                                    <!-- <li class="mr-5"><a href="#" class="icons"><i class="icon icon-eye text-muted mr-1"></i> 765</a></li> -->
+                               
+                            </ul>
+                            <ul *ngIf="post?.type == 2" class="d-flex">
+                                <li class="mr-5 mobile-only">
+                                    <a class="icons">
+                                        <i class="fa fa-money  text-muted mr-1"></i> 
+                                        <span class="font-weight-bold">
+                                            Prix sur demande
+                                             <!-- <small class="ml-1 font-weight-bold"> GNF <span class="font-weight-bold" *ngIf="post?.type == 0">/MOIS</span> </small> -->
+                                        </span>
+                                    </a>
+                                </li>
+                                    <!-- <li class="mr-5"><a href="#" class="icons"><i class="icon icon-eye text-muted mr-1"></i> 765</a></li> -->
+                               
+                            </ul>
+                        </div>
+                    </div>
+                        <div class="product-slider">
+                            <div id="carousel" class="carousel slide" data-ride="carousel">
+                                <div class="arrow-ribbon2 desktop-only bg-{{ print.getTypePostColor(post?.type) }}">
+                                    <small>
+                                        <span *ngIf="post?.type == 0 || post?.type == 1" >{{ print.printPrice(post?.prix) }} GNF</span>
+                                        <span *ngIf="post?.type == 2" >Prix sur demande</span>
+                                         <span *ngIf="post?.type == 0">/MOIS</span>
+                                    </small>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div *ngFor="let img of post?.images; let i=index;" style="max-height: 500px;" class="carousel-item {{ i == 0 ? 'active' : '' }}">
+                                         <img  src="{{ print.printImage(img) }}" style="width:500px; height:300px;" class="radius_border mobile-only" alt="img">
+                                         <!-- <img  src="{{ print.printImage(img) }}" style="width:500px; height:400px;" class="radius_border mobile-only" alt="img"> -->
+                                         <img  src="{{ print.printImage(img) }}" class="radius_border d-none d-md-block" alt="img">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                </a>
+                                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix">
+                                <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div data-target="#carousel" data-slide-to="0" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[0]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="1" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[1]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="2" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[2]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="3" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[3]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="4" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[4]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="5" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[5]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="6" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[6]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="7" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[7]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="8" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[8]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="9" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[9]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="10" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[10]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="11" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[11]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="12" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[12]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="13" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[13]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="14" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[14]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div data-target="#carousel" data-slide-to="15" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[15]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="16" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[16]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="17" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[17]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="18" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[18]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                            <div data-target="#carousel" data-slide-to="19" class="thumb img_carousel"><img src="{{ print.printImage(post?.images[19]) }}" class="radius_border" alt="{{ post?.title }}"></div>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#thumbcarousel" role="button" data-slide="prev">
+                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                    <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="border-0 mb-4">
+                    <div class="wideget-user-tab wideget-user-tab3">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu1">
+                                <ul class="nav">
+                                    <li class=""><a href="#tab-1" class="active" data-toggle="tab">Aperçu</a></li>
+                                    <li *ngIf="post?.type == 0"><a href="#tab-3" data-toggle="tab" class="">Termes & Conditions</a></li>
+                                    <li><a href="#tab-5" data-toggle="tab" class="">Vidéo</a></li>
+                                    <li *ngIf="post?.type == 2"><a href="#tab-4" data-toggle="tab" class="">Devis Construction</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content border-0 p-5 bg-white details-tab-content">
+                        <div class="tab-pane active" id="tab-1">
+                            <h3 class="card-title mb-3 font-weight-semibold">Description <span class="mb-0 font-weight-bold">(REF_{{ post?.postId}})</span></h3>
+                            <div class="mb-4">
+							<p [innerHTML]="formatText(post?.description)"></p>
+                                <p style="font-weight: 900;"><b [innerText]="post?.detail_construction"></b></p>
+
+                            </div>
+                            <h3 *ngIf="post?.type == 0 || post?.type == 1" class="card-title mb-3 font-weight-semibold">Specifications</h3>
+                                <div *ngIf="post?.type == 0 || post?.type == 1" class="row">
+                                    <div class="col-xl-4 col-md-12" *ngIf="post?.categorie != 'Terrain'">
+                                        <ul class="list-unstyled widget-spec mb-0">
+                                            <li class="">
+                                                <i class="fa fa-check text-muted w-5"></i>
+                                                {{ post?.categorie }}
+                                            </li>
+                                            <li class="">
+                                                <i class="fa fa-bed text-muted w-5"></i>
+                                                {{ post?.chambre ? post?.chambre : 0 }} {{ getChambreOrPiece(post?.categorie) }}
+                                            </li>
+                                            <li class="">
+                                                <i class="fa fa-check text-muted w-5"></i>
+                                                {{ post?.salon ? post?.salon : 0 }} Salon
+                                            </li>
+                                            <li class="">
+                                                <i class="fa fa-bath text-muted w-5"></i>
+                                                {{ post?.toilette ? post?.toilette : 0 }} Toilettes
+                                            </li>
+                                            <li class="" *ngIf="post?.mettreCaree">
+                                                <i class="fa fa-arrows-alt text-muted w-5"></i> 
+                                                {{ post?.mettreCaree }} m2
+                                            </li>
+                                            <li class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faFaucetDrip"></fa-icon>
+                                                {{ post?.eaux }}
+                                            </li>
+                                            
+                                            <li class="font-weight-semibold gras_text">
+                                                <i class="fa fa-money text-muted w-5"></i>
+                                                <span class="font-weight-bold">
+                                                    {{ print.printPrice(post?.prix) }} <small class="ml-1 font-weight-bold"> GNF <span class="font-weight-bold" *ngIf="post?.type == 0">/MOIS </span> <span *ngIf="post?.discut"> À discuter</span> </small>
+                                                </span>
+                                            </li>
+                                            <li *ngIf="post?.type == 0" class="">
+                                                <i class="fa fa-money text-muted w-5"></i>
+                                                Commission: 1 mois
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xl-4 col-md-12" *ngIf="post?.categorie != 'Terrain'">
+                                        <ul class="list-unstyled widget-spec mb-0">
+                                            <li class="" >
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faShop"></fa-icon>
+                                                {{ post?.terrasse ? post?.terrasse : 0 }} {{ getTerrasseOrBalcon(post?.etage) }}
+                                            </li>
+                                            <li class="" *ngIf="post?.sole">
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faDiamond"></fa-icon>
+                                                {{ post?.sole }}
+                                            </li>
+                                            <li class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faDungeon"></fa-icon>
+                                                {{ post?.cour ? 'Clôturer' : 'Non Clôturer'}}
+                                            </li>
+                                            <li class="" >
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faPlateWheat"></fa-icon>
+                                                {{ post?.cuisine ? post?.cuisine : 0 }} Cuisine
+                                            </li>
+                                            <li class="" >
+                                                <i class="fa fa-check text-muted w-5"></i>
+                                                {{ post?.sale_bain ? post?.sale_bain : 0 }} Salle à bain
+                                            </li>
+                                            <li class="" >
+                                                <i class="fa fa-check text-muted w-5"></i>
+                                                {{ post?.sale_manger ? post?.sale_manger : 0 }} Salle à manger
+                                            </li>
+                                            <li class="" *ngIf="post?.parcking">
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faSquareParking"></fa-icon>
+                                                Parcking
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-xl-4 col-md-12" *ngIf="post?.categorie != 'Terrain'">
+                                        <ul class="list-unstyled widget-spec mb-0">
+                                            <li class="" *ngIf="post?.etage">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faBuilding"></fa-icon>
+                                                {{ post?.nivauxEtage }} Étages
+                                            </li>
+                                            
+                                            <li *ngIf="post?.type == 0" class="font-weight-semibold" >
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faCalendar"></fa-icon>
+                                                <span *ngIf="post?.avance">{{ post?.temps }} {{ post?.periode }} Avances</span>
+                                                <span *ngIf="!post?.avance">Pad d'Avances</span>
+                                            </li>
+                                            <li class="" *ngIf="post?.meuble">
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faCouch"></fa-icon>
+                                                 Meublé
+                                            </li>
+                                            <li class="" *ngIf="post?.climatiseur">
+                                                <fa-icon class="text-muted w-5 mr-2" [icon]="faAirFreshener"></fa-icon>
+                                                Climatiseur
+                                            </li>
+                                            <li class="" *ngIf="post?.gardien">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faPersonRifle"></fa-icon>
+                                                Securité (Gardien)
+                                            </li>
+                                            
+                                            <li class="" *ngIf="post?.garage">
+                                                <i class="fa fa-check text-muted w-5"></i>
+                                                 Garage
+                                            </li>
+                                            <li class="font-weight-semibold">
+                                                <i class="fa fa-map-marker text-muted w-5"></i> 
+                                                {{ post?.region }}, {{ post?.commune }}, {{ post?.quartier }}, {{ post?.secteur }},
+                                            </li>
+                                            <li *ngIf="post?.type == 0"  class="font-weight-semibold">
+                                                <i class="fa fa-money text-muted w-5"></i>
+                                                <span *ngIf="post?.caution">{{ print.printPrice(post?.caution) }} GNF caution</span>
+                                                <span *ngIf="!post?.caution">Pas de caution</span>
+                                                 
+                                            </li>
+                                            <li *ngIf="post?.etat_bien && post?.type == 1" class="">
+                                                <i class="fa fa-building-o text-muted w-5"></i>L' état du bien: {{ post?.etat_bien }}
+                                            </li>
+                                            <li class="">
+                                                <fa-icon class=" text-muted mr-1" [icon]="faFile"></fa-icon>
+                                                Documents: {{ post?.doc }}
+                                            </li>
+                                            <!-- <li class="mb-0">
+                                                <i class="fa fa-trophy text-muted w-5"></i> Cricket Court
+                                            </li> -->
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-xl-6 col-md-12" *ngIf="post?.categorie == 'Terrain'">
+                                        <ul class="list-unstyled widget-spec mb-0">
+                                            <li class="">
+                                                <i class="fa fa-check text-muted w-5"></i> Terrain
+                                            </li>
+                                            <li class="" *ngIf="post?.mettreCaree">
+                                                <i class="fa fa-arrows-alt text-muted w-5"></i> 
+                                                {{ post?.mettreCaree }} m2
+                                            </li>
+                                            <li  class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faFile"></fa-icon> 
+                                                {{ post?.doc }}
+                                            </li>
+                                            <li *ngIf="post?.lotissement" class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faTarp"></fa-icon> 
+                                                Lotissement Acomplie
+                                            </li>
+                                            <li *ngIf="post?.terassement" class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faPersonDigging"></fa-icon>
+                                                Terrasement Acomplie
+                                            </li>
+
+                                            <li *ngIf="post?.cour" class="">
+                                                <fa-icon class=" text-muted w-5 mr-2" [icon]="faDungeon"></fa-icon>
+                                                Clôturer
+                                            </li>
+
+                                            <li class="">
+                                                <i class="fa fa-map-marker text-muted w-5"></i> 
+                                                {{ post?.region }}, {{ post?.commune }}, {{ post?.quartier }}, {{ post?.secteur }},
+                                            </li>
+
+                                            <li class="font-weight-semibold gras_text">
+                                                <i class="fa fa-money text-muted w-5"></i> <span>{{ print.printPrice(post?.prix) }} GNF </span> <span *ngIf="post?.discut"> À discuter</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane" id="tab-3">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12">
+                                    <h3 class="card-title mb-3 font-weight-semibold">Les termes et conditions</h3>
+                                    <div class="mb-4">
+                                        <p>{{ post?.condition }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                            <ul class="list-unstyled video-list-thumbs row ">
+                                <li class="mb-0">
+                                    <!-- <a data-toggle="modal" data-target="#homeVideo">
+                                        <img src="../assets/images/products/products/h1.jpg" alt="Barca" class="img-responsive">
+                                        <span class="mdi mdi-arrow-right-drop-circle-outline text-white"></span>
+                                    </a> -->
+                                    <!-- <video  controls>
+                                        <source src="{{ print.printVideo(post?.video) }}" type="video/mp4">
+                                        
+                                    </video> -->
+
+                                    <video *ngIf="post?.video"  controls>
+                                        <source src="{{ print.printVideo(post?.video) }}" type="video/mp4">
+                                        <!-- <source src="movie.ogg" type="video/ogg"> -->
+                                        Videos detail du bien!!
+                                    </video>
+                                    <img *ngIf="!post?.video" src="../assets/images/products/products/h1.jpg" alt="Barca" class="img-responsive">
+
+                                    <!-- <span *ngIf="!post?.video" class="mdi mdi-arrow-right-drop-circle-outline text-white"></span> -->
+                                </li>
+                            </ul>
+                        </div>
+                        <div *ngIf="post?.type == 2" class="tab-pane" id="tab-4">
+                            <div class="row" *ngIf="post?.status_devi == 2">
+                                <!-- <div *ngFor="let devi of post?.devis" class="col-md-12 col-xl-4">
+                                    <div class="card">
+                                        <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
+                                        <div class="card-header">
+                                            <h3 class="card-title line_clamp" title="{{ devi.title }}">{{ devi.title }}</h3>
+    
+                                        </div>
+                                        <div class="card-body">
+                                            {{ print.printDescription(devi.desc, 35).text }} <span *ngIf="print.printDescription(devi.desc).voirPlus" class="text-primary cursorPointer" (click)="onVoirPlus(devi.desc)">voir plus</span>
+                                        </div>
+                                        <div class="card-footer ">
+                                            <span> <b style="font-weight: 900; color: black;"> {{ print.printPrice(devi.prix) }} GNF</b></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-12 col-lg-12 features">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div class="feature">
+                                                <div class="fa-stack fa-lg  fea-icon bg-success  mb-3">
+                                                    <i class="fa fa-file-pdf-o  text-white"></i>
+                                                </div>
+                                                <h2>Devis du plan disponible</h2>
+                                                <!-- <p>our being able to do what we like best, every pleasure is to be welcomed and every pain. our being able to do what we like best, every pleasure is to be welcomed and every pain.</p> -->
+                                                <p>Vous pouvez voir le devis de ce plan... La construction peut être exécutée selon vos besoins.</p>
+                                                <button class="btn btn-success mt-2" (click)="print.pdf(post?.pdf)"><i class="fa fa-file-pdf-o "></i> Voir le devis</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="post?.status_devi == 0 || post?.status_devi == 1">
+                                <div class="col-md-12 col-lg-12 features">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div class="feature">
+                                                <div class="fa-stack fa-lg  fea-icon bg-primary  mb-3">
+                                                    <i class="fa fa-file-pdf-o  text-white"></i>
+                                                </div>
+                                                <h2>Besoin d'un devi?</h2>
+                                                <!-- <p>our being able to do what we like best, every pleasure is to be welcomed and every pain. our being able to do what we like best, every pleasure is to be welcomed and every pain.</p> -->
+                                                <p> Voulez-vous construire ce plan? Demandez-nous un devis et nous vous le proposerons dans un bref délai.</p>
+                                                <button class="btn btn-primary mt-2" (click)="onContactMe(post)"><i class="fa fa-envelope"></i> Nous Contacter</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-4 pl-5 pr-5 border-top bg-white">
+                        <div class="list-id">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="mb-0 font-weight-bold">REF_{{ post?.postId }}</a>
+                                </div>
+                                <div class="col col-auto" *ngIf="post?.type == 0 || post?.type == 1">
+                                    Poster Par <a class="mb-0 font-weight-bold">{{ post?.ing == false ? post?.user_id.name : 'PYOLE GROUP SARLU' }}</a> / <span class="nb-0 font-weight-bold callnumber"> <a *ngIf="post?.ing == false" href="tel:{{ post?.user_id.tel}}">{{ post?.user_id.tel}}</a> <a *ngIf="post?.ing == true" href="tel:+224-612-39-67-39">+224 612-39-67-39</a> </span>
+                                </div>
+
+                                <div class="col col-auto" *ngIf="post?.type ==2">
+                                     <a class="mb-0 font-weight-bold">PIYOLE GROUP SARLU / </a> <span class="nb-0 font-weight-bold callnumber"> <a href="tel:+224-612-39-67-39">612-39-67-39</a> </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white details-tab">
+                        <div class="icons">
+                            <span class="btn btn-{{ print.getTypePostColor(post?.type) }} mr-1" *ngIf="post" (click)="onContactMe(post)"><i class="fa fa-envelope"></i>  Contactez moi</span>
+                            <!-- <a href="#" class="btn btn-info icons"><i class="icon icon-share mr-1"></i> Partager</a> -->
+                            <!-- <a href="#" class="btn btn-primary icons"><i class="icon icon-heart  mr-1"></i> 678</a> -->
+                            <!-- <a href="#" class="btn btn-secondary icons"><i class="icon icon-printer  mr-1"></i> Print</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-5 mt-4 desktop-only">Articles Similaires</h3>
+
+                <!--Related Posts-->
+                <div class="row desktop-only" >
+                    <!-- Wrapper for carousel items -->
+                    <div class="col-lg-12 col-md-12"
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="100"
+                    (scrolled)="onScroll()"
+                    [scrollWindow]="true"
+                    >
+                        <div *ngFor="let post_rent of postings" class="card overflow-hidden">
+                            <div class="d-md-flex cursorPointer" (click)="onDetaille(post_rent._id)">
+                                <div class="item-card9-img">
+                                    <div class="arrow-ribbon bg-{{ print.getTypePostColor(post_rent?.type) }}" *ngIf="post_rent.type == 0">Location</div>
+                                    <div class="arrow-ribbon bg-{{ print.getTypePostColor(post_rent?.type) }}" *ngIf="post_rent.type == 1">Vente</div>
+                                    <div class="arrow-ribbon bg-{{ print.getTypePostColor(post_rent?.type) }}" *ngIf="post_rent.type == 2">Plan à vendre</div>
+                                    <div class="item-card9-imgs">
+                                        <a [routerLink]="['../../detail-post', post_rent._id]"></a>
+                                        <img src="{{ print.printImage(post_rent?.images[0]) }}" style="max-height: 300px; max-width: 400px;" alt="{{ post_rent?.title }}" class="cover-image products-1">
+                                    </div>
+                                    <!-- <div class="item-card9-icons">
+                                        <a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
+                                    </div> -->
+                                    <div class="item-tags">
+                                        <div class="ng_post_id tag-option">REF_{{ post_rent.postId }} </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="card border-0 mb-0">
+                                    <div class="card-body ">
+                                        <div class="item-card9">
+                                            <a [routerLink]="['../../detail-post', post_rent._id]" class="text-muted"><i class="fa fa-tag mr-1" ></i> {{ post_rent.categorie }}</a>
+                                            <a [routerLink]="['../../detail-post', post_rent._id]" class="text-dark"><h4 class="font-weight-bold mt-1 line_clamp">{{ post_rent.title }} </h4></a>
+                                            <p class="mb-0 leading-tight">{{ post_rent.description  }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer pt-4 pb-4">
+                                        <div class="item-card9-footer d-flex" *ngIf="post_rent.type != 2">
+                                            <div class="item-card9-cost" >
+                                                <a [routerLink]="['../../detail-post', post_rent._id]" class="mr-4"><span class=""><i class="fa fa-map-marker text-muted mr-1"></i> {{ post_rent.commune }}, {{ post_rent.quartier }}, {{ post_rent.secteur }}</span></a>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <a [routerLink]="['../../detail-post', post_rent._id]" class=""><span class=""> <h6 class="font-weight-bold mt-1">{{ print.printPrice(post_rent.prix) }} GNF <span *ngIf="post_rent?.type == 0">/MOIS </span> <span *ngIf="post_rent?.discut"> À discuter</span> </h6></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="item-card9-footer d-flex" *ngIf="post_rent.type == 2">
+                                            <div class="item-card9-cost" >
+                                                <a [routerLink]="['../../detail-post', post_rent._id]" class=""><span class=""> <h6 class="font-weight-bold mt-1">Prix sur demande <span *ngIf="post_rent?.type == 0">/MOIS</span> </h6></span></a>
+                                            </div>
+                                            <div class="ml-auto">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!--/Related Posts-->
+
+                <!--Comments-->
+               
+                <!--/Comments-->
+
+            </div>
+
+            <!--Right Side Content-->
+
+
+            <div class="col-xl-4 col-lg-4 col-md-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Poster Par</h3>
+                    </div>
+                    <div *ngIf="post?.type == 0 || post?.type == 1" class="card-body  item-user">
+                        <div class="profile-pic mb-0">
+                            <img src="{{ print.printProfile(post?.user_id?.image) }}" class="brround avatar-xxl" alt="user">
+                            <div class="">
+                                <a href="userprofile2.html" class="text-dark">
+                                    <h4 class="mt-3 mb-1 font-weight-semibold">{{ post?.user_id.name}}</h4>
+                                </a>
+                                <p class="mb-0">{{ post?.user_id.role != 'ingenieur' ? 'Agence Immobilière' : 'PIYOLE GROUP SARLU'}}</p>
+                                <span class="text-muted">Membre Depuis {{ post?.user_id.createdAt | date}}</span>
+                                <h6 class="mt-2 mb-0">
+                                    <a *ngIf="post?.ing == false" [routerLink]="['/', post?.user_id?.slug]" class="btn btn-{{ post?.type == '0' ? 'primary' : 'secondary'}} btn-sm">Voir tous les postes</a>
+                                    <a *ngIf="post?.ing == true" [routerLink]="['/posts/all-post-ing']"class="btn btn-{{ post?.type == '0' ? 'primary' : 'secondary'}} btn-sm">Voir tous les postes</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="post?.type == 2" class="card-body  item-user">
+                        <div class="profile-pic mb-0">
+                            <img src="{{ print.printProfile('') }}" class="brround avatar-xxl" alt="user">
+                            <div class="">
+                                <a href="userprofile2.html" class="text-dark">
+                                    <h4 class="mt-3 mb-1 font-weight-semibold">{{ 'PIYOLE GROUP SARLU' }}</h4>
+                                </a>
+                                <p class="mb-0">{{ 'PIYOLE GROUP SARLU' }}</p>
+                                <span class="text-muted">Membre Depuis le debut</span>
+                                <h6 class="mt-2 mb-0"><a [routerLink]="['../../all-plans']"class="btn btn-{{ print.getTypePostColor(post?.type) }} btn-sm">Voir tous les postes</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body item-user">
+                        <h4 class="mb-4">Informations pour contact</h4>
+                        <div *ngIf="post?.type == 0 || post?.type == 1">
+                            <h6><span class="font-weight-semibold"><i class="fa fa-map-marker mr-2 mb-2"></i></span><span class="text-body"> {{ post?.user_id.region }}, {{ post?.user_id.commune }}, {{ post?.user_id.quartier }}</span></h6>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-envelope mr-2 mb-2"></i></span><span class="text-body"> {{ post?.ing == false ? post?.user_id.email : 'contact@piyole.com' }}</span></h6>
+                            <h6 *ngIf="post?.ing == false"><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><span class="text-body"> <a href="tel:{{ post?.user_id.tel }}">{{ post?.user_id.tel }}</a></span></h6>
+                            <h6 *ngIf="post?.ing == true"><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><span class="text-body"> <a href="tel:+224612396739">+224 612-39-67-39</a></span></h6>
+                            <h6 *ngIf="post?.ing == false"><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span><a href="{{ post?.user_id.site }}" class="text-body">{{ post?.user_id.site }}</a></h6>
+                            <h6 *ngIf="post?.ing == true"><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span><a [routerLink]="['../../../posts/all-post-ing']" class="text-body">piyole.com/posts/all-post-ing</a></h6>
+                        </div>
+
+                        <div *ngIf="post?.type == 2">
+                            <h6><span class="font-weight-semibold"><i class="fa fa-map-marker mr-2 mb-2"></i></span><span class="text-body"> {{ 'Conakry' }}, {{ 'Ratoma' }}, {{ 'Nongo Taady' }}</span></h6>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-envelope mr-2 mb-2"></i></span><span class="text-body"> {{ 'contact@piyole.com' }}</span></h6>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><span class="text-body"> <a href="tel:+224 612-39-67-39">+224 612-39-67-39</a></span></h6>
+                            <h6><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span><a [routerLink]="['../../../posts/all-plans']" class="text-body">{{ 'piyole.com' }}</a></h6>
+                        </div>
+
+                        <!-- <div class=" item-user-icons mt-4">
+                            <a *ngIf="post?.user_id.facebook" href="{{ post?.user_id.facebook }}" target="_blank" title="Facebook" class="facebook-bg mt-0"><i class="fa fa-facebook"></i></a>
+                            <a *ngIf="post?.user_id.twitter" href="{{ post?.user_id.twitter }}" target="_blank" title="Twtter" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                            <a *ngIf="post?.user_id.instagram" href="{{ post?.user_id.instagram }}" target="_blank" title="Instagram" class="dribbble-bg"><i class="fa fa-instagram"></i></a>
+                            <a *ngIf="post?.user_id.tiktok" href="{{ post?.user_id.tiktok }}" target="_blank" title="Tiktok" class="dribbble-bg"><i class="fa fa-tiktok"></i></a>
+                            <a *ngIf="post?.user_id.site" href="{{ post?.user_id.site }}" target="_blank" title="Site Internet" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
+                        </div> -->
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-left">
+                            <!-- <a href="#" class="btn  btn-success mr-1"><i class="fa fa-envelope"></i> Chat</a> -->
+                            <span class="btn btn-{{ print.getTypePostColor(post?.type) }} mr-1" *ngIf="post" (click)="onContactMe(post)"><i class="fa fa-envelope"></i>  Contactez moi</span>
+                            <!-- <a href="#" class="btn  btn-info"><i class="fa fa-share"></i> Partager</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="posts?.length > 0">
+                    <div class="card-header">
+                        <h3 class="card-title">Autres {{ post?.categorie }} pour {{ post?.type == 0 ? 'Location' : 'Vente'}} à {{ post?.commune }}, {{ post?.quartier }}</h3>
+                    </div>
+                    <div class="card-body pb-3">
+                        <div class="rated-products">
+                            <ul class="vertical-scroll">
+                                <li class="item" *ngFor="let post of posts">
+                                    <div (click)="onDetaille(post?._id)" class="media m-0 mt-0 p-5 cursorPointer">
+                                        <img class="mr-4" src="{{ print.printImage(post.images[0]) }}" alt="{{ post.title }}">
+                                        <div class="media-body">
+                                            <h4 class="mt-2 mb-1 capitalString">{{ print.printTitle(post?.title) }}</h4>
+                                            <!-- <p class="mb-2"><i class="fa fa-map-marker text-danger mr-1"></i>{{ print.printAdress(post?.commune, post?.quartier, post?.secteur, 28)}}</p> -->
+                                            <span class="font-weight-bold ng_post_cat">REF_{{ post.postId }}</span>
+                                            <div class="h5 mb-0 font-weight-semibold mt-1">{{ print.printPrice(post?.prix) }} GNF <span *ngIf="post.type == 0">/Mois</span></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <a [routerLink]="['../../get-post-by-categorie-commune-quartier-type',  post?.categorie, post?.commune, post?.quartier, post?.type]" ><i class="fa fa-share"></i> Voir Tous</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="quartiers?.length > 0">
+                    <div class="card-header">
+                        <h3 class="card-title">Autres Quartier dans {{ post?.commune }}</h3>
+                    </div>
+                    <div class="card-body product-filter-desc">
+                        <div class="product-tags clearfix">
+                            <ul class="list-unstyled mb-0">
+                                <li *ngFor="let item of quartiers"><a [routerLink]="['../../get-post-by-categorie-commune-quartier-type',  post?.categorie, post?.commune, item._id, post?.type]">{{ item._id }}</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Vente de Materiaux de Construction </h3>
+                    </div>
+                    <div class="card-body pb-3">
+                        <ul class="vertical-scroll">
+                            <li *ngFor="let shop_cat of shopings" class="news-item">
+                                <table>
+                                    <tr>
+                                        <td><img src="{{ print.printImage(shop_cat?.images[0]) }}" style="max-height: 50px;" alt="{{ shop_cat?.title }}" class="w-8 border" /></td>
+                                        <td class="pl-4">
+                                            <h5 class="mb-1 line_clamp"> <b>{{ shop_cat.title }}</b>  <small> ({{ shop_cat.categorie }})</small></h5><a [routerLink]="['../../../shops/detail-product', shop_cat._id]" class="btn-link">Voir les détails</a><span class="float-right font-weight-bold ng_post_id">REF_{{ shop_cat.productId }}</span></td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class=" card-footer text-center">
+                        <a [routerLink]="['../../../shops/shopping']" ><i class="fa fa-share"></i> Voir Tous</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Publications Récentes</h3>
+                    </div>
+                    <div class="card-body pb-3">
+                        <ul class="vertical-scroll"
+                        infiniteScroll
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="100"
+                        (scrolled)="onScrollRecent()"
+                        [scrollWindow]="true"
+                        >
+                            <li *ngFor="let post_recen of post_recents" class="news-item horizontal-card m_card ling cursorPointer" (click)="onDetaille(post_recen._id)" >
+                                <!-- <table>
+                                    <tr>
+                                        <td><img src="{{ print.printImage(post_recen?.images[0]) }}" style="max-height: 50px;" alt="img" class="w-8 border" /></td>
+                                        <td class="pl-4">
+                                            <h5 class="mb-1 line_clamp"> <b>{{ post_recen.categorie }}</b> 
+                                                 <small> ({{ post_recen.quartier }})</small>
+                                            </h5>
+                                            <a [routerLink]="['../../detail-post', post_recen._id]" class="btn-link">Voir les détails</a>
+                                            <span class="float-right font-weight-bold ng_post_id">REF_{{ post_recen.postId }}</span>
+                                        </td>
+                                    </tr>
+                                </table> -->
+                                <table *ngIf="post_recen.type == 0 || post_recen.type == 1" >
+                                    <tr  >
+                                        <td>
+                                            <span class="badgeng" *ngIf="post_recen.type == 0" style="background-color: #FF0100; color: white;">À Louer</span>
+                                            <span class="badgeng" *ngIf="post_recen.type == 1" style="background-color: #1B50E1; color: white;">À Vendre</span>
+                                            <span class="badgeng" *ngIf="post_recen.type == 2" style="background-color: #0C7420; color: white;">Plan</span>
+                                            <img src="{{ print.printImage(post_recen?.images[0]) }}" style="height: 100px; min-width: 120px;" alt="{{ post_recen?.title }}" class="w-8 border img-fluid  radius_border" />
+                                            <!-- <div class="badge">Nouveau</div> -->
+                                        </td>
+                                        <td class="pl-4">
+                                            <!-- <span style="font-size: 12px;"> -->
+                                                    <span class="font-weight-bold l_clamp margin-bottom: -90px;" style="font-weight: 900; margin-bottom: -20px;" >{{ post_recen.title }}</span><br>
+                                             <!-- </span> -->
+                                               <small style="font-weight: 900; color: red;">{{ print.printPrice(post_recen.prix)}} FG à discuter</small><br>
+                                            <small class="font-weight-bold" style="font-weight: 500;">
+                                                <span>{{ post_recen.mettreCaree }} m²</span>
+                                                <span *ngIf="post_recen.categorie != 'Terrain'">, {{ post_recen.chambre }} ch, </span>
+                                                <span *ngIf="post_recen.categorie != 'Terrain'">{{ post_recen.salon}} sal, </span>
+                                                <span *ngIf="post_recen.categorie != 'Terrain'">{{ post_recen.toilette }} toil</span>
+                                            </small>
+                                            <br>
+                                            <span> <i class="fa fa-map-marker"></i> {{ post_recen.quartier }}</span><br>
+                                           
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table *ngIf="post_recen.type == 2" >
+                                    <tr  >
+                                        <td>
+                                            <span class="badgeng" *ngIf="post_recen.type == 0" style="background-color: #1B50E1; color: white;">À Louer</span>
+                                            <span class="badgeng" *ngIf="post_recen.type == 1" style="background-color: #FF0100; color: white;">À Vendre</span>
+                                            <span class="badgeng" *ngIf="post_recen.type == 2" style="background-color: #0C7420; color: white;">Plan</span>
+                                            <img src="{{ print.printImage(post_recen?.images[0]) }}" style="height: 100px; min-width: 120px;" alt="{{ post_recen?.title }}" class="w-8 border img-fluid  radius_border" />
+                                            <!-- <div class="badge">Nouveau</div> -->
+                                        </td>
+                                        <td class="pl-4">
+                                            <!-- <span style="font-size: 12px;"> -->
+                                                    <span class="font-weight-bold l_clamp margin-bottom: -90px;" style="font-weight: 900; margin-bottom: -20px;" >{{ post_recen.title }}</span><br>
+                                             <!-- </span> -->
+                                               <small style="font-weight: 900; color: red;">Prix sur demande</small><br>
+                                               <small style="font-weight: 900;">Tel/What: <a href="tel:+224-622-37-23-45">+224 622-37-23-45</a></small><br>
+                                         
+                                            <br>
+                                           
+                                        </td>
+                                    </tr>
+                                </table>
+                                <span class="float-right font-weight-bold ng_post_id">REF_{{ post_recen.postId }}</span>
+
+                            </li>
+                            
+                            <li *ngFor="let item of chimers" class=" {{ !chimer_recent ? 'd-none' : ''}} col-xl-3 col-lg-4 col-md-6 col-sm-12 "  >
+                                
+                                <table>
+                                    <tr  >
+                                        <td>
+                                            <!-- <img src="{{ print.printImage(post_recen?.images[0]) }}" style="height: 100px; min-width: 120px;" alt="img" class="w-8 border img-fluid  radius_border" /> -->
+                                            <!-- <div class="badge">Nouveau</div> -->
+                                            <shimmer style="margin-left: 2px; margin-top: 10px; max-height: 150px;" width="100px" height="100px" type="square"></shimmer>
+                                        </td>
+                                        <td class="pl-4">
+                                            <div>
+                                                <shimmer width="160px" type="line"></shimmer>
+                                            </div>
+                                            <div>
+                                                <shimmer width="110px" type="line"></shimmer>
+                                                <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+
+                               
+                                    
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/Right Side Content-->
+        </div>
+    </div>
+</section>
+
+<section class="sptb desktop-only" *ngIf="!post">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="720px" class="" type="square"></shimmer>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="320px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body pb-3">
+                        <shimmer width="320px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sptb mobile-only " *ngIf="!post">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                
+                <!--Classified Description-->
+                <div class="card overflow-hidden">
+                    <div class="card-header">
+                        <shimmer width="200px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <shimmer width="600px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-header">
+                        <shimmer width="100px" type="line"></shimmer>
+                    </div>
+                    <div class="card-body pb-3">
+                        <shimmer width="290px" class="" type="square"></shimmer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

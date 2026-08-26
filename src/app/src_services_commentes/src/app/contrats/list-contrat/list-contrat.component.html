@@ -1,0 +1,118 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Contrat</h3>
+            <div class="card-options">
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon fa fa-search mr-1"></i> Recherche Post</span>
+              <span>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon icon-plus mr-1"></i> Publication
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post')" style="color: black;">Location</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post-sale')" style="color: black;">Vente</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-terrain')" style="color: black;">Terrain</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-plan')" style="color: black;">Plan</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-plan')" style="color: black;">Materiaux de construction</a>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Information client</th>
+                        <th>Type</th>
+                        <th>NON PAYER(MOIS/JOURS)</th>
+                        <th>Type CONTRAT</th>
+                        <th>ID POST</th>
+                        <th>Montant</th>
+                        <th>Caution</th>
+                        <th>Date</th>
+                        <th >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats" class="bg-{{ contrat.type_contrat == 0 ? test(contrat)?.response_status : ''}} bg-{{ contrat.type_contrat == 1 ? jnp(contrat)?.response_status : ''}}">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        
+                        <td>
+                          <div  class="d-flex">
+                              <span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../assets/images/faces/male/25.jpg"></span>
+                              <div>
+                                  <span>{{ contrat.client_id?.name }}</span><br>
+                                  <a ><small>{{ contrat.client_id?.tel }}</small></a>
+                              </div>
+                          </div>
+                      </td>
+                        <td>
+                          <span class="badge badge-{{ contrat.post_id?.type == 0 ? 'primary' : 'info' }}">{{ contrat.post_id?.type == 0 ? 'Location' : 'Vente' }}</span>
+                        </td>
+                        <td>
+                          <span *ngIf="contrat.type_contrat == 0">{{ test(contrat).month_verifie }} mois</span>
+                          <span *ngIf="contrat.type_contrat == 1">{{jnp(contrat).jnp }}</span>
+                        </td>
+                        <td>
+                          <span > {{ getTypeContrat(contrat.type_contrat) }}</span>
+
+                        </td>
+                        <td>{{ contrat.post_id?.postId }}</td>
+                        <td>
+                          {{ print.printPrice(contrat.montant) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(contrat.caution) }}
+                        </td>
+                        <td>
+                          {{ contrat.createdAt | date }}
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu">
+                            <a *ngIf="contrat.post_id?.type == 0 && contrat.type_contrat != 2" class="dropdown-item cursorPointer" [routerLink]="['../../contrats/payements-contrat', contrat._id]" >Payements</a>
+                            <!-- <span class="dropdown-item cursorPointer" >Annuler le contrat</span> -->
+                            <span class="dropdown-item cursorPointer" *ngIf="contrat.type_contrat == 0" (click)="addPresAvis(contrat)">Pres Avis</span>
+                            <span class="dropdown-item cursorPointer" (click)="addResiliation(contrat)">Resilier le contrat</span>
+                            <span class="dropdown-item cursorPointer" >Detail du post</span>
+                            <span class="dropdown-item cursorPointer" *ngIf="contrat.type_contrat == 1" (click)="stopContrat(contrat)">Stop Contrat</span>
+                            <span class="dropdown-item cursorPointer" >Plus de detail sur le contrat</span>
+                            <!-- <span class="dropdown-item cursorPointer" >Modification</span> -->
+                            <span class="dropdown-item cursorPointer" (click)="onUpdatePrix(contrat)" >Modification Prix</span>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Fermer</a> -->
+                            </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

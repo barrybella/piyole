@@ -1,0 +1,26 @@
+<app-nav-bar [subTitle]="categorie"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container">
+      <div class="section-title center-block text-center">
+          <h1>{{ categorie }} en vente ou en location partout en Guinée Conakry</h1>
+          <p>Plongez dans le marché immobilier florissant en Guinée Conakry, laissez-nous vous guider vers votre nouveau chez-vous.👌</p>
+      </div>
+      <div class="row">
+        <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+      </div>
+      <!-- <div class="center-block text-center">
+        <a [routerLink]="['../../get-posts-by-categorie-for-rent', categorie]" class="btn btn-primary rounded-pill btn-lg">-----Voir tout les {{ categorie }} pour Location (3500)-----</a>
+    </div> -->
+  </div>
+</section>
+<!--Latest Ads-->
+
+</section>

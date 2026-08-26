@@ -1,0 +1,2238 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Contrart No {{ contrat?.contratId }}</h3>
+            <div class="card-options">
+              <a (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="panel panel-primary" *ngIf="contrat?.type_contrat == 0">
+              <div class="tab-menu-heading">
+                <div class="tabs-menu ">
+                  <!-- Tabs -->
+                  <ul class="nav panel-tabs">
+                    <!-- <li class=""><a href="#tab1" class="active" data-toggle="tab">2022</a></li> -->
+                    <li *ngFor="let item of iters" class=""><a data-toggle="tab" href="#tab{{ item }}" class="{{ year_tab_now == item ? 'active' : ''}} ">{{ item }}</a></li>
+
+                    <!-- <li><a href="#tab2" data-toggle="tab">2023</a></li>
+                    <li><a href="#tab3" data-toggle="tab">2024</a></li>
+                    <li><a href="#tab4" data-toggle="tab">2025</a></li> -->
+                  </ul>
+                </div>
+              </div>
+              <div class="panel-body tabs-menu-body">
+                <div class="tab-content">
+                  <div class="tab-pane {{ year_tab_now == 2022 ? 'active' : ''}}" id="tab2022">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2022) ? payement(1, 2022) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2022) != 'success' && payement(1, 2022) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2022)" (click)="onAddPay(1, 2022)">PAYER</span>
+                                  <span *ngIf="payement(1, 2022) == 'success' && isRemove(1, 2022)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2022)">ANNULER</span></span>
+                                  <span *ngIf="payement(1, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2022) ? payement(2, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2022) != 'success' && payement(2, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2022)" (click)="onAddPay(2, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2022) ? payement(3, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2022) != 'success' && payement(3, 2022) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2022)" (click)="onAddPay(3, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2022) ? payement(4, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2022) != 'success' && payement(4, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2022)" (click)="onAddPay(4, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2022) ? payement(5, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2022) != 'success' && payement(5, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2022)" (click)="onAddPay(5, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2022) ? payement(6, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2022) != 'success' && payement(6, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2022)" (click)="onAddPay(6, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2022) == 'success'">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2022) ? payement(7, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2022) != 'success' && payement(7, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2022)" (click)="onAddPay(7, 2022)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2022) == 'success' && isRemove(7, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2022)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2022) == 'success' && isRemove(7, 2022)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2022) ? payement(8, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2022) != 'success' && payement(8, 2022) != 'light'" (click)="onAddPay(8, 2022)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2022)" (click)="onAddPay(8, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2022) == 'success' && isRemove(8, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2022)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2022) == 'success' && isRemove(8, 2022)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2022)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2022) ? payement(9, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2022) != 'success' && payement(9, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2022)" (click)="onAddPay(9, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2022) == 'success' && isRemove(9, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2022)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2022) == 'success'  && !isRemove(9, 2022)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2022)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2022) ? payement(10, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2022) != 'success' && payement(10, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2022)" (click)="onAddPay(10, 2022)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2022) == 'success' && isRemove(10, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2022)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2022) == 'success' && !isRemove(10, 2022)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2022) ? payement(11, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2022) != 'success' && payement(11, 2022) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2022)" (click)="onAddPay(11, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2022) == 'success' && isRemove(11, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2022)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2022) == 'success' && !isRemove(11, 2022)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2022)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2022) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2022) ? payement(12, 2022) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2022) != 'success' && payement(12, 2022) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2022)" (click)="onAddPay(12, 2022)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2022) == 'success' && isRemove(12, 2022)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2022)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2022) == 'success' && !isRemove(12, 2022)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2022)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane  {{ year_tab_now == 2023 ? 'active' : ''}}" id="tab2023">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2023) ? payement(1, 2023) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2023) != 'success' && payement(1, 2023) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2023) && !isPresAvisOrStopContrat(1, 2023)" (click)="onAddPay(1, 2023)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2023) == 'success' && isRemove(1, 2023)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2023)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2023) == 'success' && isRemove(1, 2023)  && !isPresAvisOrStopContrat(1, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2023) == 'success' && !isRemove(1, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2023) ? payement(2, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2023) != 'success' && payement(2, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2023) && !isPresAvisOrStopContrat(2, 2023)" (click)="onAddPay(2, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2023) == 'success' && isRemove(2, 2023) && !isPresAvisOrStopContrat(2, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2023) == 'success' && !isRemove(2, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2023) ? payement(3, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2023) != 'success' && payement(3, 2023) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2023) && !isPresAvisOrStopContrat(3, 2023)" (click)="onAddPay(3, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2023) == 'success' && isRemove(3, 2023) && !isPresAvisOrStopContrat(3, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2023) == 'success' && !isRemove(3, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2023) ? payement(4, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2023) != 'success' && payement(4, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2023) && !isPresAvisOrStopContrat(4, 2023)" (click)="onAddPay(4, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2023) == 'success' && isRemove(4, 2023) && !isPresAvisOrStopContrat(4, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2023) == 'success' && !isRemove(4, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2023) ? payement(5, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2023) != 'success' && payement(5, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2023) && !isPresAvisOrStopContrat(5, 2023)" (click)="onAddPay(5, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2023) == 'success' && isRemove(5, 2023) && !isPresAvisOrStopContrat(5, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2023) == 'success' && !isRemove(5, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2023) ? payement(6, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2023) != 'success' && payement(6, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2023) && !isPresAvisOrStopContrat(6, 2023)" (click)="onAddPay(6, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2023) == 'success' && isRemove(6, 2023) && !isPresAvisOrStopContrat(6, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2023) == 'success' && !isRemove(6, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2023) ? payement(7, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2023) != 'success' && payement(7, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2023) && !isPresAvisOrStopContrat(7, 2023)" (click)="onAddPay(7, 2023)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2023) == 'success' && isRemove(7, 2023) && !isPresAvisOrStopContrat(7, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2023) == 'success' && !isRemove(7, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2023) ? payement(8, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2023) != 'success' && payement(8, 2023) != 'light'" (click)="onAddPay(8, 2023)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2023) && !isPresAvisOrStopContrat(8, 2023)" (click)="onAddPay(8, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2023) == 'success' && isRemove(8, 2023) && !isPresAvisOrStopContrat(8, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2023) == 'success' && !isRemove(8, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2023)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2023) ? payement(9, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2023) != 'success' && payement(9, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2023) && !isPresAvisOrStopContrat(9, 2023)" (click)="onAddPay(9, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2023) == 'success' && isRemove(9, 2023) && !isPresAvisOrStopContrat(9, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2023) == 'success'  && !isRemove(9, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2023)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2023) ? payement(10, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2023) != 'success' && payement(10, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2023) && !isPresAvisOrStopContrat(10, 2023)" (click)="onAddPay(10, 2023)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2023) == 'success' && isRemove(10, 2023) && !isPresAvisOrStopContrat(10, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2023)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2023) == 'success' && !isRemove(10, 2023)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2023) ? payement(11, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2023) != 'success' && payement(11, 2023) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2023) && !isPresAvisOrStopContrat(11, 2023)" (click)="onAddPay(11, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2023) == 'success' && isRemove(11, 2023)  && !isPresAvisOrStopContrat(11, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2023) == 'success' && !isRemove(11, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2023)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2023) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2023) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2023) ? payement(12, 2023) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2023) != 'success' && payement(12, 2023) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2023) && !isPresAvisOrStopContrat(12, 2023)" (click)="onAddPay(12, 2023)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2023) == 'success' && isRemove(12, 2023) && !isPresAvisOrStopContrat(12, 2023)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2023)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2023) == 'success' && !isRemove(12, 2023)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2023)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane {{ year_tab_now == 2024 ? 'active' : ''}}" id="tab2024">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2024) ? payement(1, 2024) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2024) != 'success' && payement(1, 2024) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2024) && !isPresAvisOrStopContrat(1, 2024)" (click)="onAddPay(1, 2024)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2024) == 'success' && isRemove(1, 2024)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2024)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2024) == 'success' && isRemove(1, 2024)  && !isPresAvisOrStopContrat(1, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2024) == 'success' && !isRemove(1, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2024) ? payement(2, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2024) != 'success' && payement(2, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2024) && !isPresAvisOrStopContrat(2, 2024)" (click)="onAddPay(2, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2024) == 'success' && isRemove(2, 2024) && !isPresAvisOrStopContrat(2, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2024) == 'success' && !isRemove(2, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2024) ? payement(3, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2024) != 'success' && payement(3, 2024) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2024) && !isPresAvisOrStopContrat(3, 2024)" (click)="onAddPay(3, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2024) == 'success' && isRemove(3, 2024) && !isPresAvisOrStopContrat(3, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2024) == 'success' && !isRemove(3, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2024) ? payement(4, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2024) != 'success' && payement(4, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2024) && !isPresAvisOrStopContrat(4, 2024)" (click)="onAddPay(4, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2024) == 'success' && isRemove(4, 2024) && !isPresAvisOrStopContrat(4, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2024) == 'success' && !isRemove(4, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2024) ? payement(5, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2024) != 'success' && payement(5, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2024) && !isPresAvisOrStopContrat(5, 2024)" (click)="onAddPay(5, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2024) == 'success' && isRemove(5, 2024) && !isPresAvisOrStopContrat(5, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2024) == 'success' && !isRemove(5, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2024) ? payement(6, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2024) != 'success' && payement(6, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2024) && !isPresAvisOrStopContrat(6, 2024)" (click)="onAddPay(6, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2024) == 'success' && isRemove(6, 2024) && !isPresAvisOrStopContrat(6, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2024) == 'success' && !isRemove(6, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2024) ? payement(7, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2024) != 'success' && payement(7, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2024) && !isPresAvisOrStopContrat(7, 2024)" (click)="onAddPay(7, 2024)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2024) == 'success' && isRemove(7, 2024) && !isPresAvisOrStopContrat(7, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2024) == 'success' && !isRemove(7, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2024) ? payement(8, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2024) != 'success' && payement(8, 2024) != 'light'" (click)="onAddPay(8, 2024)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2024) && !isPresAvisOrStopContrat(8, 2024)" (click)="onAddPay(8, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2024) == 'success' && isRemove(8, 2024) && !isPresAvisOrStopContrat(8, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2024) == 'success' && !isRemove(8, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2024)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2024) ? payement(9, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2024) != 'success' && payement(9, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2024) && !isPresAvisOrStopContrat(9, 2024)" (click)="onAddPay(9, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2024) == 'success' && isRemove(9, 2024) && !isPresAvisOrStopContrat(9, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2024) == 'success'  && !isRemove(9, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2024)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2024) ? payement(10, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2024) != 'success' && payement(10, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2024) && !isPresAvisOrStopContrat(10, 2024)" (click)="onAddPay(10, 2024)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2024) == 'success' && isRemove(10, 2024) && !isPresAvisOrStopContrat(10, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2024)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2024) == 'success' && !isRemove(10, 2024)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2024) ? payement(11, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2024) != 'success' && payement(11, 2024) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2024) && !isPresAvisOrStopContrat(11, 2024)" (click)="onAddPay(11, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2024) == 'success' && isRemove(11, 2024)  && !isPresAvisOrStopContrat(11, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2024) == 'success' && !isRemove(11, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2024)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2024) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2024) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2024) ? payement(12, 2024) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2024) != 'success' && payement(12, 2024) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2024) && !isPresAvisOrStopContrat(12, 2024)" (click)="onAddPay(12, 2024)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2024) == 'success' && isRemove(12, 2024) && !isPresAvisOrStopContrat(12, 2024)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2024)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2024) == 'success' && !isRemove(12, 2024)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2024)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane {{ year_tab_now == 2025 ? 'active' : ''}}" id="tab2025">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2025) ? payement(1, 2025) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2025) != 'success' && payement(1, 2025) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2025) && !isPresAvisOrStopContrat(1, 2025)" (click)="onAddPay(1, 2025)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2025) == 'success' && isRemove(1, 2025)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2025)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2025) == 'success' && isRemove(1, 2025)  && !isPresAvisOrStopContrat(1, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2025) == 'success' && !isRemove(1, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2025) ? payement(2, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2025) != 'success' && payement(2, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2025) && !isPresAvisOrStopContrat(2, 2025)" (click)="onAddPay(2, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2025) == 'success' && isRemove(2, 2025) && !isPresAvisOrStopContrat(2, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2025) == 'success' && !isRemove(2, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2025) ? payement(3, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2025) != 'success' && payement(3, 2025) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2025) && !isPresAvisOrStopContrat(3, 2025)" (click)="onAddPay(3, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2025) == 'success' && isRemove(3, 2025) && !isPresAvisOrStopContrat(3, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2025) == 'success' && !isRemove(3, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2025) ? payement(4, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2025) != 'success' && payement(4, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2025) && !isPresAvisOrStopContrat(4, 2025)" (click)="onAddPay(4, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2025) == 'success' && isRemove(4, 2025) && !isPresAvisOrStopContrat(4, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2025) == 'success' && !isRemove(4, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2025) ? payement(5, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2025) != 'success' && payement(5, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2025) && !isPresAvisOrStopContrat(5, 2025)" (click)="onAddPay(5, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2025) == 'success' && isRemove(5, 2025) && !isPresAvisOrStopContrat(5, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2025) == 'success' && !isRemove(5, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2025) ? payement(6, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2025) != 'success' && payement(6, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2025) && !isPresAvisOrStopContrat(6, 2025)" (click)="onAddPay(6, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2025) == 'success' && isRemove(6, 2025) && !isPresAvisOrStopContrat(6, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2025) == 'success' && !isRemove(6, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2025) ? payement(7, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2025) != 'success' && payement(7, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2025) && !isPresAvisOrStopContrat(7, 2025)" (click)="onAddPay(7, 2025)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2025) == 'success' && isRemove(7, 2025) && !isPresAvisOrStopContrat(7, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2025) == 'success' && !isRemove(7, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2025) ? payement(8, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2025) != 'success' && payement(8, 2025) != 'light'" (click)="onAddPay(8, 2025)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2025) && !isPresAvisOrStopContrat(8, 2025)" (click)="onAddPay(8, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2025) == 'success' && isRemove(8, 2025) && !isPresAvisOrStopContrat(8, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2025) == 'success' && !isRemove(8, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2025)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2025) ? payement(9, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2025) != 'success' && payement(9, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2025) && !isPresAvisOrStopContrat(9, 2025)" (click)="onAddPay(9, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2025) == 'success' && isRemove(9, 2025) && !isPresAvisOrStopContrat(9, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2025) == 'success'  && !isRemove(9, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2025)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2025) ? payement(10, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2025) != 'success' && payement(10, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2025) && !isPresAvisOrStopContrat(10, 2025)" (click)="onAddPay(10, 2025)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2025) == 'success' && isRemove(10, 2025) && !isPresAvisOrStopContrat(10, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2025)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2025) == 'success' && !isRemove(10, 2025)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2025) ? payement(11, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2025) != 'success' && payement(11, 2025) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2025) && !isPresAvisOrStopContrat(11, 2025)" (click)="onAddPay(11, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2025) == 'success' && isRemove(11, 2025)  && !isPresAvisOrStopContrat(11, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2025) == 'success' && !isRemove(11, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2025)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2025) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2025) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2025) ? payement(12, 2025) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2025) != 'success' && payement(12, 2025) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2025) && !isPresAvisOrStopContrat(12, 2025)" (click)="onAddPay(12, 2025)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2025) == 'success' && isRemove(12, 2025) && !isPresAvisOrStopContrat(12, 2025)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2025)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2025) == 'success' && !isRemove(12, 2025)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2025)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane {{ year_tab_now == 2026 ? 'active' : ''}}" id="tab2026">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2026) ? payement(1, 2026) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2026) != 'success' && payement(1, 2026) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2026) && !isPresAvisOrStopContrat(1, 2026)" (click)="onAddPay(1, 2026)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2026) == 'success' && isRemove(1, 2026)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2026)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2026) == 'success' && isRemove(1, 2026)  && !isPresAvisOrStopContrat(1, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2026) == 'success' && !isRemove(1, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2026) ? payement(2, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2026) != 'success' && payement(2, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2026) && !isPresAvisOrStopContrat(2, 2026)" (click)="onAddPay(2, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2026) == 'success' && isRemove(2, 2026) && !isPresAvisOrStopContrat(2, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2026) == 'success' && !isRemove(2, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2026) ? payement(3, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2026) != 'success' && payement(3, 2026) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2026) && !isPresAvisOrStopContrat(3, 2026)" (click)="onAddPay(3, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2026) == 'success' && isRemove(3, 2026) && !isPresAvisOrStopContrat(3, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2026) == 'success' && !isRemove(3, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2026) ? payement(4, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2026) != 'success' && payement(4, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2026) && !isPresAvisOrStopContrat(4, 2026)" (click)="onAddPay(4, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2026) == 'success' && isRemove(4, 2026) && !isPresAvisOrStopContrat(4, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2026) == 'success' && !isRemove(4, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2026) ? payement(5, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2026) != 'success' && payement(5, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2026) && !isPresAvisOrStopContrat(5, 2026)" (click)="onAddPay(5, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2026) == 'success' && isRemove(5, 2026) && !isPresAvisOrStopContrat(5, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2026) == 'success' && !isRemove(5, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2026) ? payement(6, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2026) != 'success' && payement(6, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2026) && !isPresAvisOrStopContrat(6, 2026)" (click)="onAddPay(6, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2026) == 'success' && isRemove(6, 2026) && !isPresAvisOrStopContrat(6, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2026) == 'success' && !isRemove(6, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2026) ? payement(7, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2026) != 'success' && payement(7, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2026) && !isPresAvisOrStopContrat(7, 2026)" (click)="onAddPay(7, 2026)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2026) == 'success' && isRemove(7, 2026) && !isPresAvisOrStopContrat(7, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2026) == 'success' && !isRemove(7, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2026) ? payement(8, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2026) != 'success' && payement(8, 2026) != 'light'" (click)="onAddPay(8, 2026)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2026) && !isPresAvisOrStopContrat(8, 2026)" (click)="onAddPay(8, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2026) == 'success' && isRemove(8, 2026) && !isPresAvisOrStopContrat(8, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2026) == 'success' && !isRemove(8, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2026)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2026) ? payement(9, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2026) != 'success' && payement(9, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2026) && !isPresAvisOrStopContrat(9, 2026)" (click)="onAddPay(9, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2026) == 'success' && isRemove(9, 2026) && !isPresAvisOrStopContrat(9, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2026) == 'success'  && !isRemove(9, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2026)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2026) ? payement(10, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2026) != 'success' && payement(10, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2026) && !isPresAvisOrStopContrat(10, 2026)" (click)="onAddPay(10, 2026)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2026) == 'success' && isRemove(10, 2026) && !isPresAvisOrStopContrat(10, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2026)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2026) == 'success' && !isRemove(10, 2026)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2026) ? payement(11, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2026) != 'success' && payement(11, 2026) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2026) && !isPresAvisOrStopContrat(11, 2026)" (click)="onAddPay(11, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2026) == 'success' && isRemove(11, 2026)  && !isPresAvisOrStopContrat(11, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2026) == 'success' && !isRemove(11, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2026)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2026) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2026) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2026) ? payement(12, 2026) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2026) != 'success' && payement(12, 2026) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2026) && !isPresAvisOrStopContrat(12, 2026)" (click)="onAddPay(12, 2026)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2026) == 'success' && isRemove(12, 2026) && !isPresAvisOrStopContrat(12, 2026)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2026)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2026) == 'success' && !isRemove(12, 2026)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2026)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane {{ year_tab_now == 2027 ? 'active' : ''}}" id="tab2027">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2027) ? payement(1, 2027) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2027) != 'success' && payement(1, 2027) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2027) && !isPresAvisOrStopContrat(1, 2027)" (click)="onAddPay(1, 2027)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2027) == 'success' && isRemove(1, 2027)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2027)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2027) == 'success' && isRemove(1, 2027)  && !isPresAvisOrStopContrat(1, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2027) == 'success' && !isRemove(1, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2027) ? payement(2, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2027) != 'success' && payement(2, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2027) && !isPresAvisOrStopContrat(2, 2027)" (click)="onAddPay(2, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2027) == 'success' && isRemove(2, 2027) && !isPresAvisOrStopContrat(2, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2027) == 'success' && !isRemove(2, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2027) ? payement(3, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2027) != 'success' && payement(3, 2027) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2027) && !isPresAvisOrStopContrat(3, 2027)" (click)="onAddPay(3, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2027) == 'success' && isRemove(3, 2027) && !isPresAvisOrStopContrat(3, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2027) == 'success' && !isRemove(3, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2027) ? payement(4, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2027) != 'success' && payement(4, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2027) && !isPresAvisOrStopContrat(4, 2027)" (click)="onAddPay(4, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2027) == 'success' && isRemove(4, 2027) && !isPresAvisOrStopContrat(4, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2027) == 'success' && !isRemove(4, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2027) ? payement(5, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2027) != 'success' && payement(5, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2027) && !isPresAvisOrStopContrat(5, 2027)" (click)="onAddPay(5, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2027) == 'success' && isRemove(5, 2027) && !isPresAvisOrStopContrat(5, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2027) == 'success' && !isRemove(5, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2027) ? payement(6, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2027) != 'success' && payement(6, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2027) && !isPresAvisOrStopContrat(6, 2027)" (click)="onAddPay(6, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2027) == 'success' && isRemove(6, 2027) && !isPresAvisOrStopContrat(6, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2027) == 'success' && !isRemove(6, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2027) ? payement(7, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2027) != 'success' && payement(7, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2027) && !isPresAvisOrStopContrat(7, 2027)" (click)="onAddPay(7, 2027)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2027) == 'success' && isRemove(7, 2027) && !isPresAvisOrStopContrat(7, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2027) == 'success' && !isRemove(7, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2027) ? payement(8, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2027) != 'success' && payement(8, 2027) != 'light'" (click)="onAddPay(8, 2027)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2027) && !isPresAvisOrStopContrat(8, 2027)" (click)="onAddPay(8, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2027) == 'success' && isRemove(8, 2027) && !isPresAvisOrStopContrat(8, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2027) == 'success' && !isRemove(8, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2027)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2027) ? payement(9, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2027) != 'success' && payement(9, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2027) && !isPresAvisOrStopContrat(9, 2027)" (click)="onAddPay(9, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2027) == 'success' && isRemove(9, 2027) && !isPresAvisOrStopContrat(9, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2027) == 'success'  && !isRemove(9, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2027)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2027) ? payement(10, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2027) != 'success' && payement(10, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2027) && !isPresAvisOrStopContrat(10, 2027)" (click)="onAddPay(10, 2027)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2027) == 'success' && isRemove(10, 2027) && !isPresAvisOrStopContrat(10, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2027)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2027) == 'success' && !isRemove(10, 2027)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2027) ? payement(11, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2027) != 'success' && payement(11, 2027) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2027) && !isPresAvisOrStopContrat(11, 2027)" (click)="onAddPay(11, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2027) == 'success' && isRemove(11, 2027)  && !isPresAvisOrStopContrat(11, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2027) == 'success' && !isRemove(11, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2027)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2027) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2027) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2027) ? payement(12, 2027) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2027) != 'success' && payement(12, 2027) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2027) && !isPresAvisOrStopContrat(12, 2027)" (click)="onAddPay(12, 2027)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2027) == 'success' && isRemove(12, 2027) && !isPresAvisOrStopContrat(12, 2027)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2027)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2027) == 'success' && !isRemove(12, 2027)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2027)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane {{ year_tab_now == 2028 ? 'active' : ''}}" id="tab2028">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2028) ? payement(1, 2028) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2028) != 'success' && payement(1, 2028) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2028) && !isPresAvisOrStopContrat(1, 2028)" (click)="onAddPay(1, 2028)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2028) == 'success' && isRemove(1, 2028)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2028)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2028) == 'success' && isRemove(1, 2028)  && !isPresAvisOrStopContrat(1, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2028) == 'success' && !isRemove(1, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2028) ? payement(2, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2028) != 'success' && payement(2, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2028) && !isPresAvisOrStopContrat(2, 2028)" (click)="onAddPay(2, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2028) == 'success' && isRemove(2, 2028) && !isPresAvisOrStopContrat(2, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2028) == 'success' && !isRemove(2, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2028) ? payement(3, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2028) != 'success' && payement(3, 2028) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2028) && !isPresAvisOrStopContrat(3, 2028)" (click)="onAddPay(3, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2028) == 'success' && isRemove(3, 2028) && !isPresAvisOrStopContrat(3, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2028) == 'success' && !isRemove(3, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2028) ? payement(4, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2028) != 'success' && payement(4, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2028) && !isPresAvisOrStopContrat(4, 2028)" (click)="onAddPay(4, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2028) == 'success' && isRemove(4, 2028) && !isPresAvisOrStopContrat(4, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2028) == 'success' && !isRemove(4, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2028) ? payement(5, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2028) != 'success' && payement(5, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2028) && !isPresAvisOrStopContrat(5, 2028)" (click)="onAddPay(5, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2028) == 'success' && isRemove(5, 2028) && !isPresAvisOrStopContrat(5, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2028) == 'success' && !isRemove(5, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2028) ? payement(6, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2028) != 'success' && payement(6, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2028) && !isPresAvisOrStopContrat(6, 2028)" (click)="onAddPay(6, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2028) == 'success' && isRemove(6, 2028) && !isPresAvisOrStopContrat(6, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2028) == 'success' && !isRemove(6, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2028) ? payement(7, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2028) != 'success' && payement(7, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2028) && !isPresAvisOrStopContrat(7, 2028)" (click)="onAddPay(7, 2028)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2028) == 'success' && isRemove(7, 2028) && !isPresAvisOrStopContrat(7, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2028) == 'success' && !isRemove(7, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2028) ? payement(8, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2028) != 'success' && payement(8, 2028) != 'light'" (click)="onAddPay(8, 2028)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2028) && !isPresAvisOrStopContrat(8, 2028)" (click)="onAddPay(8, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2028) == 'success' && isRemove(8, 2028) && !isPresAvisOrStopContrat(8, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2028) == 'success' && !isRemove(8, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2028)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2028) ? payement(9, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2028) != 'success' && payement(9, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2028) && !isPresAvisOrStopContrat(9, 2028)" (click)="onAddPay(9, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2028) == 'success' && isRemove(9, 2028) && !isPresAvisOrStopContrat(9, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2028) == 'success'  && !isRemove(9, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2028)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2028) ? payement(10, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2028) != 'success' && payement(10, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2028) && !isPresAvisOrStopContrat(10, 2028)" (click)="onAddPay(10, 2028)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2028) == 'success' && isRemove(10, 2028) && !isPresAvisOrStopContrat(10, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2028)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2028) == 'success' && !isRemove(10, 2028)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2028) ? payement(11, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2028) != 'success' && payement(11, 2028) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2028) && !isPresAvisOrStopContrat(11, 2028)" (click)="onAddPay(11, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2028) == 'success' && isRemove(11, 2028)  && !isPresAvisOrStopContrat(11, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2028) == 'success' && !isRemove(11, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2028)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2028) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2028) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2028) ? payement(12, 2028) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2028) != 'success' && payement(12, 2028) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2028) && !isPresAvisOrStopContrat(12, 2028)" (click)="onAddPay(12, 2028)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2028) == 'success' && isRemove(12, 2028) && !isPresAvisOrStopContrat(12, 2028)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2028)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2028) == 'success' && !isRemove(12, 2028)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2028)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane {{ year_tab_now == 2029 ? 'active' : ''}}" id="tab2029">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2029) ? payement(1, 2029) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2029) != 'success' && payement(1, 2029) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2029) && !isPresAvisOrStopContrat(1, 2029)" (click)="onAddPay(1, 2029)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2029) == 'success' && isRemove(1, 2029)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2029)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2029) == 'success' && isRemove(1, 2029)  && !isPresAvisOrStopContrat(1, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2029) == 'success' && !isRemove(1, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2029) ? payement(2, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2029) != 'success' && payement(2, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2029) && !isPresAvisOrStopContrat(2, 2029)" (click)="onAddPay(2, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2029) == 'success' && isRemove(2, 2029) && !isPresAvisOrStopContrat(2, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2029) == 'success' && !isRemove(2, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2029) ? payement(3, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2029) != 'success' && payement(3, 2029) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2029) && !isPresAvisOrStopContrat(3, 2029)" (click)="onAddPay(3, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2029) == 'success' && isRemove(3, 2029) && !isPresAvisOrStopContrat(3, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2029) == 'success' && !isRemove(3, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2029) ? payement(4, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2029) != 'success' && payement(4, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2029) && !isPresAvisOrStopContrat(4, 2029)" (click)="onAddPay(4, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2029) == 'success' && isRemove(4, 2029) && !isPresAvisOrStopContrat(4, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2029) == 'success' && !isRemove(4, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2029) ? payement(5, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2029) != 'success' && payement(5, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2029) && !isPresAvisOrStopContrat(5, 2029)" (click)="onAddPay(5, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2029) == 'success' && isRemove(5, 2029) && !isPresAvisOrStopContrat(5, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2029) == 'success' && !isRemove(5, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2029) ? payement(6, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2029) != 'success' && payement(6, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2029) && !isPresAvisOrStopContrat(6, 2029)" (click)="onAddPay(6, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2029) == 'success' && isRemove(6, 2029) && !isPresAvisOrStopContrat(6, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2029) == 'success' && !isRemove(6, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2029) ? payement(7, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2029) != 'success' && payement(7, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2029) && !isPresAvisOrStopContrat(7, 2029)" (click)="onAddPay(7, 2029)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2029) == 'success' && isRemove(7, 2029) && !isPresAvisOrStopContrat(7, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2029) == 'success' && !isRemove(7, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2029) ? payement(8, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2029) != 'success' && payement(8, 2029) != 'light'" (click)="onAddPay(8, 2029)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2029) && !isPresAvisOrStopContrat(8, 2029)" (click)="onAddPay(8, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2029) == 'success' && isRemove(8, 2029) && !isPresAvisOrStopContrat(8, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2029) == 'success' && !isRemove(8, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2029)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2029) ? payement(9, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2029) != 'success' && payement(9, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2029) && !isPresAvisOrStopContrat(9, 2029)" (click)="onAddPay(9, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2029) == 'success' && isRemove(9, 2029) && !isPresAvisOrStopContrat(9, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2029) == 'success'  && !isRemove(9, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2029)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2029) ? payement(10, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2029) != 'success' && payement(10, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2029) && !isPresAvisOrStopContrat(10, 2029)" (click)="onAddPay(10, 2029)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2029) == 'success' && isRemove(10, 2029) && !isPresAvisOrStopContrat(10, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2029)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2029) == 'success' && !isRemove(10, 2029)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2029) ? payement(11, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2029) != 'success' && payement(11, 2029) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2029) && !isPresAvisOrStopContrat(11, 2029)" (click)="onAddPay(11, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2029) == 'success' && isRemove(11, 2029)  && !isPresAvisOrStopContrat(11, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2029) == 'success' && !isRemove(11, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2029)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2029) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2029) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2029) ? payement(12, 2029) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2029) != 'success' && payement(12, 2029) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2029) && !isPresAvisOrStopContrat(12, 2029)" (click)="onAddPay(12, 2029)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2029) == 'success' && isRemove(12, 2029) && !isPresAvisOrStopContrat(12, 2029)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2029)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2029) == 'success' && !isRemove(12, 2029)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2029)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane {{ year_tab_now == 2030 ? 'active' : ''}}" id="tab2030">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card  {{ isNotContrat(1, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(1, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(1, 2030) ? payement(1, 2030) : 'light'}} "><i class="fa fa-building-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JANVIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(1, 2030) != 'success' && payement(1, 2030) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(1, 2030) && !isPresAvisOrStopContrat(1, 2030)" (click)="onAddPay(1, 2030)">PAYER</span>
+                                  <!-- <span *ngIf="payement(1, 2030) == 'success' && isRemove(1, 2030)" class="badge badge-danger cursorPointer"  (click)="onAddPay(1, 2030)">ANNULER</span> -->
+                                  </span>
+                                  <span *ngIf="payement(1, 2030) == 'success' && isRemove(1, 2030)  && !isPresAvisOrStopContrat(1, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(1, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(1, 2030) == 'success' && !isRemove(1, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(1, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(2, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(2, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(2, 2030) ? payement(2, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">FEVRIER</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(2, 2030) != 'success' && payement(2, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(2, 2030) && !isPresAvisOrStopContrat(2, 2030)" (click)="onAddPay(2, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(2, 2030) == 'success' && isRemove(2, 2030) && !isPresAvisOrStopContrat(2, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(2, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(2, 2030) == 'success' && !isRemove(2, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(2, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(3, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(3, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(3, 2030) ? payement(3, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MARS</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(3, 2030) != 'success' && payement(3, 2030) != 'light'"  class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(3, 2030) && !isPresAvisOrStopContrat(3, 2030)" (click)="onAddPay(3, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(3, 2030) == 'success' && isRemove(3, 2030) && !isPresAvisOrStopContrat(3, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(3, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(3, 2030) == 'success' && !isRemove(3, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(3, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(4, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(4, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(4, 2030) ? payement(4, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AVRIL</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(4, 2030) != 'success' && payement(4, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(4, 2030) && !isPresAvisOrStopContrat(4, 2030)" (click)="onAddPay(4, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(4, 2030) == 'success' && isRemove(4, 2030) && !isPresAvisOrStopContrat(4, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(4, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(4, 2030) == 'success' && !isRemove(4, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(4, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(5, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(5, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(5, 2030) ? payement(5, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">MAI</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(5, 2030) != 'success' && payement(5, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(5, 2030) && !isPresAvisOrStopContrat(5, 2030)" (click)="onAddPay(5, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(5, 2030) == 'success' && isRemove(5, 2030) && !isPresAvisOrStopContrat(5, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(5, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(5, 2030) == 'success' && !isRemove(5, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(5, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(6, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(6, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(6, 2030) ? payement(6, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUIN</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(6, 2030) != 'success' && payement(6, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(6, 2030) && !isPresAvisOrStopContrat(6, 2030)" (click)="onAddPay(6, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(6, 2030) == 'success' && isRemove(6, 2030) && !isPresAvisOrStopContrat(6, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(6, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(6, 2030) == 'success' && !isRemove(6, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(6, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(7, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(7, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(7, 2030) ? payement(7, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">JUILLET</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(7, 2030) != 'success' && payement(7, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(7, 2030) && !isPresAvisOrStopContrat(7, 2030)" (click)="onAddPay(7, 2030)">PAYER</span> </span>
+                                  <span *ngIf="payement(7, 2030) == 'success' && isRemove(7, 2030) && !isPresAvisOrStopContrat(7, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(7, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(7, 2030) == 'success' && !isRemove(7, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(7, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(8, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(8, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(8, 2030) ? payement(8, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">AÔUT</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(8, 2030) != 'success' && payement(8, 2030) != 'light'" (click)="onAddPay(8, 2030)" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(8, 2030) && !isPresAvisOrStopContrat(8, 2030)" (click)="onAddPay(8, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(8, 2030) == 'success' && isRemove(8, 2030) && !isPresAvisOrStopContrat(8, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(8, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(8, 2030) == 'success' && !isRemove(8, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(8, 2030)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(9, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(9, 2030) ? payement(9, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">SEPTEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(9, 2030) != 'success' && payement(9, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(9, 2030) && !isPresAvisOrStopContrat(9, 2030)" (click)="onAddPay(9, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(9, 2030) == 'success' && isRemove(9, 2030) && !isPresAvisOrStopContrat(9, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(9, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(9, 2030) == 'success'  && !isRemove(9, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(9, 2030)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(10, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(10, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(10, 2030) ? payement(10, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">OCTOBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <p class="text-muted mb-0" >
+                                    <span *ngIf="payement(10, 2030) != 'success' && payement(10, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(10, 2030) && !isPresAvisOrStopContrat(10, 2030)" (click)="onAddPay(10, 2030)">PAYER</span></span>
+                                    <span *ngIf="payement(10, 2030) == 'success' && isRemove(10, 2030) && !isPresAvisOrStopContrat(10, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(10, 2030)">ANNULER</span>
+                                    <span *ngIf="payement(10, 2030) == 'success' && !isRemove(10, 2030)">DEJAT PAYER</span><br>
+                                    <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(10, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(11, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(11, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(11, 2030) ? payement(11, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">NOVEMBRE</h5>
+                                <p class="text-muted mb-0" >
+                                  <span *ngIf="payement(11, 2030) != 'success' && payement(11, 2030) != 'light'" class="badge badge-danger cursorPointer">
+                                  <span class="badge badge-danger cursorPointer" *ngIf="canPay(11, 2030) && !isPresAvisOrStopContrat(11, 2030)" (click)="onAddPay(11, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(11, 2030) == 'success' && isRemove(11, 2030)  && !isPresAvisOrStopContrat(11, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(11, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(11, 2030) == 'success' && !isRemove(11, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(11, 2030)) }} GNF</span>
+
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-12">
+                        <div class="card {{ isNotContrat(12, 2030) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(12, 2030) ? 'stop_or_pres_avis' : '' }}">
+                          <div class="card-body">
+                            <div class="item-box text-center">
+                              <div class="stamp text-center stamp-lg bg-{{ payement(12, 2030) ? payement(12, 2030) : 'light'}}"><i class="fa fa-clock-o"></i></div>
+                              <div class="item-box-wrap">
+                                <h5 class="mb-2">DECEMBRE</h5>
+                                <p class="text-muted mb-0">
+                                  <span *ngIf="payement(12, 2030) != 'success' && payement(12, 2030) != 'light'" class="badge badge-danger cursorPointer"><span class="badge badge-danger cursorPointer" *ngIf="canPay(12, 2030) && !isPresAvisOrStopContrat(12, 2030)" (click)="onAddPay(12, 2030)">PAYER</span></span>
+                                  <span *ngIf="payement(12, 2030) == 'success' && isRemove(12, 2030) && !isPresAvisOrStopContrat(12, 2030)" class="badge badge-info cursorPointer"  (click)="onRemovePay(12, 2030)">ANNULER</span>
+                                  <span *ngIf="payement(12, 2030) == 'success' && !isRemove(12, 2030)">DEJAT PAYER</span><br>
+                                  <span style="color: black; font-weight: bold;">{{ print.printPrice(getMontnant(12, 2030)) }} GNF</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="contrat?.type_contrat == 1">
+              <!-- <div class="col-lg-12 col-xl-12" *ngFor="let item of contrat?.payements">
+                  <div class="card mb-3 widget-content {{ isNotContrat(1, 2022) ? 'notContrat' : '' }} {{ isPresAvisOrStopContrat(9, 2023) ? 'stop_or_pres_avis' : '' }}">
+                      <div class="widget-content-outer ">
+                          <div class="widget-content-wrapper" >
+                              <div class="widget-content-left">
+                                  <div class="widget-heading">{{ item.start_date | date }} à {{ getTime(item.start_date) }} au {{ item.end_date | date }} à {{ getTime(item.end_date) }}</div>
+                                  <div class=""> 
+                                    <span *ngIf="payement(1, 2022) != 'success' && payement(1, 2022) != 'light'">  <span class="widget-subheading">Jurnalier </span> <small><span *ngIf="!item.renouvel" class="badge badge-danger cursorPointer" (click)="onRenouvelement(contrat, item)">Renouveler</span></small></span>
+                                    <span *ngIf="payement(1, 2022) == 'success'"  class="widget-subheading">Dejat Reglé </span>
+                                </div>
+                              </div>
+                              <div class="widget-content-right">
+                                <div class="widget-numbers text-{{ payement(1, 2022) ? payement(1, 2022) : 'light'}}"><span class="montantContrat">{{ print.printPrice(getMontnant(1, 2022)) }}</span></div>
+                              </div>
+                          </div>
+                          <div class="widget-progress-wrapper">
+                              <div class="progress-bar-xs progress">
+                                <div class="progress-bar {{ (datteDifff(item.start_date) > item.day && item.renouvel) ? '' : 'progress-bar-animated progress-bar-striped'}}   bg-{{ getColorProgress(progressBar(datteDifff(item.start_date), item.day),  item.renouvel ) }} " role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" [style.width.%]="progressBar(datteDifff(item.start_date), item.day)"></div>
+                              </div>
+                              <div class="progress-sub-label">
+                                <div class="sub-label-left">Jour du contrat </div>
+                                <div class="sub-label-right" >{{ !item.renouvel ?  datteDifff(item.start_date) : (datteDifff(item.start_date) > item.day ? item.day : datteDifff(item.start_date)) }}/{{ item.day }}</div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div> -->
+                <div class="col-md-12" *ngFor="let item of contrat?.payements">
+                  <div class="card">
+                      <label class="mb-3 mt-3 ml-3"><b>{{ item.start_date | date }} à {{ getTime(item.start_date) }} au {{ item.end_date | date }} à {{ getTime(item.end_date) }}</b></label>
+                      <div class="mb-3 ml-3"> 
+                        <span>  <span class="widget-subheading">Journalier </span> <small><span *ngIf="!item.renouvel && contrat?.status == 0" class="badge badge-danger cursorPointer" (click)="onRenouvelement(contrat, item)">Renouveler</span></small> <span class="badge badge-info ml-5 cursorPointer" *ngIf="isRemoveJournalier(item) && contrat?.status == 0" (click)="onRemoveJournalier(item)">Annuler</span></span>
+                        <span class="pull-right mr-3 text-{{ getColorProgress(progressBar(datteDifff(item.start_date), item.day),  item.renouvel ) }}"><span class="montantContrat">{{ print.printPrice(item?.montant) }} GNF</span></span>
+                      </div>
+
+                      <div class="progress progress-md mb-3 ml-3 mr-3 ">
+                        <div class="progress-bar {{ (datteDifff(item.start_date) > item.day && item.renouvel) ? '' : 'progress-bar-animated progress-bar-striped'}}   bg-{{ getColorProgress(progressBar(datteDifff(item.start_date), item.day),  item.renouvel ) }} " role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" [style.width.%]="progressBar(datteDifff(item.start_date), item.day)"></div>
+                      </div>
+                      <div class="progress-sub-label mb-4">
+                        <div class="sub-label-left ml-3">
+                          Jour du contrat 
+                           <span class="sub-label-right pull-right mr-3" >{{ !item.renouvel ?  datteDifff(item.start_date) : (datteDifff(item.start_date) > item.day ? item.day : datteDifff(item.start_date)) }}/{{ item.day }}</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

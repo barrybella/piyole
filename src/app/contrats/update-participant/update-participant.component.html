@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header text-withe">
+        <div class="card-title">
+            <span>MODIFICATION PARTICIPANT -- {{ participant?.status }}</span> <br>
+        </div> 
+        <div class="btn-actions-pane-right">
+          <div class="nav">
+              <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        </div>
+    </div>
+ 
+  <div class="card-body">
+      <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+          <div class="form-row">
+              <div class="form-group col-md-12">
+                  <label class="form-label text-dark">Numero de telephone</label>
+                  <input type="text" formControlName="tel" class="form-control " placeholder="NUMERO DE TELEPHONE">
+              </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+                <label class="form-label text-dark">Type Participant</label>
+                <select formControlName="status" class="form-control" id="">
+                    <option value="Selectioner">Selectioner</option>
+                    <option value="0">Non Intervenant</option>
+                    <option value="1">Intervenant</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label class="form-label text-dark">Fonction</label>
+                <input type="text" formControlName="fonction" class="form-control" placeholder="NUMERO DE TELEPHONE">
+            </div>
+        </div>
+          
+       
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea name="" id="description" formControlName="desc" cols="30" rows="2" class="form-control" placeholder="Description"></textarea>
+          </div>
+          <button type="submit" [disabled]="controlForm.invalid" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPaading"></span> <span *ngIf="!etatPaading">Valider</span></button>
+          </form>
+  </div>
+  </div>

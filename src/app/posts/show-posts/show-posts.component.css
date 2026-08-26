@@ -1,0 +1,17 @@
+#ng_color{
+  color: red;
+  background-color: red;
+  font-weight: bold;
+}
+
+.max_height_ng{
+  max-height: 165px;
+}
+
+.max_height_mobile_ng{
+  max-height: 200px;
+}
+
+.d_none_desktop{
+  display: none;
+}

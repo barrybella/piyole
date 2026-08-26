@@ -1,0 +1,109 @@
+<app-nav-bar [subTitle]="'Ajout post Plan'"></app-nav-bar>
+
+<section class="sptb">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xl-3 col-lg-12 col-md-12">
+                <app-left-nav></app-left-nav>
+              </div>
+            <div class="col-lg-8 col-md-12 col-md-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <h3 class="card-title">Ajout Produit</h3>
+                        <div class="card-options">
+                            <button (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</button>
+                          </div>
+                    </div>
+                    <form (ngSubmit)="onSubmit()" [formGroup]="controlForm" enctype="multipart/form-data">
+                      <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label class="form-label text-dark">Entreprise</label>
+                                <select formControlName="entreprise_id" class="form-control   custom-select">
+                                    <option disabled value="Selectioner">Selectioner</option>
+                                    <option *ngFor="let user of users"  value="{{ user._id }}">{{ user.entreprise }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="form-label text-dark">Categorie</label>
+                                <select formControlName="categorie" class="form-control   custom-select">
+                                    <option disabled value="Selectioner">Selectioner</option>
+                                    <option *ngFor="let cate of categories"  value="{{ cate.categorie }}">{{ cate.categorie }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label text-dark">Titre</label>
+                            <input type="text" formControlName="title" class="form-control {{ getTitleEror() ? 'is-invalid state-invalid' : getTitleSuccess() ? 'is-valid state-valid' : '' }}" placeholder="EX: Location Appartement bon prix profité en!">
+                            <span *ngIf="getTitleEror()" class="text text-danger"><small>{{ getTitleEror() }}</small></span>
+                        </div>
+
+                       <div class="form-row">
+                           <div class="form-group col-6">
+                             <label class="form-label text-dark">Prix</label>
+                             <input formControlName="prix_global" type="number" min="0" class="form-control {{ getPrixEror() ? 'is-invalid state-invalid' : getPrixSuccess() ? 'is-valid state-valid' : '' }}" placeholder="0">
+                             <span *ngIf="getPrixEror()" class="text text-danger"><small>{{ getPrixEror() }}</small></span>
+                             <!-- <span><small class="text-danger" *ngIf="prixRequired">Veiller enter le prix par mois!!</small></span> -->
+                           </div>
+                           <div class="form-group col-6">
+                             <label class="form-label text-dark">Unitée</label>
+                             <input formControlName="unite" type="text" class="form-control {{ getUniteEror() ? 'is-invalid state-invalid' : getUniteSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Unitée">
+                             <span *ngIf="getUniteEror()" class="text text-danger"><small>{{ getUniteEror() }}</small></span>
+                             <!-- <span><small class="text-danger" *ngIf="prixRequired">Veiller enter le prix par mois!!</small></span> -->
+                           </div>
+                       </div>
+
+                       <!-- <div class="form-row">
+                        <div class="form-group col-4">
+                          <label class="form-label text-dark">Marque</label>
+                          <input formControlName="marque" type="text"  class="form-control {{ getMarqueEror() ? 'is-invalid state-invalid' : getMarqueSuccess() ? 'is-valid state-valid' : '' }}" placeholder="La marque du produit.">
+                          <span *ngIf="getMarqueEror()" class="text text-danger"><small>{{ getMarqueEror() }}</small></span>
+                        </div>
+                        <div class="form-group col-4">
+                          <label class="form-label text-dark">Size</label>
+                          <input formControlName="size" type="text" class="form-control {{ getSizeEror() ? 'is-invalid state-invalid' : getSizeSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Unitée">
+                          <span *ngIf="getSizeEror()" class="text text-danger"><small>{{ getSizeEror() }}</small></span>
+                        </div>
+                        <div class="form-group col-4">
+                          <label class="form-label text-dark">Couleur</label>
+                          <input formControlName="color" type="text" class="form-control {{ getColorEror() ? 'is-invalid state-invalid' : getColorSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Unitée">
+                          <span *ngIf="getColorEror()" class="text text-danger"><small>{{ getColorEror() }}</small></span>
+                        </div>
+                       </div> -->
+
+                       <div class="form-group">
+                        <label class="form-label text-dark">Introduction</label>
+                        <textarea class="form-control {{ getIntroEror() ? 'is-invalid state-invalid' : getIntroSuccess() ? 'is-valid state-valid' : '' }}" formControlName="intro" rows="6" placeholder="Introduction du produit"></textarea>
+                        <span *ngIf="getIntroEror()" class="text text-danger"><small>{{ getIntroEror() }}</small></span>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="form-label text-dark">Description</label>
+                        <textarea class="form-control {{ getDescriptionEror() ? 'is-invalid state-invalid' : getDescriptionSuccess() ? 'is-valid state-valid' : '' }}" formControlName="desc" rows="6" placeholder="Minimum 60 carateres.."></textarea>
+                        <span *ngIf="getDescriptionEror()" class="text text-danger"><small>{{ getDescriptionEror() }}</small></span>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label text-dark">Utilisation</label>
+                        <textarea class="form-control {{ getUseEror() ? 'is-invalid state-invalid' : getUseSuccess() ? 'is-valid state-valid' : '' }}" formControlName="use" rows="6" placeholder="Description de l'utilisation du produit.."></textarea>
+                        <span *ngIf="getUseEror()" class="text text-danger"><small>{{ getUseEror() }}</small></span>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="file">Images</label>
+                        <input type="file" accept="image/*" name="photos" multiple (change)="fileProgress($event)" class="form-control" >
+                      </div>
+
+                        <div class="card-footer ">
+                            <button type="submit" [disabled]="controlForm.invalid || etatPadding || ctrlImage" class="btn btn-success {{ etatPadding ? 'btn-loading' : '' }} ">Enregistrer</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

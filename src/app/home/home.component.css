@@ -1,0 +1,9 @@
+#ng_color{
+  color: red;
+  background-color: red;
+  font-weight: bold;
+}
+
+.dispNone{
+  display: none;
+}

@@ -1,0 +1,49 @@
+import  Swal from 'sweetalert2';
+import { Contrat } from './../../interfaces/contrat';
+import { VoirPlusComponent } from 'src/app/voir-plus/voir-plus.component';
+import { PrintService } from 'src/app/services/print.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-liste-versement-agence',
+  templateUrl: './liste-versement-agence.component.html',
+  styleUrls: ['./liste-versement-agence.component.css']
+})
+export class ListeVersementAgenceComponent implements OnInit {
+  versements: any[] = [];
+  contrat?: Contrat;
+  p: number = 1;
+  mont_total: number = 0;
+
+  constructor(public dialogRef: MatDialogRef<ListeVersementAgenceComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public print: PrintService, private dialog: MatDialog) { }
+
+  /**
+   * Initialise le composant et prépare les données nécessaires à son affichage.
+   */
+  ngOnInit(): void {
+
+    this.contrat = this.data.contrat;
+    this.versements = this.data.contrat.agence_versements.filter((resp: any) => {
+      return resp.status == 0;
+    });
+
+    this.versements.forEach(resp => {
+      this.mont_total = (+resp.montant) + (+this.mont_total);
+    })
+
+  }
+
+  /**
+   * Exécute le traitement associé à la méthode « onVoirPlus ». 
+   */
+  onVoirPlus(text: any){
+    this.dialog.open(VoirPlusComponent, {
+      data: {text: text},
+      width: '500px'
+    })
+  }
+
+
+}

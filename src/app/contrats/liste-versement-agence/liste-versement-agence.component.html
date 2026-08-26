@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+    <div class="card-header">
+        <div class="card-title">Liste des depots <span class="ml-5">(TOTAL: {{ mont_total }})</span></div>
+        <!-- <span>logs fj</span> -->
+        <div class="card-options">
+            <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" style="color: black; font-weight: bold">Montant(GNF)</th>
+          <th scope="col" style="color: black; font-weight: bold">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let versement of versements ">
+          <td>{{ print.printPrice(versement.montant) }}</td>
+          <td>{{ print.printDescription(versement.desc, 60).text }} <span class="text text-primary cursorPointer" (click)="onVoirPlus(versement.desc)" *ngIf="print.printDescription(versement.desc, 60).voirPlus">Voir plus</span></td>
+        </tr>
+       
+      </tbody>
+    </table>
+    <!-- <pagination-controls (pageChange)="p = $event" previousLabel="précédent" nextLabel="Suivant" [autoHide]=true></pagination-controls> -->
+  </div>
+</div>

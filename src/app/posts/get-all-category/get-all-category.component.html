@@ -1,0 +1,213 @@
+<app-nav-bar [subTitle]="'Categories'"></app-nav-bar>
+<section class="sptb">
+  <section class="sptb bg-white">
+    <div class="container">
+      <div class="section-title center-block text-center">
+        <h2>Categories</h2>
+        <p>Toute les catégories disponible</p>
+      </div>
+      <div class="row">
+        <shimmer width="160px" *ngFor="let item of chimers" class="mr-2 mb-4 {{ !chimer ? 'd-none' : ''}}" type="square"></shimmer>
+        <div *ngFor="let categorie of categories" class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
+          <div class="card bg-card-light">
+            <div class="card-body">
+              <div class="cat-item text-center">
+                <a [routerLink]="['../../posts/get-post-by-category', categorie.categorie]"></a>
+                <div class="cat-img text-shadow1">
+                  <img src="{{ print.printImage(categorie.image) }}" alt="img">
+                </div>
+                <div class="cat-desc">
+                  <h5 class="mb-1">{{ categorie.categorie }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </section>
+</section>  
+
+	<!--Location-->
+  <section class="sptb">
+    <div class="container">
+      <div class="section-title center-block text-center">
+        <h2>Nous sommes partout!!</h2>
+        <p>Pas de soucis! nous couvrons toute l'étendue du territoire national</p>
+      </div>
+      <div class="row">
+        <div  class="col-12 col-md-12 col-lg-12 col-xl-6 ">
+          <div class="row">
+            <div (click)="onGetPostByCommune('Kindia')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/kindia.jpeg" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-primary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 786
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Kindia') }}
+                            <span>
+                                <i class="fa fa-map-marker mr-1 text-primary"></i>
+                                KINDIA
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div (click)="onGetPostByCommune('Mamou')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/mamoun.jpeg" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 89
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Mamou') }}
+                            <span><i class="fa fa-map-marker mr-1 text-primary"></i>
+                                MAMOU
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div (click)="onGetPostByCommune('KanKan')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden mb-lg-0">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/kankan.jpeg" alt="img" class="cover-image">
+                    </div>
+                    
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('KanKan') }}<span>
+                            <i class="fa fa-map-marker text-primary mr-1"></i>KANKAN</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div (click)="onGetPostByCommune('Labé')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden mb-lg-0">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/labe.jpeg" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 123
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Labé') }}<span><i class="fa fa-map-marker text-primary mr-1"></i>LABÉ</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-12 col-xl-6">
+          <div class="row">
+            <div (click)="onGetPostByCommune('Conakry')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/conakry.png" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-primary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 786
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Conakry') }}
+                            <span>
+                                <i class="fa fa-map-marker mr-1 text-primary"></i>
+                                CONAKRY
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div  (click)="onGetPostByCommune('Boké')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/boke.jpeg" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 89
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Boké') }}
+                            <span><i class="fa fa-map-marker mr-1 text-primary"></i>
+                                BOKÉ
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div (click)="onGetPostByCommune('Faranah')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden mb-lg-0">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/faranah.jpeg" alt="img" class="cover-image">
+                    </div>
+                    
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Faranah ') }}<span>
+                            <i class="fa fa-map-marker text-primary mr-1"></i>FARANAH</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div (click)="onGetPostByCommune('Nzérékoré')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+              <div class="item-card overflow-hidden">
+                <div class="item-card-desc">
+                  <div class="card text-center overflow-hidden mb-lg-0">
+                    <div class="card-img">
+                        <img src="../assets/images/locations/nzerekore.jpeg" alt="img" class="cover-image">
+                    </div>
+                    <!-- <div class="item-tags">
+                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 123
+                        </div>
+                    </div> -->
+                    <div class="item-card-text">
+                        <h4 class="mb-0">{{ getCountRegion('Nzérékoré ') }}<span><i class="fa fa-map-marker text-primary mr-1"></i>NZÉRÉKORÉ</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/Location-->
+

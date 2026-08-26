@@ -1,0 +1,57 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb ">
+  <div class="container">
+      <div class="section-title center-block text-center">
+          <h2>Tout les opportunitée d'investisement</h2>
+          <p>Scroller pour voir l'ensemble des publications des different agence!! Vous trouverrez votre gout 👌</p>
+      </div>
+      <div class="row">
+        <div class=""  *ngFor="let post of posts; let i=index;">
+          <div class="card" *ngIf="i%2 == 0">
+            <div class="row h-100">
+              <div class="col-md-12 col-lg-6  pr-0 ">
+                <div class="card-body p-7 pabout">
+                  <h2 class="mb-4 font-weight-semibold line_clamp">{{ post.title }} </h2>
+                  <h4 class="leading-normal two_line_clamp">{{ post.sub_title }}</h4>
+                  <p class="leading-normal five_line_clamp">{{ post.description }}</p>
+                  <ul class="d-flex mb-3 ">
+                    <!-- <li class=""><a href="#" class="icons text-muted"><i class="icon icon-location-pin text-muted mr-1"></i> {{ post.user_id?.name }}</a></li> -->
+                    <li class="mr-5"><a href="#" class="icons text-muted"><i class="icon icon-event text-muted mr-1"></i>{{ post.createdAt | date}}</a></li>
+                    <li class=""><a href="#" class="icons text-muted"><i class="icon icon-phone text-muted mr-1"></i>(+224) 612-39-67-39</a></li>
+                </ul>
+                  <a [routerLink]="['../detail-opportunity', post._id]" class="btn btn-primary mt-2">Voir Plus</a>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6 pl-0 d-none d-lg-block">
+                <div class="arrow-ribbon bg-primary">ID: #{{ post?.postId }}</div>
+                <img src="../assets/images/thumbnails/imo.jpg" alt="img" class=" br-br-2 br-tr-2">
+              </div>
+            </div>
+          </div>
+          <div class="card" *ngIf="i%2 != 0">
+            <div class="row">
+              <div class="col-md-12 col-lg-6 pr-0 d-none d-lg-block">
+                <div class="arrow-ribbon bg-primary">ID: #{{ post?.postId }}</div>
+                <img src="../assets/images/thumbnails/imo1.jpg" alt="img" class="br-tl-2 br-bl-2 ">
+              </div>
+              <div class="col-md-12 col-lg-6  pl-0 ">
+                <div class="card-body p-7 about-con pabout">
+                  <h2 class="mb-4 font-weight-semibold line_clamp">{{ post.title }}</h2>
+                  <h4 class="leading-normal two_line_clamp">{{ post.sub_title }}</h4>
+                  <p class="leading-normal five_line_clamp">{{ post.description }}</p>
+                  <ul class="d-flex mb-3 ">
+                    <!-- <li class=""><a href="#" class="icons text-muted"><i class="icon icon-location-pin text-muted mr-1"></i> {{ post.user_id?.name }}</a></li> -->
+                    <li class="mr-5"><a href="#" class="icons text-muted"><i class="icon icon-event text-muted mr-1"></i>{{ post.createdAt | date}}</a></li>
+                    <li class=""><a href="#" class="icons text-muted"><i class="icon icon-phone text-muted mr-1"></i>(+224) 612-39-67-39</a></li>
+                  </ul>
+                  <a [routerLink]="['../detail-opportunity', post._id]" class="btn btn-primary  mt-2">Voir Plus</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+  </div>
+</section>

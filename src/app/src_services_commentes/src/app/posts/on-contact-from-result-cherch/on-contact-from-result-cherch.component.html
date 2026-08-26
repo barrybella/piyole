@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">Confirmation contact</div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+      <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+          <input type="hidden" formControlName="postId">
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label class="form-label text-dark">Nom & Premom</label>
+                  <input type="text" formControlName="name" class="form-control {{ getNameError() ? 'is-invalid' : getNameSuccess() ? 'is-valid' : '' }}" placeholder="EX: Kana Bah">
+                  <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="form-label text-dark">Telephone</label>
+                  <input type="text" formControlName="tel" class="form-control {{ getTelError() ? 'is-invalid' : getTelSuccess() ? 'is-valid' : '' }}" placeholder="EX: 622372345">
+                  <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputAddress">Adresse</label>
+              <input type="text" class="form-control {{ getAdressError() ? 'is-invalid' : getAdressSuccess() ? 'is-valid' : '' }}" formControlName="adress" id="inputAddress" placeholder="EX: Ratoma/Sonfonia">
+              <span *ngIf="getAdressError()" class="text text-danger"><small>{{ getAdressError() }}</small></span>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-6">
+                  <label for="inputAddress2">Date</label>
+                  <input type="date" min="{{ date_limit }}" formControlName="dateRendevous" class="form-control {{ getDateRendvousError() ? 'is-invalid' : getDateRendvousSuccess() ? 'is-valid' : '' }}" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                  <span *ngIf="getDateRendvousError()" class="text text-danger"><small>{{ getDateRendvousError() }}</small></span>
+              </div>
+              <div class="form-group col-6">
+                  <label for="inputAddress2">Heure</label>
+                  <input type="time" formControlName="time" class="form-control {{ getTimeError() ? 'is-invalid' : getTimeSuccess() ? 'is-valid' : '' }}" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                  <span *ngIf="getTimeError()" class="text text-danger"><small>{{ getTimeError() }}</small></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea name="" id="description" formControlName="description" cols="30" rows="2" class="form-control" placeholder="Description"></textarea>
+          </div>
+          <button type="submit" [disabled]="controlForm.invalid" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPaading"></span> <span *ngIf="!etatPaading">Valider</span></button>
+          </form>
+  </div>
+</div>

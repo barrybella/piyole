@@ -1,0 +1,479 @@
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { take } from 'rxjs';
+import { CompressImageService } from './../../services/compress-image.service';
+import { ToolsService } from './../../services/tools.service';
+import { Router } from '@angular/router';
+import { UserService } from './../../services/user.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PostService } from './../../services/post.service';
+import { Component, OnInit } from '@angular/core';
+import { property_id_piyole } from 'src/app/backend';
+import { selectionerValidator } from 'src/app/validators/selectioner.validator';
+import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
+import { PrintService } from 'src/app/services/print.service';
+
+@Component({
+  selector: 'app-add-post-sale',
+  templateUrl: './add-post-sale.component.html',
+  styleUrls: ['./add-post-sale.component.css']
+})
+export class AddPostSaleComponent implements OnInit {
+  etatPadding: boolean = false;
+
+  categorieRequired: boolean = false;
+  regionRequired: boolean = false;
+  communeRequired: boolean = false;
+  quartierRequired: boolean = false;
+  parkingRequired: boolean = false;
+  meubleRequired: boolean = false;
+  climatiseurRequired: boolean = false;
+  courRequired: boolean = false;
+  gardienRequired: boolean = false;
+  chambreRequired: boolean = false;
+  etageRequired: boolean = false;
+  prixRequired: boolean = false;
+  soleRequired: boolean = false;
+
+  nivauxEtageRequired: boolean = false;
+  avanceRequired: boolean = false;
+  periodeRequired: boolean = false;
+  tempsRequired: boolean = false;
+
+  colValEtage: number = 4;
+  champNiveauxEtage: boolean = false;
+
+  hiddenStatus: boolean = false;
+
+  communes: any[] = [];
+  quartiers: any[] = [];
+  quartierFileters: any[] = [];
+  select_commune: boolean = false;
+
+  multiplesImages: any[] = [];
+  fileData?: any;
+  tables: any[] = [];
+  tabs: any[] = [];
+
+  ctrlImage: boolean = true;
+
+  /**
+   * Initialise le composant et injecte les dépendances nécessaires.
+   */
+  constructor(private postService: PostService, private fb: FormBuilder, private userService: UserService, private _snackBar: SnackBarService, private location: Location, private router: Router, public print: PrintService, private toolsService: ToolsService, private compressImage: CompressImageService) { }
+
+  /**
+   * Initialise le composant après la création de la vue et prépare les données nécessaires.
+   */
+  ngOnInit() {
+    this.getCommunes();
+    this.getQuartiers();
+  }
+
+  controlForm = this.fb.group({
+    title: ['', [Validators.required]],
+    categorie: ['Selectioner', [Validators.required,selectionerValidator()]],
+    etat_bien: ['Selectioner', [Validators.required,selectionerValidator()]],
+    chambre: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    prix: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
+    salon: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    toilette: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    couloir: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    terrasse: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    cuisine: ['', [Validators.pattern(/^[0-9+]{1,}$/)]],
+    eaux: ['Selectioner', [selectionerValidator()]],
+    sale_bain: ['', []],
+    doc: ['', [Validators.required]],
+    partner: ['', []],
+    sale_manger: ['', []],
+    garage: ['Selectioner', [selectionerValidator()]],
+    condition: ['', []],
+    nivauxEtage: ['Selectioner', []],
+    parcking: ['Selectioner', [selectionerValidator()]],
+    meuble: ['Selectioner', [selectionerValidator()]],
+    climatiseur: ['Selectioner', [selectionerValidator()]],
+    mettreCaree: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
+    cour: ['Selectioner', [selectionerValidator()]],
+    discut: ['Selectioner', [selectionerValidator()]],
+    region: ['Selectioner', [selectionerValidator()]],
+    commune: ['Selectioner', [selectionerValidator()]],
+    quartier: ['Selectioner', [selectionerValidator()]],
+    etage: ['Selectioner', [selectionerValidator()]],
+    type: [1],
+    secteur: ['', []],
+    description: ['', [Validators.required]],
+    fournisseur: ['0', []],
+    delete: [0, []],
+    active: [false ],
+    property_id: ['',],
+    from: ['',],
+    ing: [false],
+    images: ['',],
+    user_id: ['',],
+    slug_id: ['',],
+
+  })
+
+  /**
+   * Traite la progression et les informations du fichier sélectionné.
+   */
+  fileProgress(event){
+    this.tables = [];
+    let image: any = event.target.files;
+    
+    for(var i=0; i< image.length; i++){
+      if(image.length >= 5 && image.length <= 25){
+        this.ctrlImage = false;
+        this.compressImage.compress(image[i])
+        .pipe(take(1))
+        .subscribe(compressedImage => {
+          this.tables.push(compressedImage);
+          if(event.target.files.length > 0){
+            this.multiplesImages = this.tables.sort((a, b) => {
+              let nameA = a.name.toLowerCase();
+              let nameB = b.name.toLowerCase();
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+              return 0;
+            });
+          }
+        })
+      }else{
+        Swal.fire("Impossible!!", "Vous ne pouvez ajouté que minimum 5 images et au maximum 10 images", "warning");
+        this.ctrlImage = true;
+
+      }
+      
+    }
+  }
+
+  /**
+   * Valide les données du formulaire et déclenche le traitement de soumission.
+   */
+  onSubmit() {
+    this.etatPadding = true;
+
+    this.categorieRequired = false;
+    this.regionRequired = false;
+    this.communeRequired = false;
+    this.quartierRequired = false;
+    this.parkingRequired = false;
+    this.meubleRequired = false;
+    this.climatiseurRequired = false;
+    this.courRequired = false;
+    this.chambreRequired = false;
+
+    var ok = true;
+
+    if (this.categorie.value == 'Selectioner') {
+      this.categorieRequired = true;
+      ok = false;
+    } else {
+      this.categorieRequired = false;
+    }
+
+    if (this.region.value == 'Selectioner') {
+      this.regionRequired = true;
+      ok = false;
+    } else {
+      this.regionRequired = false;
+    }
+
+    if (this.commune.value == 'Selectioner') {
+      this.communeRequired = true;
+      ok = false;
+    } else {
+      this.communeRequired = false;
+    }
+
+    if (this.quartier.value == 'Selectioner') {
+      this.quartierRequired = true;
+      ok = false;
+    } else {
+      this.quartierRequired = false;
+    }
+
+    if (this.parcking.value == 'Selectioner') {
+      this.parkingRequired = true;
+      ok = false;
+    } else {
+      this.parkingRequired = false;
+    }
+
+    if (this.meuble.value == 'Selectioner') {
+      this.meubleRequired = true;
+      ok = false;
+    } else {
+      this.meubleRequired = false;
+    }
+
+    if (this.climatiseur.value == 'Selectioner') {
+      this.climatiseurRequired = true;
+      ok = false;
+    } else {
+      this.climatiseurRequired = false;
+    }
+
+    if (this.cour.value == 'Selectioner') {
+      this.courRequired = true;
+      ok = false;
+    } else {
+      this.courRequired = false;
+    }
+
+    if (this.etage.value == 'Selectioner') {
+      this.etageRequired = true;
+      ok = false;
+    } else {
+      this.etageRequired = false;
+    }
+
+    if (this.nivauxEtage.value == 'Selectioner' && this.etage.value == '1') {
+      this.nivauxEtageRequired = true;
+      ok = false;
+    } else {
+      this.nivauxEtageRequired = false;
+    }
+
+    if (this.prix.value == '') {
+      this.prixRequired = true;
+      ok = false;
+    } else {
+      this.prixRequired = false;
+    }
+
+    if (!ok) {
+      return;
+    }
+    console.log("OK ", this.controlForm.value);
+    
+    this.user_id.setValue(this.userService.getUserDetails()._id);
+    this.slug_id.setValue(this.userService.getUserDetails().slug);
+    this.property_id.setValue(property_id_piyole);
+
+    const formData = new FormData();
+    
+    for(let img of this.multiplesImages){
+      formData.append('files', img);
+    }
+
+    this.postService.upload(formData).subscribe(res => {
+      this._snackBar.openSnackBar("Telechargment d'image en cours...", "");
+
+      console.log("BEFORE ", res);
+      const partiesImages: string[] = res.map(url => url.slice(url.indexOf('/piyole-bucket.s3.eu-north-1.amazonaws.com/') + '/piyole-bucket.s3.eu-north-1.amazonaws.com/'.length));
+       // Filtrer et trier les éléments commençant par "images/"
+       let filteredTabs = partiesImages.filter(tab => tab.startsWith('images/'));
+
+       // Filtrer et trier les éléments commençant par "images/WhatsApp"
+       let whatsappTabs = partiesImages.filter(tab => tab.startsWith('images/WhatsApp'));
+ 
+       // Fusionner les deux tableaux filtrés
+       let sortedTabs = filteredTabs.concat(whatsappTabs);
+      
+       
+       this.images?.setValue(sortedTabs);
+
+      this.postService.addPost(this.controlForm.value).subscribe(res => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Post ajouté!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        this.etatPadding = false;
+        this.router.navigate(['posts/dashboard'])
+      });
+    });
+    
+    
+  }
+
+  /**
+   * Gère le changement de valeur d'un champ ou d'une sélection.
+   */
+  changeEvent(event){
+    var eventValue = event.target.value;
+    if(eventValue == 1){
+      this.colValEtage = 3;
+      this.champNiveauxEtage = true;
+      this.nivauxEtage.setValidators([Validators.required, selectionerValidator()]);
+      this.nivauxEtage.updateValueAndValidity();
+    }else{
+      this.colValEtage = 4;
+      this.champNiveauxEtage = false;
+      this.nivauxEtage.clearValidators();
+      this.nivauxEtage.updateValueAndValidity();
+    }
+  }
+
+  colValAvance: number = 12;
+  champAvance: boolean = false;
+
+  /**
+   * Gère la modification des critères de recherche ou des paramètres avancés.
+   */
+  changeEventAvance(event){
+    var eventValue = event.target.value;
+    if(eventValue == 1){
+      this.colValAvance = 4;
+      this.champAvance = true;
+    }else{
+      this.colValAvance = 12;
+      this.champAvance = false;
+    }
+  }
+
+  /**
+   * Gère le changement de commune et met à jour les données dépendantes.
+   */
+  eventChangeCommune(event: any){
+    this.select_commune = true;
+    this.quartierFileters = [];
+    var commune = event.target.value;
+
+    this.quartierFileters = this.quartiers.filter(resp => {
+      return resp.commune == commune;
+    })
+  }
+
+  /**
+   * Récupère la liste des communes disponibles.
+   */
+  getCommunes(){
+    this.toolsService.getCommunes().subscribe(res => {
+      this.communes = res;
+    })
+  }
+
+  /**
+   * Récupère les quartiers associés à la commune sélectionnée.
+   */
+  getQuartiers(){
+    this.toolsService.getQuartiers().subscribe(res => {
+      this.quartiers = res;
+    })
+  }
+
+  
+
+  get sole() {
+    return this.controlForm.get('sole');
+  }
+
+  get cour() {
+    return this.controlForm.get('cour');
+  }
+
+  get chambre() {
+    return this.controlForm.get('chambre');
+  }
+
+  get gardien() {
+    return this.controlForm.get('gardien');
+  }
+
+  get climatiseur() {
+    return this.controlForm.get('climatiseur');
+  }
+
+  get meuble() {
+    return this.controlForm.get('meuble');
+  }
+
+  get user_id() {
+    return this.controlForm.get('user_id');
+  }
+
+  get categorie() {
+    return this.controlForm.get('categorie');
+  }
+
+  get type() {
+    return this.controlForm.get('type');
+  }
+
+  get region() {
+    return this.controlForm.get('region');
+  }
+
+  get commune() {
+    return this.controlForm.get('commune');
+  }
+
+  get quartier() {
+    return this.controlForm.get('quartier');
+  }
+
+  get parcking() {
+    return this.controlForm.get('parcking');
+  }
+
+  get nivauxEtage() {
+    return this.controlForm.get('nivauxEtage');
+  }
+
+  get prix() {
+    return this.controlForm.get('prix');
+  }
+
+  get etage() {
+    return this.controlForm.get('etage');
+  }
+
+  get avance() {
+    return this.controlForm.get('avance');
+  }
+
+  get periode() {
+    return this.controlForm.get('periode');
+  }
+
+  get temps() {
+    return this.controlForm.get('temps');
+  }
+
+  get lotissement() {
+    return this.controlForm.get('lotissement');
+  }
+
+  get eaux() {
+    return this.controlForm.get('eaux');
+  }
+
+  get terassement() {
+    return this.controlForm.get('terassement');
+  }
+
+  get garage() {
+    return this.controlForm.get('garage');
+  }
+
+  get property_id() {
+    return this.controlForm.get('property_id');
+  }
+
+  get slug_id() {
+    return this.controlForm.get('slug_id');
+  }
+
+  get etat_bien() {
+    return this.controlForm.get('etat_bien');
+  }
+
+  get images() {
+    return this.controlForm.get('images');
+  }
+
+  /**
+   * Revient à la page ou à l'étape précédente.
+   */
+  onBack(){
+    this.location.back();
+  }
+}

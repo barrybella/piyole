@@ -1,0 +1,84 @@
+<app-nav-bar [subTitle]="'Contrats Construction'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Liste des participants du chantier</h3>
+            <div class="card-options">
+              <span *ngIf="contrat?.id_agent == userService.getUserDetails()._id" (click)="addParticipant()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Ajout participant</span>
+              <span (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i>Retour</span>
+             
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab " id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>NOM && PRÉNOM</th>
+                        <th>TELEPHONE</th>
+                        <th>EMAIL</th>
+                        <th>ADRESSE</th>
+                        <th>FONCTION</th>
+                        <th>DATE</th>
+                        <th>DETAILS </th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let participant of participants | paginate:{ itemsPerPage: 10, currentPage: p}" class="">
+                        <td>
+                            {{ participant.user_id.name }}  
+                        </td>
+                        <td>
+                            {{ participant.user_id.tel }}  
+                        </td>
+                        <td>
+                            {{ participant.user_id.email }}  
+                        </td>
+                        <td>
+                            {{ participant.user_id.adress }}  
+                        </td>
+                        <td>
+                            {{ participant.fonction }}
+                        </td>
+                        <td>
+                            {{ participant.date | date }}  
+                        </td>
+                        <td>
+                            {{ participant.desc }}  
+                        </td>
+                        <td>
+                            <button *ngIf="contrat?.id_agent == userService.getUserDetails()._id && contrat?.id_agent != participant.user_id._id" class="btn btn-sm btn-primary" (click)="onCancel(contrat._id, participant._id)" >Retirer</button>
+                            <!-- <div *ngIf="contrat?.id_agent == userService.getUserDetails()._id" class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                
+                                </button>
+                                <div   class="dropdown-menu" >
+                                    <span *ngIf="contrat?.id_agent != participant.user_id._id" class="dropdown-item cursorPointer"  (click)="onCancel(contrat._id, participant._id)" >Retirer</span>
+                                </div>
+                            </div> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event" previousLabel="précédent" nextLabel="Suivant" [autoHide]=true></pagination-controls>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

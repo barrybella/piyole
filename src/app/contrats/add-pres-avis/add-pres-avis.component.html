@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+    <div class="card-title">
+      <span>PRES AVIS</span><br>
+     <span>{{ message }}</span>
+   </div> 
+   <div class="card-options">
+     <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">×</span>
+     </button>
+ </div>
+   </div>
+  <div class="card-body">
+    <form [formGroup]="controlForm" (ngSubmit)="onSubmit()"> 
+      <div class="form-group">
+        <label for="type_pres_avis">Type près avis</label>
+        <select (change)="changeEvent($event)" formControlName="type_pres_avis" class="form-control" id="type_pres_avis">
+          <option disabled value="Selectioner">Selectioner</option>
+          <option value="0">Démmander</option>
+          <option value="1">Donner</option>
+        </select>
+        <!-- <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small> -->
+      </div>
+      <div *ngIf="is_type" class="form-group">
+        <label for="nb_month">Nombre des mois</label>
+        <select  formControlName="nb_month_pres_avis" class="form-control" id="nb_month">
+          <option disabled value="Selectioner">Selectioner</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <!-- <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small> -->
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="******">
+        <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+      </div>
+      
+      <button type="submit"[disabled]="controlForm.invalid || !status_button" class="btn btn-danger"> <span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPadding"></span> <span *ngIf="!etatPadding">Valider</span></button>
+    </form>
+  </div>
+</div>

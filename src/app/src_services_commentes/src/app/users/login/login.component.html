@@ -1,0 +1,68 @@
+<!--Sliders Section-->
+<section>
+    <div class="bannerimg cover-image bg-background3" data-image-src="../assets/images/banners/im-login.jpeg">
+        <div class="header-text mb-0">
+            <div class="container">
+                <div class="text-center text-white">
+                    <h1 class="">Connexion</h1>
+                    <ol class="breadcrumb text-center">
+                        <li class="breadcrumb-item"><a [routerLink]="['/']">Acceuil</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
+                        <li class="breadcrumb-item active text-white" aria-current="page">Connexion</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Sliders Section-->
+
+<!--Login-Section-->
+<section class="sptb">
+    <div class="container customerpage">
+        <div class="row">
+            <div class="col-lg-5 col-xl-4 col-md-6 d-block mx-auto">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-md-12 register-right">
+                        <ul class="nav nav-tabs nav-justified mb-5 p-2 border" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active m-1 border " id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link m-1 border " id="profile-tab" data-toggle="tab" [routerLink]="['/users/register']" routerLinkActive="router-link-active"  role="tab" aria-controls="profile" aria-selected="false">S'inscrire</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="single-page  w-100  p-0">
+                                    <div class="wrapper wrapper2">
+                                        <form id="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body" tabindex="500">
+                                            <h3 class="pb-2">Connexion</h3>
+                                            <div class="mail">
+                                                <input type="text" formControlName="login">
+                                                <label>Téléphone ou Adresse email</label>
+                                            </div>
+                                            <div class="passwd">
+                                                <input type="password" formControlName="password">
+                                                <label>Mot de passe</label>
+                                            </div>
+                                            <span *ngIf="passwordIncorect"><span class="text-danger">Identifiant incorrecte!!</span></span><br>
+
+                                            <div class="submit">
+                                                <button class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }}" [disabled]="loginForm.invalid || etatPadding">Connexion</button>
+                                            </div>
+                                            <p class="mb-2"><span style="color: black;">Mot de passe <span (click)="onClick()" class="text-danger cursorPointer">oublié?</span></span></p>
+                                            <p class="text-dark mb-0">Vous n'avez pas de compte?<a [routerLink]="['/users/register']" routerLinkActive="router-link-active"  class="text-primary ml-1">S'inscrire</a></p>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Login-Section-->

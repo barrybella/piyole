@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="row">
+        <div *ngFor="let shop of shops; let i=index;" class="col-lg-6 col-md-12 col-xl-4 cursorPointer">
+            <div (click)="onDetail(shop._id)" class="card cursorPointer">
+                <div class="arrow-ribbon bg-primary">{{ shop.categorie }}</div>
+                <div class="item-card2-img">
+                    <a (click)="onDetail(shop._id)"></a>
+                    <img src="{{ print.printImage(shop.images[0]) }}" alt="" alt="{{ shop?.title }}" class="cover-image">
+                    
+                </div>
+                <div class="item-card7-overlaytext">
+                    <a (click)="onDetail(shop._id)" routerLinkActive="router-link-active" class="text-white"> REF_{{ shop.productId }}</a>
+                </div>
+                <div class="card-body">
+                    <div class="item-card2">
+                        <div class="item-card2-desc">
+                            <h4 class="font-weight-semibold line_clamp" style="font-weight: 900;">{{ shop.title }}</h4>
+                            <p class="fow_line_clamp" style="font-weight: 400;" title="{{ shop?.intro }}" [innerHTML]="formatText(shop?.intro)"></p>
+                            <!-- <a href="#" class="btn btn-primary">Duplex House</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="product-item-wrap d-flex">
+                        <div class="product-item-price">
+                            <span class="newprice text-dark line_clamp" style="font-size: 15px;">{{ print.printPrice(shop.prix_global) }} FG<span *ngIf="shop.unite">/{{ shop.unite }}</span></span>
+                            <!-- <del class="oldprice text-muted">$195</del> -->
+                        </div>
+                        
+                        <!-- <span style="float: right;" class="pull-right">(à discuter)</span> -->
+                        <!-- <a [routerLink]="['../detail-product', shop._id]" class="btn btn-info btn-sm ml-auto">Détails</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+         <div *ngFor="let item of chimers" class="{{ !chimer ? 'd-none' : 'desktop-only'}} col-xl-4 col-md-6 col-xs-12 col-sm-12">
+                <div class="card overflow-hidden">
+                    <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="248px" height="100px" type="square"></shimmer>
+                    <div class="card-body">
+                        <div >
+                            
+                            <shimmer width="100px" type="line"></shimmer>
+                            
+                            <div>
+                            <shimmer width="280px" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="320px" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="110px" type="line"></shimmer>
+                            <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="90px" type="line"></shimmer>
+                            <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+        </div>
+    
+        <div *ngFor="let item of chimers_mobile" class="{{ !chimer ? 'd-none' : 'mobile-only'}} col-xl-4 col-md-6" style="">
+                <div class="card overflow-hidden">
+                    <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="293px" height="100px" type="square"></shimmer>
+                    <div class="card-body">
+                        <div >
+                            
+                            <shimmer width="260px" type="line"></shimmer>
+                            
+                            <div>
+                            <shimmer width="190px" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="100px" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="110px" type="line"></shimmer>
+                            <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                            </div>
+                            <div>
+                            <shimmer width="90px" type="line"></shimmer>
+                            <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

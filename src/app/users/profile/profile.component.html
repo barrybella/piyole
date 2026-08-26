@@ -1,0 +1,119 @@
+<app-nav-bar [subTitle]="'Profil'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Editer le profil</h3>
+          </div>
+          <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Nom & Prenom (ou Nom Agence)*</label>
+                    <input type="text" class="form-control {{ getNameError() ? 'is-invalid state-invalid' : getNameSuccess() ? 'is-valid state-valid' : '' }}" formControlName="name" id="name" placeholder="EX: Piyole">
+                    <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control {{ getEmailError() ? 'is-invalid state-invalid' : getEmailSuccess() ? 'is-valid state-valid' : '' }}" formControlName="email" id="inputEmail5" placeholder="EX: kanabah55@gmail.com">
+                    <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>                  </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                  <div class="form-group">
+                    <label class="form-label">Code Pays*</label>
+                    <input type="text" formControlName="code" class="form-control" placeholder="EX: +224">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Telephone*</label>
+                    <input type="text" class="form-control {{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }}" formControlName="tel" id="name2"  placeholder="Ex: 669928153">
+                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                  </div>
+                </div>
+  
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Region(Ville)</label>
+                    <input type="text" formControlName="region" class="form-control" placeholder="Votre Region">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Commune</label>
+                    <input type="text" formControlName="commune" class="form-control" placeholder="Votre Commune">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Quartier</label>
+                    <input type="text" formControlName="quartier" class="form-control" placeholder="Votre Quartier">
+                  </div>
+                </div>
+               
+                <div class="col-sm-6 col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Facebook</label>
+                    <input type="text" formControlName="facebook" class="form-control" placeholder="https://www.facebook.com/">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Instagram</label>
+                    <input type="text" formControlName="instagram" class="form-control" placeholder="https://www.instagram.com/">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Twitter</label>
+                    <input type="text" formControlName="twitter" class="form-control" placeholder="https://twitter.com/">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">TikTok</label>
+                    <input type="text" formControlName="tiktok" class="form-control" placeholder="https://tiktok.com.com/">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Site Internet</label>
+                    <input type="text" formControlName="site" class="form-control" placeholder="https://piyole.com/">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">À propos de moi</label>
+                    <textarea rows="5" formControlName="about" class="form-control" placeholder="Enter About your description"></textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group mb-0">
+                    <label class="form-label">Photo du profile</label>
+                    <div class="custom-file">
+                      <!-- <input type="file" accept="image/*" name="image" (change)="fileProgress($event)" class="custom-file-input">
+                      <label class="custom-file-label">Choisir une image</label> -->
+                      <input type="file" accept="image/*" name="image" (change)="fileProgress($event)" >
+                      <!-- <label class="custom-file-label">Choisir une image</label> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" [disabled]="controlForm.invalid || controlForm.pending || etatPadding" class="btn btn-primary  {{ etatPadding ? 'btn-loading' : '' }} ">Mettre à jour</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

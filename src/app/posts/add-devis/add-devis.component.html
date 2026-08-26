@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">Devis </div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+      <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label class="form-label">Le devis</label>
+              <input type="file" accept=".pdf" name="pdf" (change)="fileProgress($event)" type="file" class="form-control" >
+
+              <!-- <input type="text" formControlName="title" class="form-control {{ getTitleError() ? 'is-invalid state-invalid' : getTitleSuccess() ? 'is-valid state-valid' : '' }}" id="exampleInputEmail11"  placeholder="EX:622372345">
+              <span *ngIf="getTitleError()" class="text text-danger"><small>{{ getTitleError() }}</small></span> -->
+          </div>
+          <div class="form-group">
+              <label class="form-label">
+                  Descritption
+              </label>
+              <textarea class="form-control {{ getDescError() ? 'is-invalid state-invalid' : getDescSuccess() ? 'is-valid state-valid' : '' }}" formControlName="desc_devis" rows="3" placeholder="Minimum 25 caracteres, Maximum"></textarea>
+              <span *ngIf="getDescError()" class="text text-danger"><small>{{ getDescError() }}</small></span>
+          </div>
+          <!-- <div class="form-group">
+            <label class="form-label">Montant</label>
+            <input type="text" formControlName="prix" class="form-control {{ getPrixError() ? 'is-invalid state-invalid' : getPrixSuccess() ? 'is-valid state-valid' : '' }}" id="exampleInputEmail11"  placeholder="12000000">
+            <span *ngIf="getPrixError()" class="text text-danger"><small>{{ getPrixError() }}</small></span>
+          </div> -->
+
+          <div class="form-footer">
+              <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }} mr-1">Valider</button>
+          </div>
+      </form>
+  </div>
+</div>

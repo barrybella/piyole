@@ -1,0 +1,119 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">
+        Contac__{{ montant }} <br>
+        <!-- <span style="font-size: 13px; font-weight: 500;">
+            La date à atteint le 18, le client doit payez les 9 jours restant qui corespond à 300 000 GNF
+        </span> -->
+
+        <span *ngIf="mont_day_rest">La date a atteint le <span style="color: red; font-weight: bold;">{{ nb_day_free }}</span> , le client doit payez les <span style="color: red; font-weight: bold;">{{ day_diff }}</span> jours restant qui corespond à <span style="color: red; font-weight: bold;">{{ print.printPrice(mont_day_rest) }}</span> GNF </span>
+        <span *ngIf="show_days_offert && day_diff" >La date a atteint le <span style="color: red; font-weight: bold;">{{ nb_day_free }}</span> , on offre les <span style="color: red; font-weight: bold;">{{ day_diff }}</span> jours restant. </span>
+        
+      </div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+    <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark">Email</label>
+                <input type="email" formControlName="email" class="form-control {{ getEmailError() ? 'is-invalid' : getEmailSuccess() ? 'is-valid' : '' }}" placeholder="EX: email@gmail.com">
+                <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="form-label text-dark" for="etatCivil">Etat Civil</label>
+                <select class="form-control" formControlName="etatCivil" id="etatCivil">
+                    <option disabled value="Selectioner">Selectioner</option>
+                    <option value="Marié">Marié</option>
+                    <option value="Celibataire">Celibataire</option>
+                    <option value="Divorcé">Divorcé</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="form-label text-dark" for="sexe">Sexe</label>
+                <select class="form-control" formControlName="sexe" id="sexe">
+                    <option disabled value="Selectioner">Selectioner</option>
+                    <option value="H">Homme</option>
+                    <option value="F">Femme</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark">Profession</label>
+                <input type="text" formControlName="proffesion" class="form-control {{ getProffesionError() ? 'is-invalid' : getProffesionSuccess() ? 'is-valid' : '' }}" placeholder="EX: Informaticien">
+                <span *ngIf="getProffesionError()" class="text text-danger"><small>{{ getProffesionError() }}</small></span>
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="inputAddress">Nombre Personne</label>
+                <input type="number" class="form-control {{ getNbPersoneError() ? 'is-invalid' : getNbPersoneSuccess() ? 'is-valid' : '' }}" formControlName="nbPersone" id="inputAddress" placeholder="EX: 4">
+                <span *ngIf="getNbPersoneError()" class="text text-danger"><small>{{ getNbPersoneError() }}</small></span>
+            </div>
+        </div>
+        <div class="form-row">
+            
+            <div class="col-md-2 form-group">
+                <label for="inputAddress">Nombre Voiture</label>
+                <input type="number" class="form-control {{ getNbVoitureError() ? 'is-invalid' : getNbVoitureSuccess() ? 'is-valid' : '' }}" formControlName="nbVoiture" id="inputAddress" placeholder="EX: 3">
+                <span *ngIf="getNbVoitureError()" class="text text-danger"><small>{{ getNbVoitureError() }}</small></span>
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="inputAddress">Nombre Moto</label>
+                <input type="number" class="form-control {{ getNbMotoError() ? 'is-invalid' : getNbMotoSuccess() ? 'is-valid' : '' }}" formControlName="nbMoto" id="inputAddress" placeholder="EX: 2">
+                <span *ngIf="getNbMotoError()" class="text text-danger"><small>{{ getNbMotoError() }}</small></span>
+            </div>
+            <div class="form-group col-2">
+                <label for="inputAddress2">Animale</label>
+                <input type="text" formControlName="animal" class="form-control " id="inputAddress2" placeholder="Chiem, chat,..">
+            </div>
+            <div class="form-group col-3">
+                <label for="inputAddress2">Photo</label>
+                <input type="file" accept="image/*" name="image" (change)="fileProgress($event)"  class="form-control" id="inputAddress2" placeholder="Image">
+            </div>
+            <div class="form-group col-3">
+                <label for="inputAddress2">Piece d'Identité</label>
+                <input type="file" name="carte" accept=".pdf" (change)="fileProgressCarte($event)"  class="form-control" id="inputAddress2" placeholder="Carte">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-{{ col_type }}">
+                <label for="inputPassword4"  class="form-label">Type contrat </label>
+                <select formControlName="type_contrat" (change)="eventIfByDay($event)" id="" class="form-control">
+                    <option value="Selectioner"  disabled>Selectioner</option>
+                    <option value="0">Mensuel</option>
+                    <option value="1">Journalier</option>
+                    <option value="2">Pas de suivie</option>
+                </select>
+            </div>
+            <div class="form-group col-6" *ngIf="byMonth">
+                <label class="form-label text-dark" for="nbMonth">Nombre de mois</label>
+                  <select (change)="changeEvent($event)" class="form-control" formControlName="nbMonth" id="nbMonth">
+                      <option disabled value="Selectioner">Selectioner</option>
+                      <option [disabled]="((month < (post.periode == 'Mois' ? post.temps : post.temps * 12)) ? true : false) && (post.avance)" *ngFor="let month of months" value="{{ month }}">{{ month }}</option>
+                  </select>
+            </div>
+            <div class="form-group col-6" *ngIf="byDay">
+                <label class="form-label text-dark" for="nbDay">Nombre de Jour</label>
+                  <select (change)="changeEventDays($event)" class="form-control" formControlName="nbDay" id="nbDay">
+                      <option disabled value="Selectioner">Selectioner</option>
+                      <option  *ngFor="let day of days" value="{{ day  }}">{{ day }}</option>
+                </select>
+            </div>
+          </div>
+        <div class="form-group">
+            <label for="description">Autre detaille</label>
+            <textarea name="" id="description" formControlName="detail" cols="30" rows="2" class="form-control" placeholder="Autre Information"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Mot de passe</label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+            <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+        </div>
+        <button type="submit" [disabled]="controlForm.invalid || etatPaading" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPaading"></span> <span *ngIf="!etatPaading">Valider</span></button>
+        </form>
+</div>
+</div>

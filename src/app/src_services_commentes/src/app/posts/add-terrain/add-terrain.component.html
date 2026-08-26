@@ -1,0 +1,184 @@
+<app-nav-bar [subTitle]="'Ajout post Terrain'"></app-nav-bar>
+
+<!--Add posts-section-->
+<section class="sptb">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 col-md-12 col-md-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <h3 class="card-title">Ajout Publication Terrain</h3>
+                        <div class="card-options">
+                            <button (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-arrow-left mr-1"></i> Retour</button>
+                          </div>
+                    </div>
+                    <form (ngSubmit)="onSubmit()" [formGroup]="controlForm">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label text-dark">Titre</label>
+                                <input type="text" formControlName="title" class="form-control" placeholder="EX: Location Appartement bon prix profité en!">
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-3">
+                                <label for="lotissement">Lotissement</label>
+                                <select formControlName="lotissement" class="form-control   custom-select">
+                                  <option disabled value="Selectioner">Selectioner</option>
+                                  <option value="1">Oui</option>
+                                  <option value="0">Non</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group col-md-3">
+                                <label for="terassement">Terassement</label>
+                                <select formControlName="terassement" class="form-control   custom-select">
+                                  <option disabled value="Selectioner">Selectioner</option>
+                                  <option value="1">Oui</option>
+                                  <option value="0">Non</option>
+                                </select>
+                              </div>
+                              <div class="form-group col-md-3">
+                                <label class="form-label text-dark">Mettre Carree</label>
+                                <input formControlName="mettreCaree" type="number" min="0" class="form-control" placeholder="0">
+
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label class="form-label text-dark">Cour</label>
+                                  <select formControlName="cour" class="form-control custom-select">
+                                    <option disabled value="Selectioner">Selectioner</option>
+                                    <option value="1">Oui</option>
+                                    <option value="0">Non</option>
+                                  </select>
+                                  <span><small class="text-danger" *ngIf="courRequired">Veiller choisir si oui ou non!!</small></span>
+                            </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label text-dark">Prix</label>
+                                    <input formControlName="prix" type="number" min="0" class="form-control" placeholder="0">
+                                    <span><small class="text-danger" *ngIf="prixRequired">Veiller enter le prix!!</small></span>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="form-label text-dark">Document</label>
+                                    <input formControlName="doc" type="text"  class="form-control" placeholder="EX: Titre Foncier, Donation, Plan de masse,...">
+                                    <span><small class="text-danger" *ngIf="prixRequired">Veiller enter le document</small></span>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label class="form-label text-dark">À discuter</label>
+                                    <select formControlName="discut" class="form-control custom-select">
+                                        <option disabled value="Selectioner">Selectioner</option>
+                                        <option value="1">Oui</option>
+                                        <option value="0">Non</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Region</label>
+                                    <select formControlName="region" class="form-control custom-select">
+                                      <option disabled value="Selectioner">Selectioner</option>
+                                      <option value="Conakry">Conakry</option>
+										<option value="Labé">Labé</option>
+										<option value="Boké">Boké</option>
+										<option value="Kindia">Kindia</option>
+										<option value="Mamou">Mamou</option>
+										<option value="Kankan">Kankan</option>
+										<option value="Nzérékoré">Nzérékoré</option>
+										<option value="Faranah">Faranah</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="regionRequired">La region est requise!!</small></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Commume</label>
+                                    <select (change)="eventChangeCommune($event)"  formControlName="commune" class="form-control custom-select">
+                                        <option  disabled value="Selectioner">Selectioner</option>
+                                        <option *ngFor="let item of communes"  value="{{ item.commune }}">{{ item.commune }}</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="communeRequired">La commune est requise!!</small></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Quartier</label>
+                                    <select formControlName="quartier" class="form-control custom-select">
+                                        <option  disabled value="Selectioner">Selectioner</option>
+                                        <option *ngFor="let item of quartierFileters" value="{{ item.quartier }}">{{ item.quartier }}</option>
+                                    </select>
+                                    <span><small class="text-danger" *ngIf="quartierRequired">Le quartier est requise!!</small></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="form-label text-dark">Secteur</label>
+                                    <input formControlName="secteur" type="text" class="form-control" placeholder="EX: Concasseur">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Images</label>
+                                <input type="file" accept="image/*" name="photos" multiple (change)="fileProgress($event)" class="form-control" >
+                              </div>
+                            <div class="form-group">
+                                <label class="form-label text-dark">Description</label>
+                                <textarea class="form-control" formControlName="description" rows="6" placeholder="ecrivez ici.."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text-dark">Patenaire</label>
+                                <textarea class="form-control" formControlName="partner" rows="3" placeholder="Les detail du partenaire."></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer ">
+                            <button type="submit" [disabled]="controlForm.invalid || etatPadding || ctrlImage" class="btn btn-success {{ etatPadding ? 'btn-loading' : '' }} ">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Termes et conditions</h3>
+                    </div>
+                    <div class="card-body pb-2">
+                        <ul class="list-unstyled widget-spec vertical-scroll mb-0">
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Inclure des vrais information
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Mesurer tous les pièces par mètre carré
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Prendre des images claire
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Prendre les images en portrait
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne publier que des bien qui existent
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne pas mettre d'autres images qui ne concernent pas l'immobilier
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Avoir la certitude que le bien n'a pas de problème
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Ne pas mettre des images qui concernent pas le bien
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Bien rédiger la description avec plusieurs détails
+                            </li>
+                            <li>
+                                <i class="fa fa-check text-success" aria-hidden="true"></i>Au minimum 5 images et au maiximum 10 images
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Add posts-section-->

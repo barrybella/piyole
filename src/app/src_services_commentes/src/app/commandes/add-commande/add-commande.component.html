@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+    <div class="card-header">
+        <div class="card-title">
+            Confirmation Commande <br>
+            <!-- <div *ngIf="quantity_event">
+                <span style="font-size: 10px;">
+                    Quantitée: 
+                    <span class="text-danger">
+                        {{ quantity_event }}
+                        <span>
+                            {{ shop?.unite }}
+                        </span>
+                    </span>
+                </span>,
+                <span style="font-size: 10px;">
+                    Montant Total: 
+                    <span class="text-danger">
+                        {{ print.printPrice(total_price_event) }} FG
+                    </span>
+                </span>,
+            </div> -->
+        </div>
+        
+        <div class="card-options">
+            <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+           
+            <div class="form-group">
+                <label class="form-label">Adresse Livraison</label>
+                <input type="text" formControlName="adress" class="form-control" id="exampleInputEmail11"  placeholder="Region/Commune/Quartier/Secteur">
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    Avez vous d'autre details à fournir?
+                </label>
+                <textarea class="form-control" formControlName="desc" rows="3" placeholder="Plus de detail..."></textarea>
+            </div>
+            <label for="livraison"><input type="checkbox" disabled name="" checked id="">  Payement à la livraison</label>
+
+
+            <div class="form-footer">
+                <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }} mr-1">Valider</button>
+            </div>
+        </form>
+    </div>
+</div>

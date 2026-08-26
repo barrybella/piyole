@@ -1,0 +1,80 @@
+<app-nav-bar [subTitle]="'Contrats constructions'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Contrat de construction</h3>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab {{ contrats.length < 2 ? 'botom_card' : '' }}" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>ID POST</th>
+                        <th>SOLDE</th>
+                        <!-- <th>VERSEMENT</th> -->
+                        <!-- <th>DEPENSE</th> -->
+                        <th>PERIODE(MOIS)</th>
+                        <th>Date FIN </th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats" class="{{ getStatusConstruct(contrat.status_construct) }}">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        <td>{{ contrat.post_id?.postId }}</td>
+                        <td>
+                          {{ print.printPrice(getMontantForConstruct(contrat) - getMontantVersementAgence(contrat)) }}
+                         
+                        </td>
+                        <!-- <td>
+                          {{ print.printPrice(getMontantVersementAgence(contrat)) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(getDepense(contrat)) }}
+                        </td> -->
+                        <td>
+                          {{ contrat.nb_month - monthDiff(date_now, contrat.date_fin_exuction) }}/{{ contrat.nb_month }}
+                        </td>
+                        <td>
+                          {{ contrat.date_fin_exuction | date }}
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu" >
+                            <!-- <span class="dropdown-item cursorPointer {{ contrat.status_construct == 0 ? '' : 'disabled gazo' }}" *ngIf="contrat?.status_construct == 0" (click)="onAddRaport(contrat)" >Ajouter un raport</span> -->
+                            <a [routerLink]="['../raport-construction', contrat._id]" class="dropdown-item cursorPointer" >Voir vos raports</a>
+                            <span (click)="onListePayementClient(contrat)" class="dropdown-item cursorPointer" >Mes payements</span>
+                            <span (click)="onRedirect('/posts/detail-post', contrat.post_id?._id)" class="dropdown-item cursorPointer" >Detail Post</span>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Fermer</a> -->
+                            </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<app-nav-bar [subTitle]="'Ventes'"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container">
+      <div class="section-title center-block text-center">
+          <h1>Ventes maisons, terrains partout en Guinée Conakry </h1>
+          <!-- <p>Scroller pour voir l'ensemble des publications des différentes agences! Vous trouverez votre gout!</p> -->
+          <p>Trouvez toutes les publications (maisons, appartements, villas, terrains, parcelles, ...) pour la vente en Guinée Conakry.</p>
+      </div>
+      <div class="row">
+        <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+      </div>
+  </div>
+</section>
+<!--Latest Ads-->
+</section>

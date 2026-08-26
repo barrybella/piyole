@@ -1,0 +1,86 @@
+<app-nav-bar [subTitle]="'Contrats Construction'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Liste contrat suivie de chantier</h3>
+            <div class="card-options">
+              <span (click)="onAddChantier()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Ajout Chantier</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab {{ contrats.length < 3 ? 'botom_card' : '' }}" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>REF</th>
+                        <th>CONTRAT</th>
+                        <!-- <th>VERSEMENT</th> -->
+                        <!-- <th>DEPENSE</th> -->
+                        <th>PERIODE(MOIS)</th>
+                        <th>Date FIN </th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats | paginate:{ itemsPerPage: 10, currentPage: p}" class="{{ getStatusConstruct(contrat.status_construct) }}">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        <td>
+                            {{ contrat.chantier }}  
+                        </td>
+                        <!-- <td>
+                          {{ print.printPrice(getMontantVersementAgence(contrat) - getDepense(contrat)) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(getMontantVersementAgence(contrat)) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(getDepense(contrat)) }}
+                        </td> -->
+                        <td>
+                          {{ contrat.nb_month - monthDiff(date_now, contrat.date_fin_exuction) }}/{{ contrat.nb_month }}
+                        </td>
+                       
+                        <td>
+                          {{ contrat.date_fin_exuction | date }}
+                        </td>
+                        <td>
+                          <button class="btn btn-sm btn-primary" *ngIf="contrat?.participants.status == 1" (click)="onAddRaport(contrat)">Ajouter un raport</button>
+                          <a class="btn btn-sm btn-success text-white ml-1" [routerLink]="['../raport-construction-for-chantier', contrat._id]">Voir le raport</a>
+                          <a class="btn btn-sm btn-secondary text-white ml-1" [routerLink]="['../list-participants', contrat._id]">Participants</a>
+                          <!-- <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu" >
+                            <span class="dropdown-item cursorPointer" *ngIf="contrat?.participants.status == 1" (click)="onAddRaport(contrat)" >Ajouter un raport</span>
+                            <a [routerLink]="['../raport-construction-for-chantier', contrat._id]" class="dropdown-item cursorPointer" >Voir vos raports</a>
+                            <a [routerLink]="['../list-participants', contrat._id]" class="dropdown-item cursorPointer" >Particiapants</a>
+                            </div>
+                          </div> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event" previousLabel="précédent" nextLabel="Suivant" [autoHide]=true></pagination-controls>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

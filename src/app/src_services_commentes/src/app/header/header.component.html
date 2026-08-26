@@ -1,0 +1,134 @@
+<div class="header-main">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-sm-4 col-7">
+                    <div class="top-bar-left d-flex">
+                        <div class="clearfix">
+                            <ul class="socials">
+                                <li>
+                                    <a class="social-icon text-dark" href="https://www.facebook.com/profile.php?id=100089773122431" target="_blank"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a class="social-icon text-dark" href="https://twitter.com/PiyoleApp" target="_blank"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a class="social-icon text-dark" href="https://www.linkedin.com/in/piyole-immo-809524270" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a class="social-icon text-dark" href="mailto:contact@piyole.com"><i class="fa fa-google-plus"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix">
+                            <ul class="contact">
+                                <li class="mr-5 d-lg-none">
+                                    <a href="#" class="callnumber text-dark"><span><i class="fa fa-phone mr-1"></i>: +224 612-39-67-39</span></a>
+                                </li>
+                                <li class="dropdown mr-5">
+                                    <a href="#" class="text-dark" data-toggle="dropdown"><span><img src="../../assets/images/drapeaux.jpeg" height="10" alt="GN"> Guinée <i class="fa fa-caret-down text-muted"></i></span> </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <span class="disabled" class="dropdown-item" disabled>
+                                        Guinée
+                                        </span>
+                                    </div>
+                                </li>
+                        <li class="dropdown mr-5">
+                            <a href="#"  class="text-dark" data-toggle="dropdown"><span> Langue <i class="fa fa-caret-down text-muted"></i></span> </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                <span class="dropdown-item cursorPointer">
+                                    Français
+                                </span>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="text-dark" data-toggle="dropdown"><span>Devise <i class="fa fa-caret-down text-muted"></i></span></a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                <span class="dropdown-item cursorPointer">
+                                    GNF
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-sm-8 col-5">
+                    <div class="top-bar-right">
+                        <ul class="custom">
+                            <li *ngIf="!userService.isLoggedIn()">
+                                <a [routerLink]="['/users/register']" routerLinkActive="router-link-active" class="text-dark"><i class="fa fa-user mr-1"></i> <span>S'inscrire</span></a>
+                            </li>
+                            <li *ngIf="!userService.isLoggedIn()">
+                                <a [routerLink]="['/users/login']" routerLinkActive="router-link-active" class="text-dark"><i class="fa fa-sign-in mr-1"></i> <span>Connexion</span></a>
+                            </li>
+                            <li *ngIf="userService.isLoggedIn()" class="cursorPointer">
+                                <a (click)="onDeconexion()" class="text-dark"><i class="fa fa-sign-in mr-1"></i> <span class="">Se déconnecter</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a (click)="cherch()" class="text-dark cursorPointer" ><i class="fa fa-search mr-1"></i><span>
+                                     Recherche Reference</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Duplex Houses Header -->
+    <div class="horizontal-header clearfix ">
+        <div class="container">
+            <a id="horizontal-navtoggle" class="animated-arrow"><span></span></a>
+            <!-- <span class="smllogo"><img src="../assets/images/brand/logo.png" width="120" alt=""/></span> -->
+            <span class="smllogo" (click)="onRedirect('/')"><img src="../assets/images/brand/01.png" width="120" alt=""/></span>
+            <a href="tel:+224612396739" class="callusbtn"><i class="fa fa-phone" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <!-- /Duplex Houses Header -->
+
+    <div class="horizontal-main bg-dark-transparent clearfix">
+        <div class="horizontal-mainwrapper container clearfix">
+            <div class="desktoplogo">
+                <!-- <a routerLink="home"><img src="../assets/images/brand/logo1.png" alt=""></a> -->
+                <a routerLink="home"><img src="../assets/images/brand/02.png" alt=""></a>
+            </div>
+            <div class="desktoplogo-1">
+                <a routerLink="home"><img src="../assets/images/brand/02.png" alt=""></a>
+                <!-- <a routerLink="home"><img src="../assets/images/brand/logo1.png" alt=""></a> -->
+            </div>
+            <!--Nav-->
+            <nav class="horizontalMenu clearfix d-md-flex">
+                <ul class="horizontalMenu-list">
+                    <li aria-haspopup="true">
+                        <a [routerLink]="['/home']" [routerLinkActive]="['active']" >Accueil</a>
+                    </li>
+                    <li aria-haspopup="true"><a [routerLink]="['posts/location-maisons-terrain-villa-appartement-partout-en-guinee-conakry']" [routerLinkActive]="['active']">Locations </a></li>
+                    <li aria-haspopup="true"><a [routerLink]="['posts/vente-maisons-terrain-villa-appartement-partout-en-guinee-conakry']" [routerLinkActive]="['active']">Ventes</a></li>
+                    <li aria-haspopup="true"><a [routerLink]="['posts/vente-de-terrain-partout-en-guinee-conakry']" [routerLinkActive]="['active']"> Terrains</a></li>
+                    <li aria-haspopup="true"><a [routerLink]="['posts/vente-plan-de-construction-guinee-conakry']" [routerLinkActive]="['active']">Plans</a></li>
+                    <li aria-haspopup="true"><a [routerLink]="['shops/shopping']" [routerLinkActive]="['active']"> Boutique</a></li>
+                    <!-- <li aria-haspopup="true"><a [routerLink]="['posts/all-plans']" [routerLinkActive]="['active']"> Plan(Construire)</a></li> -->
+                    <!-- <li aria-haspopup="true"><a [routerLink]="['investirs/opportunity-investment']" > Investir <span class="hmarrow"></span></a></li> -->
+                    <!-- <li aria-haspopup="true"><a [routerLink]="['contrats/chantiers']" [routerLinkActive]="['active']">Chantier</a></li> -->
+                    <li aria-haspopup="true"><a [routerLink]="['posts/get-all-category']" [routerLinkActive]="['active']">Categories </a></li>
+                    <!-- <li aria-haspopup="true"><a [routerLink]="['users/all-agencies']" [routerLinkActive]="['active']">Agences </a></li> -->
+                    <li aria-haspopup="true"><a [routerLink]="['contact-us']" [routerLinkActive]="['active']"> Contact <span class="hmarrow"></span></a></li>
+                    <li aria-haspopup="true" class="mt-5 pb-5 mt-lg-0" *ngIf="userService.isLoggedIn()">
+                        <!-- <span><a class="btn btn-secondary" [routerLink]="['/posts/add-post']" routerLinkAc  tive="router-link-active" >Ajouter Un Poste</a></span> -->
+                        <span *ngIf="!ok"><a class="btn btn-secondary" [routerLink]="['/posts/dashboard']" routerLinkActive="router-link-active" >Tableaux de bord</a></span>
+                        <span *ngIf="ok">
+                            <a class="btn btn-secondary" [routerLink]="['/shops/basket-listing']" routerLinkActive="router-link-active" >
+                            Mon Panier
+                            <!-- Mon Panier ({{ count_bask }}) -->
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+
+            </nav>
+            <!--Nav-->
+        </div>
+    </div>
+</div>

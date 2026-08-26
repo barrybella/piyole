@@ -1,0 +1,21 @@
+<app-nav-bar [subTitle]="user?.name"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+  <section class="sptb bg-white">
+    <div class="container ">
+        <div class="section-title center-block text-center">
+            <h2>Les plublications de {{ user?.name }}</h2>
+            <p>Scrollez pour voir l'ensemble des publications de cette agence !! Vous y trouverez votre goût. 👌</p>
+        </div>
+        <div class="row">
+          <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+        </div>
+    </div>
+  </section>
+</section>

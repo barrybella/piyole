@@ -1,0 +1,181 @@
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Tableau de Bord</h3>
+    </div>
+    <div class="card-body text-center item-user border-bottom">
+      <div class="profile-pic cursorPointer" (click)="onRedirect('users/profile')">
+        <div class="profile-pic-img">
+          <span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="online"></span>
+          <img src="{{ print.printProfile(user?.image) }}" height="80" width="80" class="brround" alt="user">
+        </div>
+        <a (click)="onRedirect('users/profile')" class="text-dark cursorPointer"><h4 class="mt-3 mb-0 font-weight-semibold">{{ userService.getUserDetails().name }}</h4></a>
+      </div>
+    </div>
+    <div class="item1-links  mb-0">
+      <a (click)="onRedirect('posts/dashboard')" class="d-flex cursorPointer border-bottom {{ getActive('/posts/dashboard') }}">
+        <span class="icon1 mr-3"><i class="icon icon-home"></i></span> Tableaux de bord
+      </a>
+      <a (click)="onRedirect('users/profile')" class="d-flex cursorPointer border-bottom {{ getActive('/users/profile') }}">
+        <span class="icon1 mr-3"><i class="icon icon-user"></i></span> Éditer le profil
+      </a>
+      
+      <!-- <a [routerLink]="['../../contrats/liste-contrat-for-client']" class="d-flex border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-game-controller"></i></span> Contrat(Location && Vente)
+      </a> -->
+      <a (click)="onRedirect('shops/basket-listing')" class="d-flex border-bottom cursorPointer {{ getActive('/shops/basket-listing') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Panier
+      </a>
+      <a (click)="onRedirect('commandes/order-list')" class="d-flex border-bottom cursorPointer {{ getActive('/commandes/order-list') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Liste Commande
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-mensuel-client')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/list-contrat-mensuel-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Mesuels
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-journalier-client')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/list-contrat-journalier-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Journalier
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-vente-client')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/list-contrat-vente-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Achat
+      </a>
+      <a  (click)="onRedirect('contrats/liste-contrat-plan-client')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/liste-contrat-plan-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat (Plan)
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-construction-for-client')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/list-contrat-construction-for-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat (Construction)
+      </a>
+      <a (click)="onRedirect('contrats/contrat-suivie-chantier')" class="d-flex border-bottom cursorPointer {{ getActive('/contrats/list-contrat-construction-for-client') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Suivie de Chantier
+      </a>
+      
+    </div>
+  </div>
+  
+  <div class="card mb-xl-0 desktop-only" *ngIf="user?.agence"  >
+    <div class="card-header">
+      <h3 class="card-title">Agence</h3>
+    </div>
+    <div class="item1-links  mb-0">
+      <a (click)="onRedirect('posts/making-contact')"  class="cursorPointer  d-flex  border-bottom {{ getActive('/posts/making-contact') }}">
+      <span class="icon1 mr-3"><i class="icon icon-call-in"></i></span>
+      <span class="{{ contact_prise ? 'text-danger' : '' }}">
+        Prise de contact ({{ contact_prise }})
+      </span>
+      </a>
+      <a (click)="onRedirect('posts/contact-confirm-listing')"  routerLinkActive="router-link-active"  class=" cursorPointer d-flex border-bottom {{ getActive('/posts/contact-confirm-listing') }}">
+        <span class="icon1 mr-3"><i class="icon icon-book-open"></i></span> Rendez-vous
+      </a>
+      <!-- <a (click)="onRedirect('contrats/list-contrat')" class="d-flex  border-bottom cursorPointer">
+        <span class="icon1 mr-3"><i class="icon icon-folder-alt"></i></span> Contrats
+      </a> -->
+      <a (click)="onRedirect('contrats/list-contrat-mensuel')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/list-contrat-mensuel') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrats(mensuel)
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-journalier')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/list-contrat-journalier') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrats(journalier)
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-plan')" class="cursorPointer {{ getActive('/contrats/list-contrat-plan') }} d-flex  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat vente plan
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-construction')" class="d-flex cursorPointer {{ getActive('/contrats/list-contrat-construction') }}  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat de construction
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-vente')" class="d-flex cursorPointer {{ getActive('/contrats/list-contrat-vente') }}  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat de vente
+      </a>
+      <a (click)="onRedirect('contrats/pres-avis-donner')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/pres-avis-donner') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Pris Avis Donner
+      </a>
+      <a (click)="onRedirect('contrats/pres-avis-demande')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/pres-avis-demande') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Pris Avis Demmander
+      </a>
+      <a (click)="onRedirect('contrats/liste-resilier')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/liste-resilier') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Contrat Resilier
+      </a>
+      <a (click)="onRedirect('contrats/liste-contrat-stop')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/liste-contrat-stop') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Contrat Stoper
+      </a>
+      <!-- <a [routerLink]="['../../contrats/list-invest-atribute-for-construction']" class="d-flex  border-bottom"> 
+        <span class="icon1 mr-3"><i class="icon icon-basket"></i></span> Contrat de construction Invest
+      </a>
+      <a [routerLink]="['../../contrats/list-contrat-invest']" class="d-flex  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-basket"></i></span> Contrat d'investisement
+      </a> -->
+    </div>
+  </div>
+
+  <div class="card mb-xl-0 desktop-only mt-5" *ngIf="user?.agence"  >
+    <div class="card-header">
+      <h3 class="card-title">Boutique</h3>
+    </div>
+    <div class="item1-links  mb-0">
+
+      <a (click)="onRedirect('shops/products-liste')"  class="cursorPointer  d-flex  border-bottom {{ getActive('/posts/making-contact') }}">
+      <span class="icon1 mr-3"><i class="icon icon-call-in"></i></span>
+      <span class="">
+        Liste des produits
+      </span>
+      </a>
+
+      <a (click)="onRedirect('commandes/liste-commande-panel')"  routerLinkActive="router-link-active"  class=" cursorPointer d-flex border-bottom {{ getActive('/posts/contact-confirm-listing') }}">
+        <span class="icon1 mr-3"><i class="icon icon-book-open"></i></span> Liste des commandes Clients
+      </a>
+
+      <a (click)="onRedirect('shops/get-corbeil-shops')"  routerLinkActive="router-link-active"  class=" cursorPointer d-flex border-bottom {{ getActive('/shops/get-corbeil-shops') }}">
+        <span class="icon1 mr-3"><i class="icon icon-book-open"></i></span> Corbeil
+      </a>
+      <!-- <a (click)="onRedirect('contrats/list-contrat')" class="d-flex  border-bottom cursorPointer">
+        <span class="icon1 mr-3"><i class="icon icon-folder-alt"></i></span> Contrats
+      </a> -->
+      <!-- <a (click)="onRedirect('contrats/list-contrat-mensuel')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/list-contrat-mensuel') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Corbeil
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-journalier')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/list-contrat-journalier') }}">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> 
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-plan')" class="cursorPointer {{ getActive('/contrats/list-contrat-plan') }} d-flex  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat vente plan
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-construction')" class="d-flex cursorPointer {{ getActive('/contrats/list-contrat-construction') }}  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat de construction
+      </a>
+      <a (click)="onRedirect('contrats/list-contrat-vente')" class="d-flex cursorPointer {{ getActive('/contrats/list-contrat-vente') }}  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-drawer"></i></span> Contrat de vente
+      </a>
+      <a (click)="onRedirect('contrats/pres-avis-donner')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/pres-avis-donner') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Pris Avis Donner
+      </a>
+      <a (click)="onRedirect('contrats/pres-avis-demande')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/pres-avis-demande') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Pris Avis Demmander
+      </a>
+      <a (click)="onRedirect('contrats/liste-resilier')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/liste-resilier') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Contrat Resilier
+      </a>
+      <a (click)="onRedirect('contrats/liste-contrat-stop')" class="d-flex  border-bottom cursorPointer {{ getActive('/contrats/liste-contrat-stop') }}">
+        <span class="icon1 mr-3"><i class="icon icon-speedometer"></i></span> Contrat Stoper
+      </a> -->
+      <!-- <a [routerLink]="['../../contrats/list-invest-atribute-for-construction']" class="d-flex  border-bottom"> 
+        <span class="icon1 mr-3"><i class="icon icon-basket"></i></span> Contrat de construction Invest
+      </a>
+      <a [routerLink]="['../../contrats/list-contrat-invest']" class="d-flex  border-bottom">
+        <span class="icon1 mr-3"><i class="icon icon-basket"></i></span> Contrat d'investisement
+      </a> -->
+    </div>
+  </div>
+
+  <div class="card mb-xl-0 mt-5">
+    <!-- <div class="card-header">
+      <h3 class="card-title">Angence</h3>
+    </div> -->
+    <div class="item1-links  mb-0">
+      <a *ngIf="user?.agence" (click)="onRedirect('posts/post-trash')" class="d-flex border-bottom cursorPointer {{ getActive('/posts/post-trash') }} desktop-only">
+        <span class="icon1 mr-3"><i class="icon icon-trash"></i></span> Corbeille
+      </a>
+      <a (click)="onUpdatePassword()"  class="d-flex cursorPointer ">
+        <span class="icon1 mr-3"><i class="icon icon-key"></i></span> Modification mot de passe
+      </a>
+      <a (click)="onDeconexion()"  class="d-flex cursorPointer ">
+        <span class="icon1 mr-3"><i class="icon icon-power"></i></span> Se déconnecter
+      </a>
+    </div>
+  </div>

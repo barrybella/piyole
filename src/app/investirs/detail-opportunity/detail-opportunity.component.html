@@ -1,0 +1,189 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="wideget-user">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="embed-responsive embed-responsive-16by9 w-100 " style="height: 400px;">
+                    <!-- <iframe class="embed-responsive-item" src="{{ youtub }}" allowfullscreen=""></iframe> -->
+                    <video width="320" height="240" controls>
+                      <source src="../assets/video/video.mp4" type="video/mp4">
+                      <!-- <source src="movie.ogg" type="video/ogg"> -->
+                      Videos explications de l'oportunitée!!
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="wideget-user-tab">
+              <div class="tab-menu-heading">
+                <div class="tabs-menu1">
+                  <ul class="nav">
+                    <li class=""><a href="#tab-51" class="active" data-toggle="tab">L'opportunitée</a></li>
+                    <li><a href="#tab-61" data-toggle="tab" class="">Quelque Images</a></li>
+                    <li><a href="#tab-71" data-toggle="tab" class="">Ceux qui ont dejat investi</a></li>
+                  </ul>
+                  <button class="btn btn-primary btn-sm pull-right" (click)="onInvest(post)">Oui j'investi!!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="border-0">
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab-51">
+                  <div id="profile-log-switch">
+                    <div class="media-heading">
+                      <h5><strong>{{ post?.title }}</strong>
+                         <b style="font-weight: 900;" class=" pull-right" >
+                           <ul class="d-flex mb-3 ">
+                            <!-- <li class="mr-5"><a href="#" class="icons "><i class="icon icon-event text-muted mr-1"></i>{{ post.createdAt | date}}</a></li> -->
+                            <li class=""><a href="#" class="icons text-danger"><i class="icon icon-phone text-muted mr-1"></i>(+224) 612-39-67-39</a></li>
+                          </ul>
+                        </b> 
+                      </h5>
+                    </div>
+                    <div class="table-responsive ">
+                      <table class="table row table-borderless">
+                        <tbody class="col-lg-12 col-xl-4 p-0">
+                          <tr>
+                            <td><strong>Montant à investir :</strong> {{ print.printPrice(post?.mont_invest) }} GNF</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Adresse :</strong> {{ post?.region }}, {{ post?.commune }}, {{ post?.quartier }}, {{ post?.secteur }}</td>
+                          </tr>
+                         
+                        </tbody>
+                        <tbody class="col-lg-12 col-xl-4 p-0">
+                          <tr>
+                            <td><strong>Benefice Prevue :</strong>{{ print.printPrice(post?.benefice_prevue) }} GNF sur les 100%</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Personnes dejat investi :</strong> 4</td>
+                          </tr>
+                         
+                        </tbody>
+                        <tbody class="col-lg-12 col-xl-4 p-0">
+                          <tr>
+                            <td><strong>Montant dejat investi :</strong>4 000 000 000 GNF soit 40%</td>
+                          </tr>
+                          <tr>
+                            <td><strong>ID du post :</strong> #{{ post?.postId }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row profie-img">
+                      <div class="col-md-12 text-justify">
+                        <div class="media-heading">
+                          <!-- <h5><strong></strong></h5> -->
+                        </div>
+                        <!-- <p> Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus</p> -->
+                        <p class="mb-0">{{ post?.description }}</p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="row mt-2 ">
+                    <div class="col-md-12"  *ngFor="let term of terms">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4><b>{{ term.title }}</b></h4>
+                          <p>{{ term.desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-body border">
+                          <div class="terms">
+                            <p>Was this information is Helpful?</p>
+                            <a class="btn btn-primary text-white">Yes</a>
+                            <a class="btn btn-success text-white">No</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-61">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                      <img class="img-fluid rounded" src="../assets/images/photos/8.jpg " alt="banner image">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <img class="img-fluid rounded" src="../assets/images/photos/10.jpg" alt="banner image ">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <img class="img-fluid rounded" src="../assets/images/photos/11.jpg" alt="banner image ">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <img class="img-fluid rounded " src="../assets/images/photos/12.jpg" alt="banner image ">
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-71">
+                  <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="team-section text-center">
+                            <div class="team-img">
+                              <img src="../assets/images/faces/male/img.png" class="img-thumbnail rounded-circle alt=" alt="">
+                            </div>
+                            <h4 class="font-weight-bold dark-grey-text mt-4">Tracey	Poole</h4>
+                            <h6 class="mb-3 blue-text ">RealEstate Agent</h6>
+                            <p class="font-weight-normal dark-grey-text">
+                            <i class="fa fa-quote-left pr-2"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.</p>
+                            <div class="text-warning">
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-xl-4 col-md-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="team-section text-center">
+                            <div class="team-img">
+                              <img src="../assets/images/faces/male/img.png" class="img-thumbnail rounded-circle alt=" alt="">
+                            </div>
+                            <h4 class="font-weight-bold dark-grey-text mt-4 text-info">Non otorisé</h4>
+                            <h6 class="mb-3 blue-text text-info">Non otorisé</h6>
+                            <p class="font-weight-normal dark-grey-text">
+                            <i class="fa fa-quote-left pr-2"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.</p>
+                            <div class="text-warning">
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                              <i class="fa fa-star"> </i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

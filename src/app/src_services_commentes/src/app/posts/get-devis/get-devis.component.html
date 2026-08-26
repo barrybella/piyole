@@ -1,0 +1,43 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title line_clamp">Devis du plan {{ post?.title }}</h3>
+            <div class="card-options">
+              <a routerLink="../add-post" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Ajouter</a>
+              <button (click)="onBack()" class="btn btn-sm btn-secondary mr-2"><i class="icon icon-plus mr-1"></i> Retour</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div *ngFor="let devi of devis" class="col-md-12 col-xl-4">
+                    <div class="card">
+                        <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
+                        <div class="card-header">
+                            <h3 class="card-title line_clamp" title="{{ devi.title }}">{{ devi.title }}</h3>
+                            <div class="card-options">
+                              <!-- <a href="#" class="btn btn-primary btn-sm">Supprimer</a> -->
+                              <span (click)="onDelete(devi)" class="text-danger cursorPointer"><i class="fa fa-trash" data-toggle="tooltip" title="fa fa-trash"></i></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ print.printDescription(devi.desc, 35).text }} <span *ngIf="print.printDescription(devi.desc).voirPlus" class="text-primary cursorPointer" (click)="onVoirPlus(devi.desc)">voir plus</span>
+                        </div>
+                        <div class="card-footer ">
+                            <span> <b style="font-weight: 900; color: black;"> {{ print.printPrice(devi.prix) }} GNF</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

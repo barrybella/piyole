@@ -1,0 +1,21 @@
+<app-nav-bar [subTitle]="'Posts par categories'"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+  <section class="sptb bg-white">
+    <div class="container ">
+        <div class="section-title center-block text-center">
+            <h1>Tout les {{ posts[0]?.categorie }}s à  {{ posts[0]?.commune }}, {{ posts[0]?.quartier }}</h1>
+            <p>Decouvrer une liste bien garnis des {{ posts[0]?.categorie }}s que vous souhaiter. 👌</p>
+        </div>
+        <div class="row">
+          <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+        </div>
+    </div>
+  </section>
+</section>

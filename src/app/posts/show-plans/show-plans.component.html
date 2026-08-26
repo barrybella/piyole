@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let post of plans; let i=index;" class="col-xl-4 col-md-6" (click)="onRedirect('/posts/detail-post', post._id)">
+        <div class="card cursorPointer overflow-hidden">
+            <div class="arrow-ribbon bg-info">Plan à vendre</div>
+            <div class="item-card7-imgs">
+                <!-- <a [routerLink]="['/posts/detail-post', post._id]" ></a> -->
+                <img src="{{ print.printImage(post?.images[0]) }}" style="max-height: 210px;" alt="{{ post?.title }}" class="cover-image">
+            </div>
+            <div class="item-card7-overlaytext">
+                <a [routerLink]="['/posts/detail-post', post._id]"  class="text-white"> REF_{{ post.postId}}</a>
+                <h4 class=" bg-info mb-0">{{ post.categorie }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="item-card7-desc">
+                    <div class="item-card7-text">
+                        <a [routerLink]="['/posts/detail-post', post._id]"  class="text-dark"><h4 class="font-weight-semibold">{{ print.printTitle(post.title, 23) }}</h4></a>
+                    </div>
+                    <ul class="d-flex mb-3">
+                        <!-- <li class=""><a [routerLink]="['/posts/detail-post', post._id]"  class="icons text-muted"><i class="icon icon-location-pin text-muted mr-1"></i> USA</a></li> -->
+                        <li><a [routerLink]="['/posts/detail-post', post._id]"  class="icons text-muted"><i class="icon icon-event text-muted mr-1"></i>{{ post.createdAt | date}}</a></li>
+                        <li class=""><a href="tel:+224612396739"  class="icons text-muted"><i class="icon icon-phone text-muted mr-1"></i> (+224) {{ '612-39-67-39' }}</a></li>
+                    </ul>
+                    <a [routerLink]="['/posts/detail-post', post._id]" class="text-dark"><h4 class="font-weight-semibold">Prix sur demande</h4></a>
+                    <p class="mb-0 two_line_clamp">{{ post.description }}</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <a [routerLink]="['/posts/detail-post', post._id]"  class="btn btn-white btn-block">Plus de detail</a>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let item of chimers" class="{{ !chimer ? 'd-none' : 'desktop-only'}} col-xl-4 col-md-6 col-xs-12 col-sm-12">
+        <!-- <div *ngFor="let item of chimers" class="card {{ !chimer ? 'd-none' : ''}}" style="width: 280px;"> -->
+            <div class="card overflow-hidden">
+                <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="348px" height="100px" type="square"></shimmer>
+                <div class="card-body">
+                    <div >
+                        
+                        <shimmer width="100px" type="line"></shimmer>
+                        
+                        <div>
+                        <shimmer width="280px" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="320px" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="110px" type="line"></shimmer>
+                        <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="90px" type="line"></shimmer>
+                        <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+    </div>
+
+    <div *ngFor="let item of chimers_mobile" class="{{ !chimer ? 'd-none' : 'mobile-only'}} col-xl-4 col-md-6" style="">
+        <!-- <div *ngFor="let item of chimers" class="card {{ !chimer ? 'd-none' : ''}}" style="width: 280px;"> -->
+            <div class="card overflow-hidden">
+                <shimmer style="margin-left: 8px; margin-top: 10px; max-height: 150px;" width="293px" height="100px" type="square"></shimmer>
+                <div class="card-body">
+                    <div >
+                        
+                        <shimmer width="260px" type="line"></shimmer>
+                        
+                        <div>
+                        <shimmer width="190px" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="100px" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="110px" type="line"></shimmer>
+                        <shimmer width="90px" style="margin-left: 20px;" type="line"></shimmer>
+                        </div>
+                        <div>
+                        <shimmer width="90px" type="line"></shimmer>
+                        <shimmer width="105px" style="margin-left: 20px;" type="line"></shimmer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+    </div>
+  </div>
+</div>

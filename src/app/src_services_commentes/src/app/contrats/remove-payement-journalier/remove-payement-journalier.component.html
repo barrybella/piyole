@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">
+        Supprimer le payement
+      </div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+      <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+          
+          <div class="form-group">
+              <label for="desc">Mot de passe</label>
+              <input type="password" class="form-control" placeholder="******" formControlName="password" >
+        <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+              <!-- <span *ngIf="getDescError()" class="text text-danger"><small>{{ getDescError() }}</small></span> -->
+          </div>
+          <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPadding"></span> <span *ngIf="!etatPadding">Valider</span></button>
+          </form>
+  </div>
+</div>

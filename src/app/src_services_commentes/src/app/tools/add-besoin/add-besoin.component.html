@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+  <div class="card-header">
+      <div class="card-title">Que cherchez-vous?</div>
+      <div class="card-options">
+          <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+              <span style="color: black; font-weight: bold;" aria-hidden="true">×</span>
+          </button>
+      </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="controlForm" (ngSubmit)="onSubmit()"> 
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="name">Nom && Prenom</label>
+          <input type="text" formControlName="name" class="form-control {{ getNameError() ? 'is-invalid state-invalid' : getNameSuccess() ? 'is-valid state-valid' : '' }}"  placeholder="Nom complet">
+          <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span> 
+        </div>
+        <div class="form-group col-6">
+          <label for="tel">Telephone </label>
+          <input type="text" formControlName="tel" class="form-control {{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Entrer le numero telephone">
+          <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="exampleInputEmail1">Categorie</label>
+          <input type="text" class="form-control {{ getCategorieError() ? 'is-invalid state-invalid' : getCategorieSuccess() ? 'is-valid state-valid' : '' }}" formControlName="categorie" placeholder="Entrer la categorie">
+          <span *ngIf="getCategorieError()" class="text text-danger"><small>{{ getCategorieError() }}</small></span> 
+        </div>
+        <div class="form-group col-6">
+          <label for="exampleInputEmail1" class="mobile-only">Type Besoin</label>
+          <label for="exampleInputEmail1" class="desktop-only ">Type du Besoin</label>
+          <input type="text" class="form-control {{ getTypePostError() ? 'is-invalid state-invalid' : getTypePostSuccess() ? 'is-valid state-valid' : '' }}" formControlName="type_post" placeholder="Vente, Location, bail, autres">
+          <span *ngIf="getTypePostError()" class="text text-danger"><small>{{ getTypePostError() }}</small></span> 
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="commune">Commune (ville)</label>
+          <input type="text" class="form-control {{ getCommuneError() ? 'is-invalid state-invalid' : getCommuneSuccess() ? 'is-valid state-valid' : '' }}" formControlName="commune" placeholder="La commune ou ville">
+          <span *ngIf="getCommuneError()" class="text text-danger"><small>{{ getCommuneError() }}</small></span> 
+        </div>
+        <div class="form-group col-6">
+          <label for="commune">Quartier (secteur)</label>
+         <input type="text" class="form-control {{ getQuartierError() ? 'is-invalid state-invalid' : getQuartierSuccess() ? 'is-valid state-valid' : '' }}" formControlName="quartier" placeholder="Le quartier">
+         <span *ngIf="getQuartierError()" class="text text-danger"><small>{{ getQuartierError() }}</small></span> 
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="prix_min">Prix Minimal</label>
+          <input type="text" formControlName="prix_min" class="form-control {{ getPrixMinError() ? 'is-invalid state-invalid' : getPrixMinSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Montant Minimal">
+          <span *ngIf="getPrixMinError()" class="text text-danger"><small>{{ getPrixMinError() }}</small></span>
+
+        </div>
+        <div class="form-group col-6">
+          <label for="commune">Prix Maximal</label>
+          <input type="text" formControlName="prix_max" class="form-control {{ getpPrixMaxError() ? 'is-invalid state-invalid' : getpPrixMaxSuccess() ? 'is-valid state-valid' : '' }}" placeholder="Montant Maximal">
+          <span *ngIf="getpPrixMaxError()" class="text text-danger"><small>{{ getpPrixMaxError() }}</small></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <label for="detail">Quelques Detail</label>
+          <textarea formControlName="detail" class="form-control" id="" placeholder="Detail de votre besoin..." cols="30" rows="3"></textarea>
+        </div>
+      </div>
+      
+      
+      <button type="submit"[disabled]="controlForm.invalid || etatPadding" class="btn btn-danger {{ etatPadding ? 'btn-loading' : '' }} mr-1">Rechercher</button>
+    </form>
+  </div>
+</div>

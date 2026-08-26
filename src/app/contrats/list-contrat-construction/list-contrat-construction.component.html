@@ -1,0 +1,98 @@
+<app-nav-bar [subTitle]="'Contrats Construction'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Liste contrat de construction</h3>
+            <div class="card-options">
+              <span (click)="whatPost()" class="btn btn-sm btn-secondary mr-2"><i class="icon fa fa-search mr-1"></i> Recherche Post</span>
+              <span>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon icon-plus mr-1"></i> Publication
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post')" style="color: black;">Location</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-post-sale')" style="color: black;">Vente</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-terrain')" style="color: black;">Terrain</a>
+                    <a class="dropdown-item cursorPointer" (click)="redirectRoutes('posts/add-plan')" style="color: black;">Plan</a>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab {{ contrats.length < 3 ? 'botom_card' : '' }}" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>ID POST</th>
+                        <th>SOLDE</th>
+                        <th>VERSEMENT</th>
+                        <th>DEPENSE</th>
+                        <th>PERIODE(MOIS)</th>
+                        <th>Date FIN </th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contrat of contrats | paginate:{ itemsPerPage: 10, currentPage: p}" class="{{ getStatusConstruct(contrat.status_construct) }}">
+                        <td>
+                            {{ contrat.contratId }}  
+                        </td>
+                        <td>{{ contrat.post_id?.postId }}</td>
+                        <td>
+                          {{ print.printPrice(getMontantVersementAgence(contrat) - getDepense(contrat)) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(getMontantVersementAgence(contrat)) }}
+                        </td>
+                        <td>
+                          {{ print.printPrice(getDepense(contrat)) }}
+                        </td>
+                        <td>
+                          {{ contrat.nb_month - monthDiff(date_now, contrat.date_fin_exuction) }}/{{ contrat.nb_month }}
+                        </td>
+                        <td>
+                          {{ contrat.date_fin_exuction | date }}
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            </button>
+                            <div class="dropdown-menu" >
+                            <span class="dropdown-item cursorPointer {{ contrat.status_construct == 0 ? '' : 'disabled gazo' }}" *ngIf="contrat?.status_construct == 0" (click)="onAddRaport(contrat)" >Ajouter un raport</span>
+                            <a [routerLink]="['../raport-construction', contrat._id]" class="dropdown-item cursorPointer" >Voir vos raports</a>
+                            <span (click)="onListeVersementAgence(contrat)" class="dropdown-item cursorPointer" >Liste des depots</span>
+                            <span class="dropdown-item cursorPointer" (click)="onDetail(contrat.post_id?._id)" >Detail du post</span>
+                            
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Fermer</a> -->
+                            </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event" previousLabel="précédent" nextLabel="Suivant" [autoHide]=true></pagination-controls>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

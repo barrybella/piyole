@@ -1,0 +1,22 @@
+<app-nav-bar [subTitle]="'Terrains'"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container">
+      <div class="section-title center-block text-center">
+          <h1>Tout les Terrains(Parcelles) à vendre en Guinée Conakry </h1>
+          <p>Trouvez toutes les publications des terrains à vendre en Guinée Conakry.</p>
+      </div>
+      <div class="row">
+        <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+      </div>
+  </div>
+</section>
+<!--Latest Ads-->
+</section>

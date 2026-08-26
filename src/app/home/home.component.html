@@ -1,0 +1,668 @@
+<!--Sliders Section-->
+<section>
+    <div class="banner-1 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../assets/images/banners/banner1.jpeg">
+        <div class="header-text mb-0">
+            <div class="container">
+                <div class="text-center text-white mb-7">
+                    <!-- meilleure propriété -->
+                    <h1 class="mb-1">Le meilleur de l'immobilier en Guinée Conakry <input type="hidden" id="opt_ng" >  <input type="hidden" id="quartier_ng" >  <input type="hidden" id="type_ng" > <input type="hidden" id="categorie_ng" > <input type="hidden" id="prix_min_ng" > <input type="hidden" id="prix_max_ng" ></h1>
+                    <p>Votre recherche immobilière en Guinée Conakry, commence et se termine avec nous : découvrez des propriétés exceptionnelles dès aujourd'hui</p>
+                    <!-- <p>C'est inédit, ne vous souciez plus pour trouver un bien à votre goût! </p> -->
+                    <!-- plus pour trouver un bien a votre gout 👍 -->
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 d-block mx-auto">
+                        <div class="search-background bg-transparent">
+                            <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+                                <div class="form row no-gutters ">
+                                    <div class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg   mb-0 bg-white">
+                                        <!-- <select (change)="changeEvent($event)" id="mySelect2" formControlName="commune" class="form-control select2-show-search ng_c  border-bottom-0" data-placeholder="Property Type"> -->
+                                        <select (change)="changeEvent($event)" id="mySelect2" formControlName="commune" class="form-control ng_c  border-bottom-0" data-placeholder="Property Type">
+                                            <!-- <optgroup label="Communes ou villes"> -->
+                                                <option disabled value="Commune (ville)" id="ng_color"> <span [ngClass]="{'link': false}" >Commune (ville)</span></option>
+                                                <option id="opt_ng" *ngFor="let item of communes"  value="{{ item.commune }}">{{ item.commune }}</option>
+                                            <!-- </optgroup> -->
+                                        </select>
+                                    </div>
+
+                                    <div  class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg {{ !change ? 'dispNone' : '' }}  mb-0 bg-white">
+                                        <select formControlName="quartier" class="form-control select2-show-search ng_q   border-bottom-0" data-placeholder="Property Type">
+                                            <option   value="Quartier (secteur)" >Quartier (secteur)</option>
+                                            <!-- <option  value="Chargement..." >Chargement...</option> -->
+                                            <option *ngFor="let item of quartierFileters" value="{{ item.quartier }}">{{ item.quartier }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div  class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg {{ change ? 'dispNone' : '' }}  mb-0 bg-white">
+                                        <select formControlName="quartier" class="form-control  ng_q   border-bottom-0" data-placeholder="Property Type">
+                                            <option  *ngIf="!chargement" value="Quartier (secteur)" >Quartier (secteur)</option>
+                                            <option *ngIf="chargement" value="Chargement..." class="text-warning">Chargement...</option>
+                                            <!-- <option *ngFor="let item of quartierFileters" value="{{ item.quartier }}">{{ item.quartier }}</option> -->
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg  mb-0 bg-white">
+                                        <select formControlName="type" class="form-control ng_type select2-show-search  border-bottom-0" data-placeholder="Property Type">
+                                            <optgroup label="Categories">
+                                                <option value="Location ou Vente"> <i class="fa fa-map-marker" aria-hidden="true"></i>Location ou Vente<i class="fa fa-map-marker" aria-hidden="true"></i></option>
+                                                <option value="Location">Location</option>
+                                                <option value="Vente">Vente</option>
+                                                
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg  mb-0 bg-white">
+                                        <select formControlName="categorie" class="form-control ng_categorie select2-show-search  border-bottom-0" data-placeholder="Property Type">
+                                            <!-- <optgroup label="Categories"> -->
+                                                <option value="Categories">Categories</option>
+                                                <option *ngFor="let cate of print.categories"  value="{{ cate.categorie }}">{{ cate.categorie }}</option>
+                                            <!-- </optgroup> -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-xl-1 col-lg-1 col-md-12 select2-lg  mb-0 bg-white">
+                                        <select formControlName="prix_min" class="form-control ng_prix_min select2-show-search  border-bottom-0" data-placeholder="Min Value">
+                                            <option value="Prix(Min)" selected>Prix(Min)</option>
+                                            <option value="100000">100000</option>
+                                            <option value="300000">300000</option>
+                                            <option value="600000">600000</option>
+                                            <option value="1000000">1000000</option>
+                                            <option value="1500000">1500000</option>
+                                            <option value="2000000">2000000</option>
+                                            <option value="4000000">4000000</option>
+                                            <option value="8000000">8000000</option>
+                                            <option value="15000000">15000000</option>
+                                            <option value="40000000">40000000</option>
+                                            <option value="150000000">150000000</option>
+                                            <option value="300000000">300000000</option>
+                                            <option value="900000000">900000000</option>
+                                            <option value="1200000000">1200000000</option>
+                                            <option value="2000000000">2000000000</option>
+                                            <option value="5000000000">5000000000</option>
+                                            <option value="10000000000">10000000000</option>
+                                            <option value="50000000000">50000000000</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-xl-1 col-lg-1 col-md-12 select2-lg  mb-0 bg-white">
+                                        <select formControlName="prix_max" class="form-control ng_prix_max select2-show-search  border-bottom-0" data-placeholder="Max Value">
+                                            <option value="Prix(Max)" selected>Prix(Max)</option>
+                                            <option value="100000">100000</option>
+                                            <option value="300000">300000</option>
+                                            <option value="600000">600000</option>
+                                            <option value="1000000">1000000</option>
+                                            <option value="1500000">1500000</option>
+                                            <option value="2000000">2000000</option>
+                                            <option value="4000000">4000000</option>
+                                            <option value="8000000">8000000</option>
+                                            <option value="15000000">15000000</option>
+                                            <option value="40000000">40000000</option>
+                                            <option value="150000000">150000000</option>
+                                            <option value="300000000">300000000</option>
+                                            <option value="900000000">900000000</option>
+                                            <option value="1200000000">1200000000</option>
+                                            <option value="2000000000">2000000000</option>
+                                            <option value="5000000000">5000000000</option>
+                                            <option value="10000000000">10000000000</option>
+                                            <option value="50000000000">50000000000</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-12 mb-0">
+                                        <button type="submit" [disabled]="etatPadding" class="btn btn-lg btn-block btn-primary br-tl-md-0 br-bl-md-0 {{ etatPadding ? 'btn-loading' : '' }} mr-1">Rechercher</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /header-text -->
+    </div>
+</section>
+<!--Sliders Section-->
+
+<!--Categories-->
+<section class="categories">
+    <div class="container">
+        <div class="card mb-0 box-shadow-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-catmb mb-4 mb-lg-0">
+                        <div class="d-flex cursorPointer" (click)="redirect('posts/get-post-by-category', 'Studio')">
+                            <div>
+                                <span class="bg-primary-transparent icon-service1 text-primary">
+                                    <fa-icon class=" " [icon]="faStore"></fa-icon> 
+                                </span>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h3 class=" mb-0 font-weight-bold">{{ getCountCate('Studio') }}</h3>
+                                <p class="mb-0 text-muted">Studio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-catmb mb-4 mb-lg-0">
+                        <div class="d-flex cursorPointer" (click)="redirect('posts/get-post-by-category', 'Appartement')">
+                            <div>
+                                <span class="bg-secondary-transparent icon-service1 text-secondary">
+                                   <i class="fa fa-building-o"></i>
+                                    <!-- <i class="fa fa-home"></i> -->
+                                </span>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h3 class=" mb-0 font-weight-bold">{{ getCountCate('Appartement') }}</h3>
+                                <p class="mb-0 text-muted">Appartement</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-catmb mb-4 mb-sm-0">
+                        <div class="d-flex cursorPointer" (click)="redirect('posts/get-post-by-category', 'Terrain')">
+                            <div>
+                                <span class="bg-warning-transparent icon-service1 text-warning">
+                                    <i class="fa fa-object-group"></i>
+                                </span>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h3 class=" mb-0 font-weight-bold">{{ getCountCate('Terrain') }}</h3>
+                                <p class="mb-0 text-muted">Terrain</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 ">
+                        <div class="d-flex cursorPointer" (click)="redirectPlan('posts/all-plans')">
+                            <div>
+                                <span class="bg-info-transparent icon-service1 text-info">
+                                    <i class="fa fa-home"></i>
+                                </span>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h3 class=" mb-0 font-weight-bold ">{{ count_post_plans }}</h3>
+                                <p class="mb-0 text-muted">Plan(Construction)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Categories-->
+
+<!--Latest Ads-->
+<section class="sptb bg-white">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h1>Sélection des biens immobiliers à louer ou à acheter</h1>
+            <p>Explorez les possibilités infinies de l'immobilier en Guinée Conakry, votre futur foyer vous attend.</p>
+        </div>
+        <div class="row">
+            <app-show-posts [posts]="posts" [chimer]="chimer"></app-show-posts>
+        </div>
+        <div class="center-block text-center">
+            <!-- <a [routerLink]="['../posts/all-post-rent-sale-random']" class="btn btn-primary rounded-pill btn-lg mobile-only">---Tous les Location && Vente ({{ count_post_vente_and_location }})---</a> -->
+            <a [routerLink]="['../posts/vente-achat-location-terrain-maison-partout-en-guinee-conakry']" class="btn btn-primary rounded-pill btn-lg ">---Voir plus ({{ count_post_vente_and_location }})---</a>
+        </div>
+
+    </div>
+</section>
+<!--Latest Ads-->
+
+<div class="container">
+    <!-- <h3 class="">Rooms Widgets</h3> -->
+    <!-- <hr> -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div id="owl-demo2" class="owl-carousel owl-carousel-icons2">
+                <div class="item" >
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Maison Habitation')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Maison Habitation')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/balcony.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Maison Habitation</h4>
+                                    <span>({{ getCountCate('Maison Habitation') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Villa')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Villa')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/villa.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Villa</h4>
+                                    <span>({{ getCountCate('Villa') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Entrer Coucher')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Entrer Coucher')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/entrer_coucher.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Entrer Coucher</h4>
+                                    <span>({{ getCountCate('Entrer Coucher') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Usage Multiples')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Usage Multiples')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/usage-multiple.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0"> Usage Multiples</h4>
+                                    <span>({{ getCountCate('Usage Multiples') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Studio')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Studio')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/farm.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Studio</h4>
+                                    <span>({{ getCountCate('Studio') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Terrain')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Terrain')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/terrain.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Terrain</h4>
+                                    <span>({{ getCountCate('Terrain') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'École/Universitée')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'École/Universitée')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/house.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">École/Universitée</h4>
+                                    <span>({{ getCountCate('École ou Universitée') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Appartement')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Appartement')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/appartment.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Appartement</h4>
+                                    <span>({{ getCountCate('Appartement') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Triplex')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Triplex')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/triplex.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Triplex</h4>
+                                    <span>({{ getCountCate('Triplex') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Duplex')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Duplex')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/duplex.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Duplex</h4>
+                                    <span>({{ getCountCate('Duplex') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Immeuble')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <a (click)="redirect('posts/get-post-by-category', 'Immeuble')"></a>
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/imeuble.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Imeuble</h4>
+                                    <span>({{ getCountCate('Immeuble') }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Magasin')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/magasin.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Magasin</h4>
+                                    <span>({{ getCountCate('Magasin')  }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Entrepôt')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/entrepot.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Entrepôt</h4>
+                                    <span>({{ getCountCate('Entrepôt')  }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="card cursorPointer" (click)="redirect('posts/get-post-by-category', 'Bureaux')">
+                        <div class="card-body">
+                            <div class="cat-item text-center">
+                                <div class="cat-img">
+                                    <img src="../assets/images/svgs/realestate/office.svg" alt="img">
+                                </div>
+                                <div class="cat-desc">
+                                    <h4 class="font-weight-semibold mb-0">Bureaux</h4>
+                                    <span>({{ getCountCate('Bureaux')  }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <hr> -->
+</div>
+<!--Featured Ads-->
+<section class="sptb bg-patterns">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Publications des plans (Constructions)</h2>
+            <p>suivez en temps réel vos chantiers à travers notre plate-forme et application mobile!</p>
+        </div>
+        <div>
+            <!-- <div class="row"> -->
+                <app-show-plans [plans]="plans" [chimer]="chimer_plans"></app-show-plans>
+            <!-- </div> -->
+            
+        </div>
+        <div class="center-block text-center">
+            <a [routerLink]="['../posts/all-plans']" class="btn btn-primary rounded-pill btn-lg">----Voir tous les plans en vente ({{ count_post_plans }})--</a>
+        </div>
+
+    </div>
+</section>
+<!--/Featured Ads-->
+
+<!--Featured Ads-->
+<section class="sptb bg-patterns">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Materiaux de Construction</h2>
+            <p>Achetez tous vos matériaux de construction en toute sécurité.</p>
+        </div>
+        <div>
+            <!-- <div class="row"> -->
+                <!-- <app-show-plans [plans]="plans" [chimer]="chimer_plans"></app-show-plans> -->
+            <!-- </div> -->
+            <app-show-products [shops]="shops" [chimer]="chimer_product"></app-show-products>
+        </div>
+        <div class="center-block text-center">
+            <a [routerLink]="['../shops/shopping']" class="btn btn-primary rounded-pill btn-lg">----Voir tous les materiaux --</a>
+        </div>
+
+    </div>
+</section>
+<!--/Featured Ads-->
+
+<!--Statistics-->
+<section>
+    <div class="about-1 cover-image sptb bg-background-color" data-image-src="../assets/images/banners/banner5.jpeg">
+        <div class="content-text mb-0 text-white info">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="counter-status md-mb-0">
+                            <div class="counter-icon">
+                                <i class="icon icon-people"></i>
+                            </div>
+                            <h5>Agence</h5>
+                            <h2 class="counter mb-0 font-weight-bold">{{ count_agence }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="counter-status status-1 md-mb-0">
+                            <div class="counter-icon text-warning">
+                                <i class="icon icon-rocket"></i>
+                            </div>
+                            <h5>Publications</h5>
+                            <h2 class="counter mb-0 font-weight-bold">{{ count_posts }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="counter-status status md-mb-0">
+                            <div class="counter-icon text-primary">
+                                <i class="icon icon-location-pin"></i>
+                            </div>
+                            <h5>Quartiers</h5>
+                            <h2 class="counter mb-0 font-weight-bold">{{ count_quartiers }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="counter-status status">
+                            <div class="counter-icon text-success">
+                                <i class="icon-emotsmile"></i>
+                            </div>
+                            <h5>Clients satisfaits</h5>
+                            <h2 class="counter font-weight-bold mb-0">{{ count_clients }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Statistics-->
+
+
+<!--Blogs-->
+<section class="sptb bg-white">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Nous sommes partout!!</h2>
+            <p>Pas de soucis! nous couvrons toute l'étendue du territoire national</p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-6">
+                <div class="row">
+                    <div (click)="onGetPostByCommune('Kindia')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                        <div class="item-card overflow-hidden">
+                            <div class="item-card-desc">
+                                <div class="card text-center overflow-hidden">
+                                    <div class="card-img">
+                                        <img src="../assets/images/locations/kindia.jpeg" alt="img" class="cover-image">
+                                    </div>
+                                    <!-- <div class="item-tags">
+                                        <div class="bg-primary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 786
+                                        </div>
+                                    </div> -->
+                                    <div class="item-card-text">
+                                        <h4 class="mb-0">{{ getCountRegion('Kindia') }}
+                                            <span>
+                                                <i class="fa fa-map-marker mr-1 text-primary"></i>
+                                                KINDIA
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onGetPostByCommune('Mamou')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                        <div class="item-card overflow-hidden">
+                            <div class="item-card-desc">
+                                <div class="card text-center overflow-hidden">
+                                    <div class="card-img">
+                                        <img src="../assets/images/locations/mamoun.jpeg" alt="img" class="cover-image">
+                                    </div>
+                                    <!-- <div class="item-tags">
+                                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 89
+                                        </div>
+                                    </div> -->
+                                    <div class="item-card-text">
+                                        <h4 class="mb-0">{{ getCountRegion('Mamou') }}
+                                            <span><i class="fa fa-map-marker mr-1 text-primary"></i>
+                                                MAMOU
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onGetPostByCommune('KanKan')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                        <div class="item-card overflow-hidden">
+                            <div class="item-card-desc">
+                                <div class="card text-center overflow-hidden mb-lg-0">
+                                    <div class="card-img">
+                                        <img src="../assets/images/locations/kankan.jpeg" alt="img" class="cover-image">
+                                    </div>
+                                    
+                                    <div class="item-card-text">
+                                        <h4 class="mb-0">{{ getCountRegion('KanKan') }}<span>
+                                            <i class="fa fa-map-marker text-primary mr-1"></i>KANKAN</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onGetPostByCommune('Labé')" class="col-sm-12 col-lg-6 col-md-6 cursorPointer">
+                        <div class="item-card overflow-hidden">
+                            <div class="item-card-desc">
+                                <div class="card text-center overflow-hidden mb-lg-0">
+                                    <div class="card-img">
+                                        <img src="../assets/images/locations/labe.jpeg" alt="img" class="cover-image">
+                                    </div>
+                                    <!-- <div class="item-tags">
+                                        <div class="bg-secondary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 123
+                                        </div>
+                                    </div> -->
+                                    <div class="item-card-text">
+                                        <h4 class="mb-0">{{ getCountRegion('Labé') }}<span><i class="fa fa-map-marker text-primary mr-1"></i>LABÉ</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div (click)="onGetPostByCommune('Conakry')" class="col-lg-12 col-md-12 col-xl-6 col-sm-12 cursorPointer">
+                <div class="item-card overflow-hidden">
+                    <div class="item-card-desc">
+                        <div class="card overflow-hidden mb-0">
+                            <div class="card-img">
+                                <img src="../assets/images/locations/conakry.png" alt="img" class="cover-image">
+                            </div>
+                            <!-- <div class="item-tags">
+                                <div class="bg-primary tag-option"><i class="fa fa fa-heart-o mr-1"></i> 567 </div>
+                            </div> -->
+                            <div class="item-card-text">
+                                <h4 class="mb-0">{{ getCountRegion('Conakry') }}<span><i class="fa fa-map-marker text-primary mr-1"></i>CONAKRY</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Blogs-->
+
+<!--Download -->
+<section class="sptb">
+    <div class="container">
+        <div class="section-title center-block text-center">
+            <h2>Télécharger l'application mobile</h2>
+            <p>Vous pouvez télécharger notre application mobile pour une meilleure expérience avec vos smartphones.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center text-wrap">
+                    <div class="btn-list">
+                        <a href="#" class="btn btn-primary btn-lg mb-sm-0"><i class="fa fa-apple fa-1x mr-2"></i> App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.piyole" target="_blank" class="btn btn-secondary btn-lg mb-sm-0"><i class="fa fa-android fa-1x mr-2"></i> Google Play</a>
+                        <!-- <a href="#" class="btn btn-info btn-lg mb-0"><i class="fa fa-windows fa-1x mr-2"></i> Windows</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Download -->
+
+
+

@@ -1,0 +1,74 @@
+<!--Sliders Section-->
+<section>
+    <div class="bannerimg cover-image bg-background3" data-image-src="../assets/images/banners/banner2.jpg">
+        <div class="header-text mb-0">
+            <div class="container">
+                <div class="text-center text-white">
+                    <h1 class="">S'inscrire</h1>
+                    <ol class="breadcrumb text-center">
+                        <li class="breadcrumb-item"><a [routerLink]="['/']">Acceuil</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">S'inscrire</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Sliders Section-->
+<!--  -->
+
+<!--Register-section-->
+<section class="sptb">
+    <div class="container customerpage">
+        <div class="row">
+            <div class="single-page" >
+                <div class="col-lg-5 col-xl-6 col-md-6 d-block mx-auto">
+                    <div class="wrapper wrapper2">
+                        <form id="Register" class="card-body" [formGroup]="registerForm" (ngSubmit)="onSubmit()" tabindex="500">
+                            <h3>Enregistrement</h3>
+                            <div class="name">
+                                <input type="text" class="{{ getNameError() ? 'is-invalid state-invalid' : getNameSuccess() ? 'is-valid state-valid' : '' }}" placeholder="" formControlName="name">
+                                <label>Nom & Prénom <small>(ou nom entreprise)</small></label>
+                                <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span> 
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-5">
+                                    <label for="country">Code Pays</label>
+                                    <!-- <select formControlName="code" class="form-control select2-show-search" id=""> -->
+                                        <!-- <option disabled value="Selectioner">Selectioner</option> -->
+                                        <!-- <option disabled *ngIf="!print_countries" value="">Chargement en cours</option> -->
+                                        <!-- <option *ngFor="let item of countries" value="{{ item.idd.root }}{{ item.idd.suffixes }}">{{ item.flag }}{{ item.translations.fra.common }} <span *ngIf="item.cca2 != 'US'">({{ item.idd.root }}{{ item.idd.suffixes }})</span> <span *ngIf="item.cca2 == 'US'">(+1)</span> </option> -->
+                                        <input type="text" placeholder="EX: +224" formControlName="code" class="form-control">
+                                    <!-- </select> -->
+                                </div>
+
+                                <div class="form-group col-7">
+                                    <input class="{{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }}" type="text" formControlName="tel">
+                                    <label>Téléphone</label>
+                                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                                </div>
+
+                            </div>
+                            <div class="mail">
+                                <input class="{{ getEmailError() ? 'is-invalid' : getEmailSuccess() ? 'is-valid' : '' }}"  type="email" formControlName="email">
+                                <label>Email</label>
+                                <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+
+                            </div>
+                            <div class="passwd">
+                                <input type="password" placeholder="******" formControlName="password">
+                                <label>Mot de passe</label>
+                            </div>
+                            <div class="submit">
+                                <button class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }}" [disabled]="registerForm.invalid || etatPadding || registerForm.pending">S'Enregistrer</button>
+                            </div>
+                            <p class="text-dark mb-0">Vous avez déjà un compte?<a [routerLink]="['../../users/login']" class="text-primary ml-1">S'identifier</a></p>
+                        </form>
+                        <!-- <hr class="divider"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Register-section-->

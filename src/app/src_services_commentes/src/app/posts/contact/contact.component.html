@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+    <div class="card-header">
+        <div class="card-title">Contact <span>{{ user?.name }}</span></div>
+        <div class="card-options">
+            <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group select2-lg col-4">
+                    <label for="country">Code Pays</label>
+                    <input placeholder="EX: +224" class="{{ getCodeError() ? 'is-invalid state-invalid' : getCodeSuccess() ? 'is-valid state-valid' : '' }} form-control" type="text" formControlName="code">
+                    <span *ngIf="getCodeError()" class="text text-danger"><small>{{ getCodeError() }}</small></span>  
+                </div>
+                <div class="form-group col-8">
+                    <label class="form-label">Telephone</label>
+                    <input type="number" formControlName="tel" class="form-control {{ getTelError() ? 'is-invalid state-invalid' : getTelSuccess() ? 'is-valid state-valid' : '' }}" id="exampleInputEmail11"  placeholder="Votre numero de Telephone">
+                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    Message
+                </label>
+                <textarea class="form-control" formControlName="message" rows="3" placeholder="Votre Message"></textarea>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" [disabled]="controlForm.invalid || etatPadding" class="btn btn-primary btn-block {{ etatPadding ? 'btn-loading' : '' }} mr-1">Valider</button>
+            </div>
+        </form>
+    </div>
+</div>

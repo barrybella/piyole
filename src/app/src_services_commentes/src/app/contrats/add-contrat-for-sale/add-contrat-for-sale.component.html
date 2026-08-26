@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-status bg-primary br-tr-7 br-tl-7"></div> 
+  <div class="card-header">
+      <div class="card-title">
+          Ajout contrat Vente
+      </div> 
+      <div class="card-options">
+        <button type="button" (click)="dialogRef.close()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+      </div>
+  </div>
+  <div class="card-body">
+      <form id="quickForm" (ngSubmit)="onSubmit()" [formGroup]="controlForm"> 
+          <div class="form-row">
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark">Email</label>
+                <input type="email" formControlName="email" class="form-control {{ getEmailError() ? 'is-invalid' : getEmailSuccess() ? 'is-valid' : '' }}" placeholder="EX: email@gmail.com">
+                <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark" for="etatCivil">Etat Civil</label>
+                <select class="form-control" formControlName="etatCivil" id="etatCivil">
+                    <option disabled value="Selectioner">Selectioner</option>
+                    <option value="Marié">Marié</option>
+                    <option value="Celibataire">Celibataire</option>
+                    <option value="Divorcé">Divorcé</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark" for="sexe">Sexe</label>
+                <select class="form-control" formControlName="sexe" id="sexe">
+                    <option disabled value="Selectioner">Selectioner</option>
+                    <option value="H">Homme</option>
+                    <option value="F">Femme</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="form-label text-dark">Profession</label>
+                <input type="text" formControlName="proffesion" class="form-control {{ getProffesionError() ? 'is-invalid' : getProffesionSuccess() ? 'is-valid' : '' }}" placeholder="EX: Informaticien">
+                <span *ngIf="getProffesionError()" class="text text-danger"><small>{{ getProffesionError() }}</small></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+                <label for="inputAddress2">Photo</label>
+                <input type="file" accept="image/*" name="image" (change)="fileProgress($event)"  class="form-control" id="inputAddress2" placeholder="Image">
+            </div>
+              <div class="form-group col-6">
+                <label for="inputAddress2">Carte d'idententification</label>
+                <input type="file" accept=".pdf" name="carte" (change)="fileProgressCarte($event)"  class="form-control" id="inputAddress2" placeholder="Carte">
+
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="description">Autre detaille</label>
+              <textarea name="" id="description" formControlName="detail" cols="30" rows="2" class="form-control" placeholder="Autre Information"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Mot de passe</label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+            <small id="emailHelp" class="form-text  text-danger" *ngIf="passwordIncorect">Mot de passe incorect</small>
+          </div>
+          <button type="submit" [disabled]="controlForm.invalid" class="btn btn-danger"><span class="spinner-border text-withe spinner-border-sm" *ngIf="etatPaading"></span> <span *ngIf="!etatPaading">Valider</span></button>
+          </form>
+  </div>
+  </div>

@@ -1,0 +1,74 @@
+<app-nav-bar [subTitle]="'Liste Commande'"></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="card mb-0">
+          <div class="card-header">
+            <h3 class="card-title">Liste de mes Commandes Client</h3>
+          </div>
+          <div class="card-body">
+            <div class="ads-tabs">
+              
+              <div class="tab-content">
+                <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+                  <table class="table table-bordered table-hover mb-0 text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nom && Prenom</th>
+                        <th>Telephone</th>
+                        <th>Adresse Livraison</th>
+                        <th>Etat de Livraison</th>
+                        <!-- <th>Montant Livraison(GNF)</th> -->
+                        <th>Montant Payer(GNF)</th>
+                        <th>Montant Restant(GNF)</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let commande of commandes">
+                        <td>
+                            {{ commande.commandeId }}  
+                        </td>
+                        <td>{{ commande.user_id?.name }}</td>
+                        <td>({{ commande.user_id?.code}}){{ commande.user_id?.tel }}</td>
+                        <td>{{ commande.adress }}</td>
+                        <td>
+                            <span class="badge badge-{{ print.getEtatLivraisonColor(commande.livraison) }}">
+                                {{ print.getEtatLivraison(commande.livraison)  }}
+                            </span>
+                        </td>
+                        <!-- <td>
+                            {{ print.printPrice(commande.mont_livraison) }} <br>
+                            <mat-slide-toggle [checked]="commande.livraison_en_charge" [disabled]="print.disabledLivraison(commande.livraison) || print.isPay(commande)" (click)="onClick(commande)" >Prendre en charge!</mat-slide-toggle>
+                        </td> -->
+                        <td>{{ print.printPrice(commande.mont_pay) }}</td>
+                        <td>{{ print.printPrice(commande.mont_rest) }}</td>
+                        <td>
+                          {{ commande.createdAt | date }}
+                        </td>
+                        <td>
+                            <a *ngIf="commande.livraison == 0 && commande.livraison == 1" class="btn btn-danger btn-sm text-white mr-1" (click)="onDelete(commande)" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                            <a class="btn btn-info btn-sm text-white" (click)="onProducts(commande)" data-toggle="tooltip" data-original-title="Liste Produit"><i class="fa fa-list-alt"></i></a>
+                            <a class="btn btn-info btn-sm text-white ml-1" (click)="onEtatLiv(commande)" data-toggle="tooltip" data-original-title="Liste Produit"><i class="fa fa-list-alt"></i>Livraison</a>
+                            <a class="btn btn-info btn-sm text-white ml-1" (click)="onPay(commande)" data-toggle="tooltip" data-original-title="Liste Produit"><i class="fa fa-list-alt"></i>Payement</a>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

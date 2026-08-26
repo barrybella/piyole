@@ -1,0 +1,161 @@
+<app-nav-bar></app-nav-bar>
+<section class="sptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-12 col-md-12">
+        <app-left-nav></app-left-nav>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12">
+        <div class="app-content  my-3 my-md-5">
+					<div class="side-app">
+						<div class="row">
+							<div class="col-lg-5 col-xl-4">
+								<div class="card card-profile cover-image "  data-image-src="../assets/images/photos/back.jpeg" style="background: url('../assets/images/photos/back.jpeg')">
+									<div class="card-body text-center">
+										<img class="card-profile-img" height="100" width="100" src="{{ print.printProfile(contrat?.client_id?.image) }}" alt="img">
+										<h3 class="mb-1 text-white">{{ contrat?.client_id?.name }}</h3>
+										<p class="mb-2 text-white">{{ contrat?.client_id?.tel }}</p>
+										<a (click)="print.pdf(contrat?.client_id?.carte)" class="btn btn-primary text-white btn-sm mt-2">
+											<span class="fa fa-twitter"></span> 
+                      Voir la carte d'identification
+										</a>
+										<!-- <a href="editprofile.html" class="btn btn-success btn-sm mt-2"><i class="fa fa-pencil" aria-hidden="true"></i> Edit profile</a> -->
+									</div>
+								</div>
+								<div class="card p-5 ">
+									<div class="card-title">
+										Informations Personnelles
+									</div>
+									<div class="media-list">
+                    <div class="body-section">
+											<h5 class="mediafont text-dark mb-1">Email</h5>
+											<p class="text-muted">{{ contrat?.client_id?.email }}</p>
+										</div>
+										<div class="body-section">
+											<h4 class="mediafont text-dark mb-1">Etat Civil</h4>
+											<p class="text-muted">{{ contrat?.client_id?.etatCivil }}</p>
+										</div>
+										<div class="body-section">
+											<h4 class="mediafont text-dark mb-1 ">Proffesion</h4>
+											<p class="text-muted">{{ contrat?.client_id?.proffesion }}</p>
+										</div>
+										<div class="body-section">
+											<h4 class="mediafont text-dark mb-1 ">Sexe</h4>
+											<p class="text-muted">{{ contrat?.client_id?.sexe }}</p>
+										</div>
+										<div class="body-section">
+											<h4 class="mediafont text-dark mb-1 ">Adresse</h4>
+											<p class="text-muted">{{ contrat?.client_id?.adresse }}</p>
+										</div>
+									</div>
+									<!-- media-list -->
+								</div>
+								
+							</div>
+							<div class="col-lg-7 col-xl-8">
+								<div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Detail sur le contrat</h3>
+                    <div class="card-options">
+                      <button (click)="onBack()" class="btn btn-secondary btn-sm"><i class="icon icon-arrow-left mr-1"></i> Retour</button>
+
+                    </div>
+                   
+                  </div>
+									<div class="card-body">
+                    <table class="mb-0 table table-bordered">
+                      <tbody>
+                      <tr >
+                          <th style="width: 150px;" scope="row">STATUT CONTRAT</th>
+                          <td> <span class="badge badge-{{ print.printStatusColorContrat(contrat?.status) }}">{{ print.printStatusContrat(contrat?.status) }}</span></td>
+                      </tr>
+                      <tr >
+                          <th style="width: 150px;" scope="row">TYPE CONTRAT</th>
+                          <td>{{ print.printTypeContrat(contrat) }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="row"> CONTRAT</th>
+                          <td>{{ contrat?.contratId }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">ID POST</th>
+                          <td>{{ contrat?.post_id?.postId }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">MONTANT</th>
+                          <td>{{ print.printPrice(contrat?.montant) }} GNF</td>
+                      </tr>
+                      <tr *ngIf="contrat?.loc_sale == 0 && contrat?.type == 0 ">
+                          <th scope="row">CAUTION</th>
+                          <td>{{ print.printPrice(contrat?.caution) }} GNF</td>
+                      </tr>
+                      <tr *ngIf="contrat?.loc_sale == 0 && contrat?.type == 0 ">
+                          <th scope="row">NOMBRE DE PERSONNES</th>
+                          <td>{{ contrat?.nbPersone }} </td>
+                      </tr>
+                      <tr *ngIf="contrat?.loc_sale == 0 && contrat?.type == 0 ">
+                          <th scope="row">NOMBRE DE VOITURES</th>
+                          <td>{{ contrat?.nbVoiture }} </td>
+                      </tr>
+                      <tr *ngIf="contrat?.loc_sale == 0 && contrat?.type == 0 ">
+                          <th scope="row">NOMBRE DE MOTOS</th>
+                          <td>{{ contrat?.nbMoto }} </td>
+                      </tr>
+                      <tr *ngIf="contrat?.loc_sale == 0 && contrat?.type == 0 ">
+                          <th scope="row">LISTE DES ANIMAUX</th>
+                          <td>{{ contrat?.animal }} </td>
+                      </tr>
+                      <tr *ngIf="contrat?.type_contrat == 0 && contrat?.type == 0 && contrat?.loc_sale == 0">
+                          <th scope="row">MOIS NON PAYER</th>
+                          <td>{{ print.printMonthNotPay(contrat).month_verifie }} mois</td>
+                      </tr>
+                      <tr *ngIf="contrat?.type_contrat == 1 && contrat?.type == 0 && contrat?.loc_sale == 0">
+                          <th scope="row">JOUR NON PAYER</th>
+                          <td>{{ print.printDayNotPay(contrat).jnp }}</td>
+                      </tr>
+                      <!-- <tr>
+                          <th scope="row">{{ contrat?.type == 0 ? 'INGENIEUR' : 'AGENCE'}}</th>
+                          <td>{{ contrat?.user_id?.name }} - {{ contrat?.user_id?.tel }}</td>
+                      </tr> -->
+                      <tr *ngIf="contrat?.type == 2">
+                          <th scope="row">PHASE</th>
+                          <td>{{ print.printPhase(contrat?.phase)}}</td>
+                      </tr>
+                      <tr *ngIf="contrat?.type == 2">
+                          <th scope="row">SUIVIE</th>
+                          <td>{{ print.printSuivie(contrat?.suivie)}}</td>
+                      </tr>
+                      <tr *ngIf="contrat?.type == 2">
+                          <th scope="row">PERIODE</th>
+                          <td> {{ contrat?.nb_month - monthDiff(date_now, contrat?.date_fin_exuction) }}/{{ contrat?.nb_month }} mois</td>
+                      </tr>
+                      <tr *ngIf="contrat?.type == 2">
+                          <th scope="row">DATE FIN EXECUTION</th>
+                          <td>{{ contrat?.date_fin_exuction | date }}</td>
+                      </tr>
+                      <tr *ngIf="contrat?.type == 2">
+                        <th scope="row">ETAT DE LA CONSTRUCTION</th>
+                        <td>{{ print.printEtatConstuction(contrat?.status_construct) }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">DATE CONTRAT</th>
+                          <td>{{ contrat?.createdAt | date }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">AUTRES DETAIL</th>
+                          <td>{{ contrat?.description }}</td>
+                      </tr>
+                      </tbody>
+                  </table>
+                  </div>  
+								</div>
+								
+							</div>
+
+						</div>
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<app-nav-bar [subTitle]="'Tous les plans'"></app-nav-bar>
+<section class="sptb"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+>
+      <!--Latest Ads-->
+<section class="sptb bg-white">
+  <div class="container">
+      <div class="section-title center-block text-center">
+          <h1>Plans de construction à vendre en Guinée Conakry </h1>
+          <p>Toutes les publications des plans (maisons, appartements, villas, immeubles , ...) pour la vente en Guinée Conakry.</p>
+      </div>
+      <!-- <div class="row"> -->
+        <app-show-plans [plans]="posts" [chimer]="chimer"></app-show-plans>
+      <!-- </div> -->
+  </div>
+</section>
+<!--Latest Ads-->
+</section>
