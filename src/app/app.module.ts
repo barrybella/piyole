@@ -36,13 +36,6 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 
 
 
-//   apiKey: "AIzaSyBwSypd4-vSf_5NCF8S7Qc6wC0t7Kk2t6M",
-//   authDomain: "api-p-20257.firebaseapp.com",
-//   projectId: "api-p-20257",
-//   storageBucket: "api-p-20257.appspot.com",
-//   messagingSenderId: "575586778110",
-//   appId: "1:575586778110:web:5f1e8d21fd82e512fb5eaf"
-
 
 
 // Module racine de l'application Angular. Déclare les composants globaux (header,
@@ -56,12 +49,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 // (voir la documentation officielle Firebase) — la sécurité réelle repose sur les règles
 // de sécurité configurées côté Firebase (Storage/Firestore Rules), pas sur le secret de cette clé.
 const firebaseConfig = {
-  apiKey: "AIzaSyBwSypd4-vSf_5NCF8S7Qc6wC0t7Kk2t6M",
-  authDomain: "api-p-20257.firebaseapp.com",
-  projectId: "api-p-20257",
-  storageBucket: "api-p-20257.appspot.com",
-  messagingSenderId: "575586778110",
-  appId: "1:575586778110:web:5f1e8d21fd82e512fb5eaf"
+ 
 };
 
 // Configuration de la connexion WebSocket (Socket.IO) vers le backend, pour les
